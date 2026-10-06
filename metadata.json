@@ -1,0 +1,6 @@
+{
+  "name": "Heviny Cosmetics & Spa Official",
+  "description": "Website resmi Heviny Cosmetics oleh Hana Cosmetics Surabaya: Produsen kosmetik murah dan sampo salon termurah di Indonesia berstandar CPKB, BPOM RI & Halal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
