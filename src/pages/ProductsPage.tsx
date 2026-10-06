@@ -174,7 +174,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         {/* Results Info Bar */}
         <div className="flex items-center justify-between text-xs text-[#5C726E] mb-6 px-1">
           <span className="font-medium">
-            Menampilkan <strong className="text-[#243330] font-bold">{filteredProducts.length}</strong> keluarga produk · <strong className="text-[#243330] font-bold">{filteredPhotoCount}</strong> foto kemasan
+            Menampilkan <strong className="text-[#243330] font-bold">{filteredProducts.length}</strong> jenis produk · <strong className="text-[#243330] font-bold">{filteredPhotoCount}</strong> foto kemasan
             {activeCategory !== 'all' && ` dalam kategori ${categories.find(c => c.id === activeCategory)?.label}`}
           </span>
 
