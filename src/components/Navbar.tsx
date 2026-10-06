@@ -9,6 +9,7 @@ import {
 import { ActivePage, ProductCategory } from '../types';
 import { HevinyLogo } from './HevinyLogo';
 import { OFFICIAL_HEVINY_CATEGORIES } from '../data/categories';
+import { getProductCategoryCount } from '../data/photoProducts';
 import { COMPANY_INFO } from '../data/companyInfo';
 import { ShopeeIcon } from './ShopeeIcon';
 
@@ -296,6 +297,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                         <div className="space-y-1 px-1.5">
                           {OFFICIAL_HEVINY_CATEGORIES.map((cat) => {
+                            const count = getProductCategoryCount(cat.id);
                             return (
                               <button
                                 key={cat.id}
@@ -306,7 +308,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                                 <span className="truncate">{cat.name}</span>
                                 <div className="flex items-center gap-1 shrink-0">
                                   <span className="text-[10px] font-mono text-white/40">
-                                    {cat.items.length}
+                                    {count}
                                   </span>
                                   <ChevronRightIcon className="w-3 h-3 text-white/30" />
                                 </div>

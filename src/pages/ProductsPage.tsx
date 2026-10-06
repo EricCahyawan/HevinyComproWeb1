@@ -7,60 +7,11 @@ import {
 } from '@heroicons/react/24/outline';
 import { Product, ProductCategory, ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
-
-interface PhotoVariant {
-  file: string;
-  size: string;
-  image: string;
-}
-
-interface PhotoProduct {
-  id: string;
-  brand: string;
-  name: string;
-  category: Exclude<ProductCategory, 'all'>;
-  variants: PhotoVariant[];
-}
-
-const getPhotoCategory = (name: string): PhotoProduct['category'] => {
-  if (/varnish remover|pelarut cat kuku/i.test(name)) return 'nail';
-  if (/air mawar|astringent|face tonic|milk cleanser|facial wash/i.test(name)) return 'face';
-  if (/shampoo|shampo|conditioner|creambath|hair mask|hair tonic/i.test(name)) return 'hair';
-  return 'body';
-};
-
-const photoProducts: PhotoProduct[] = (() => {
-  const products = new Map<string, PhotoProduct>();
-
-  __PRODUCT_PHOTO_FILES__.forEach((file) => {
-    const stem = file.replace(/\.[^.]+$/, '').replace(/ - \d+(?:\s*\([^)]*\))?$/, '');
-    const separatorIndex = stem.lastIndexOf(' - ');
-    const familyName = separatorIndex === -1 ? stem : stem.slice(0, separatorIndex);
-    const size = separatorIndex === -1 ? 'Kemasan' : stem.slice(separatorIndex + 3);
-    const brand = familyName.match(/^(HEVINY|FEGO|HAVINA)\b/i)?.[0] ?? 'HEVINY';
-    const id = familyName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    let product = products.get(id);
-
-    if (!product) {
-      product = {
-        id,
-        brand,
-        name: familyName.replace(/^(HEVINY|FEGO|HAVINA)\s+/i, ''),
-        category: getPhotoCategory(familyName),
-        variants: [],
-      };
-      products.set(id, product);
-    }
-
-    product.variants.push({
-      file,
-      size,
-      image: `/product-images/${encodeURIComponent(file)}`,
-    });
-  });
-
-  return Array.from(products.values());
-})();
+import { 
+  PhotoProduct, 
+  photoProducts, 
+  isProductInCategory 
+} from '../data/photoProducts';
 
 interface ProductsPageProps {
   onSelectProduct: (product: Product) => void;
@@ -88,11 +39,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     if (onCategoryChange) {
       onCategoryChange(catId);
     }
-  };
-
-  const isProductInCategory = (p: PhotoProduct, catId: ProductCategory) => {
-    if (catId === 'all') return true;
-    return p.category === catId;
   };
 
   const categories: { id: ProductCategory; label: string; count: number }[] = [
@@ -169,7 +115,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Cari produk, varian aroma, atau kemasan (misal: Air Mawar, Creambath, Jerigen)..."
+                placeholder="Cari produk..."
                 className="w-full pl-11 pr-10 py-3 bg-[#F6F8F7] border border-[#E3E8E6] rounded-lg text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:border-[#5C726E] focus:bg-white outline-hidden transition"
               />
               {searchQuery && (
