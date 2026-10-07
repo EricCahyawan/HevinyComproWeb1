@@ -2,15 +2,14 @@ import React, { useState, useMemo, useEffect } from 'react';
 import {
   MagnifyingGlassIcon,
   XMarkIcon,
-  ArrowPathIcon,
-  ChevronDownIcon
+  ArrowPathIcon
 } from '@heroicons/react/24/outline';
 import { Product, ProductCategory, ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
 import { 
-  PhotoProduct, 
-  photoProducts, 
-  isProductInCategory 
+  photoEntries,
+  isProductInCategory,
+  getProductCategoryCount,
 } from '../data/photoProducts';
 
 interface ProductsPageProps {
@@ -42,22 +41,23 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   };
 
   const categories: { id: ProductCategory; label: string; count: number }[] = [
-    { id: 'all', label: 'Semua Produk', count: photoProducts.length },
-    { id: 'body', label: 'Perawatan Tubuh', count: photoProducts.filter(p => isProductInCategory(p, 'body')).length },
-    { id: 'hair', label: 'Perawatan Rambut', count: photoProducts.filter(p => isProductInCategory(p, 'hair')).length },
-    { id: 'face', label: 'Perawatan Wajah', count: photoProducts.filter(p => isProductInCategory(p, 'face')).length },
-    { id: 'nail', label: 'Perawatan Kuku', count: photoProducts.filter(p => isProductInCategory(p, 'nail')).length },
+    { id: 'all', label: 'Semua Produk', count: getProductCategoryCount('all') },
+    { id: 'body', label: 'Perawatan Tubuh', count: getProductCategoryCount('body') },
+    { id: 'hair', label: 'Perawatan Rambut', count: getProductCategoryCount('hair') },
+    { id: 'face', label: 'Perawatan Wajah', count: getProductCategoryCount('face') },
+    { id: 'nail', label: 'Perawatan Kuku', count: getProductCategoryCount('nail') },
   ];
 
   const filteredProducts = useMemo(() => {
-    return photoProducts.filter(p => {
+    return photoEntries.filter(p => {
       const matchCategory = isProductInCategory(p, activeCategory);
 
       const q = searchQuery.toLowerCase().trim();
       const matchSearch = q === '' ||
         p.name.toLowerCase().includes(q) ||
         p.brand.toLowerCase().includes(q) ||
-        p.variants.some(v => v.size.toLowerCase().includes(q));
+        p.size.toLowerCase().includes(q) ||
+        p.file.toLowerCase().includes(q);
 
       return matchCategory && matchSearch;
     });
@@ -69,7 +69,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   };
 
   const hasActiveFilters = searchQuery !== '' || activeCategory !== 'all';
-  const filteredPhotoCount = filteredProducts.reduce((count, product) => count + product.variants.length, 0);
 
   const breadcrumbItems: BreadcrumbItem[] = [
     { name: 'Beranda', url: '/', onClick: () => onNavigate?.('home') },
@@ -174,7 +173,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         {/* Results Info Bar */}
         <div className="flex items-center justify-between text-xs text-[#5C726E] mb-6 px-1">
           <span className="font-medium">
-            Menampilkan <strong className="text-[#243330] font-bold">{filteredProducts.length}</strong> jenis produk · <strong className="text-[#243330] font-bold">{filteredPhotoCount}</strong> foto kemasan
+            Menampilkan <strong className="text-[#243330] font-bold">{filteredProducts.length}</strong> produk
             {activeCategory !== 'all' && ` dalam kategori ${categories.find(c => c.id === activeCategory)?.label}`}
           </span>
 
@@ -210,8 +209,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <article key={product.id} className="group min-w-0 overflow-hidden rounded-lg border border-[#E3E8E6] bg-white transition-shadow hover:shadow-lg">
                 <div className="aspect-square bg-[#F4F6F5] p-3 sm:p-5">
                   <img
-                    src={product.variants[0].image}
-                    alt={`${product.brand} ${product.name} ${product.variants[0].size}`}
+                    src={product.image}
+                    alt={`${product.brand} ${product.name} ${product.size}`}
                     loading={index < 8 ? 'eager' : 'lazy'}
                     className="h-full w-full object-contain mix-blend-multiply"
                   />
@@ -219,23 +218,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 <div className="p-3 sm:p-4">
                   <p className="mb-1 text-[9px] font-semibold uppercase tracking-wider text-[#8A9E9A]">{product.brand} · {categories.find(category => category.id === product.category)?.label}</p>
                   <h2 className="min-h-10 text-xs font-semibold leading-5 text-[#243330] sm:text-sm">{product.name}</h2>
-                  <p className="mt-2 text-[10px] text-[#5C726E]">{product.variants.length} foto kemasan</p>
-                  <details className="group mt-3 border-t border-[#EAEFEF] pt-2">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-1 text-[10px] font-semibold text-[#425B55] marker:hidden sm:text-xs">
-                      <span>Lihat semua kemasan</span>
-                      <ChevronDownIcon className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
-                    </summary>
-                    <div className="mt-3 grid grid-cols-2 gap-2">
-                      {product.variants.map((variant) => (
-                        <figure key={variant.file} className="min-w-0">
-                          <div className="aspect-square overflow-hidden rounded-md bg-[#F4F6F5] p-2">
-                            <img src={variant.image} alt={`${product.name} ${variant.size}`} loading="lazy" className="h-full w-full object-contain mix-blend-multiply" />
-                          </div>
-                          <figcaption className="mt-1 truncate text-center text-[9px] text-[#5C726E]" title={variant.file}>{variant.size}</figcaption>
-                        </figure>
-                      ))}
-                    </div>
-                  </details>
+                  <p className="mt-2 text-[10px] text-[#5C726E]">Kemasan: {product.size}</p>
                 </div>
               </article>
             ))}

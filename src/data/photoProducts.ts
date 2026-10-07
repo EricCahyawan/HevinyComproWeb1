@@ -14,6 +14,13 @@ export interface PhotoProduct {
   variants: PhotoVariant[];
 }
 
+export interface PhotoEntry extends PhotoVariant {
+  id: string;
+  brand: string;
+  name: string;
+  category: Exclude<ProductCategory, 'all'>;
+}
+
 export const getPhotoCategory = (name: string): PhotoProduct['category'] => {
   if (/varnish remover|pelarut cat kuku/i.test(name)) return 'nail';
   if (/air mawar|astringent|face tonic|milk cleanser|facial wash/i.test(name)) return 'face';
@@ -58,12 +65,22 @@ export const photoProducts: PhotoProduct[] = (() => {
   return Array.from(products.values());
 })();
 
-export const isProductInCategory = (p: PhotoProduct, catId: ProductCategory) => {
+export const photoEntries: PhotoEntry[] = photoProducts.flatMap((product) =>
+  product.variants.map((variant) => ({
+    ...variant,
+    id: variant.file,
+    brand: product.brand,
+    name: product.name,
+    category: product.category,
+  })),
+);
+
+export const isProductInCategory = (p: Pick<PhotoEntry, 'category'>, catId: ProductCategory) => {
   if (catId === 'all') return true;
   return p.category === catId;
 };
 
 export const getProductCategoryCount = (catId: ProductCategory): number => {
-  if (catId === 'all') return photoProducts.length;
-  return photoProducts.filter((p) => isProductInCategory(p, catId)).length;
+  if (catId === 'all') return photoEntries.length;
+  return photoEntries.filter((entry) => isProductInCategory(entry, catId)).length;
 };
