@@ -47,7 +47,7 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-5 sm:space-y-6">
           
-          <div className="inline-flex items-center px-4 py-1.5 rounded-sm bg-white/15 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] text-[#4fe843] uppercase shadow-xs">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-sm bg-white/15 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] text-amber-200 uppercase shadow-xs">
             <span>BEST QUALITY, BEST VALUE • HANA COSMETICS SURABAYA</span>
           </div>
 

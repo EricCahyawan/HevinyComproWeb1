@@ -115,7 +115,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari produk..."
-                className="w-full pl-11 pr-10 py-3 bg-[#F6F8F7] border border-[#E3E8E6] rounded-lg text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:border-[#4fe843] focus:ring-1 focus:ring-[#4fe843] focus:bg-white outline-hidden transition"
+                className="w-full pl-11 pr-10 py-3 bg-[#F6F8F7] border border-[#E3E8E6] rounded-lg text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:border-[#5C726E] focus:bg-white outline-hidden transition"
               />
               {searchQuery && (
                 <button
@@ -150,18 +150,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   <button
                     key={cat.id}
                     onClick={() => handleCategorySelect(cat.id)}
-                    className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                    className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
                       isActive
-                        ? 'bg-[#243330] text-white shadow-xs border border-[#4fe843]/60'
+                        ? 'bg-[#243330] text-white shadow-xs'
                         : 'bg-[#F6F8F7] text-[#5C726E] hover:bg-[#EAEFEF] border border-[#E3E8E6]'
                     }`}
                   >
-                    <span>{cat.label}</span>
-                    <span className={`text-[10px] px-2 py-0.5 rounded-xs font-mono font-bold ${
-                      isActive ? 'bg-[#4fe843] text-[#0F2415]' : 'bg-white text-[#8A9E9A] border border-[#E3E8E6]'
-                    }`}>
-                      {cat.count}
-                    </span>
+                    {cat.label}
                   </button>
                 );
               })}
@@ -173,8 +168,15 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         {/* Results Info Bar */}
         <div className="flex items-center justify-between text-xs text-[#5C726E] mb-6 px-1">
           <span className="font-medium">
-            Menampilkan <strong className="text-[#243330] font-bold">{filteredProducts.length}</strong> produk
-            {activeCategory !== 'all' && ` dalam kategori ${categories.find(c => c.id === activeCategory)?.label}`}
+            {activeCategory === 'all' && !searchQuery
+              ? 'Koleksi produk resmi Heviny & Hana Cosmetics'
+              : (
+                <>
+                  Menampilkan produk
+                  {activeCategory !== 'all' && ` kategori ${categories.find(c => c.id === activeCategory)?.label}`}
+                  {searchQuery && ` dengan kata kunci "${searchQuery}"`}
+                </>
+              )}
           </span>
 
           {hasActiveFilters && (
@@ -207,12 +209,12 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
             {filteredProducts.map((product, index) => (
               <article key={product.id} className="group min-w-0 overflow-hidden rounded-lg border border-[#E3E8E6] bg-white transition-shadow hover:shadow-lg">
-                <div className="aspect-square bg-[#F4F6F5] p-3 sm:p-5">
+                <div className="aspect-square w-full overflow-hidden bg-white">
                   <img
                     src={product.image}
                     alt={`${product.brand} ${product.name} ${product.size}`}
                     loading={index < 8 ? 'eager' : 'lazy'}
-                    className="h-full w-full object-contain mix-blend-multiply"
+                    className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-3 sm:p-4">

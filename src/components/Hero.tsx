@@ -193,7 +193,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog }) => {
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
-                <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#243330]/80 backdrop-blur-md text-[10px] font-semibold text-[#4fe843] tracking-wider uppercase border border-white/10">
+                <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-sm bg-[#243330]/80 backdrop-blur-md text-[10px] font-semibold text-amber-200 tracking-wider uppercase border border-white/10">
                   {heroThumbnails[activeThumbIdx].tag}
                 </span>
               </div>
@@ -202,7 +202,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog }) => {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-[11px] text-white/70">
                   <span className="uppercase tracking-widest">{heroThumbnails[activeThumbIdx].category}</span>
-                  <span className="font-mono text-[#4fe843] font-medium">BPOM RI Verified</span>
+                  <span className="font-mono text-amber-200 font-medium">BPOM RI Verified</span>
                 </div>
                 <h3 className="font-serif text-lg font-normal tracking-wide text-white">
                   {heroThumbnails[activeThumbIdx].name}
@@ -216,7 +216,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog }) => {
               <div className="pt-2 flex items-center justify-between border-t border-white/10">
                 <button
                   onClick={onExploreCatalog}
-                  className="text-xs font-semibold tracking-wider text-white hover:text-[#4fe843] flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="text-xs font-semibold tracking-wider text-white hover:text-amber-200 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>Lihat Semua Produk</span>
                   <ChevronRightIcon className="w-3.5 h-3.5" />

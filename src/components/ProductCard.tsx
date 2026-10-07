@@ -19,7 +19,7 @@ export const ProductCard: React.FC<ProductCardProps> = memo(({
       className="group bg-white rounded-xl border border-[#E3E8E6] hover:border-[#5C726E] transition-all duration-300 ease-out flex flex-col overflow-hidden hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full isolate transform-gpu"
     >
       {/* Visual Box */}
-      <div className="relative w-full overflow-hidden bg-[#F6F8F7] rounded-t-xl [mask-image:radial-gradient(white,black)] [-webkit-mask-image:-webkit-radial-gradient(white,black)]">
+      <div className="relative w-full overflow-hidden bg-white rounded-t-xl">
         <ProductImage
           src={product.image}
           alt={product.name}
