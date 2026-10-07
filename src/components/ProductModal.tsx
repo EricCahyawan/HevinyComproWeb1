@@ -5,6 +5,7 @@ import { ProductImage } from './ProductImage';
 import { Breadcrumb, BreadcrumbItem } from './Breadcrumb';
 import { ShopeeIcon } from './ShopeeIcon';
 import { COMPANY_INFO } from '../data/companyInfo';
+import { useLanguage } from '../LanguageContext';
 
 interface ProductModalProps {
   product: Product | null;
@@ -12,6 +13,7 @@ interface ProductModalProps {
 }
 
 export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
+  const { t } = useLanguage();
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -25,8 +27,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
   if (!product) return null;
 
   const breadcrumbItems: BreadcrumbItem[] = [
-    { name: 'Beranda', url: '/' },
-    { name: 'Produk', url: '/produk', onClick: onClose },
+    { name: t('homeBreadcrumb'), url: '/' },
+    { name: t('products'), url: '/produk', onClick: onClose },
     { name: product.catalogCategory, url: '/produk', onClick: onClose },
     { name: product.name, current: true }
   ];
@@ -50,7 +52,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
             id="btn-close-product-modal"
             onClick={onClose}
             className="w-8 h-8 rounded-md bg-white text-[#5C726E] hover:text-[#243330] hover:bg-[#E8ECEB] flex items-center justify-center transition cursor-pointer border border-[#E3E8E6] shrink-0"
-            aria-label="Tutup Detail"
+            aria-label={t('close')}
           >
             <XMarkIcon className="w-4 h-4" />
           </button>
@@ -94,7 +96,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
               {/* Benefits Checklist */}
               <div className="space-y-2 pt-1">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-[#243330]">
-                  Keunggulan & Khasiat Formulasi:
+                  {t('detailsTitle')}
                 </h4>
                 <ul className="grid gap-1.5 text-xs text-[#5C726E]">
                   {product.benefits.map((b, idx) => (
@@ -110,7 +112,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
               {product.variantsList && product.variantsList.length > 0 && (
                 <div className="space-y-2.5 pt-3 border-t border-[#E3E8E6]">
                   <div className="text-xs font-semibold uppercase tracking-wider text-[#243330] flex items-center justify-between">
-                    <span>Varian Aroma / Tipe ({product.variantsList.length}):</span>
+                    <span>{t('aromaVariants')} ({product.variantsList.length}):</span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto pr-1">
                     {product.variantsList.map((v, idx) => (
@@ -140,7 +142,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
         <div className="p-4 sm:p-5 bg-[#F6F8F7] border-t border-[#E3E8E6] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="text-xs text-[#5C726E]">
             <span className="text-xs sm:text-[13px] text-[#5C726E] font-medium block">
-              Diproduksi resmi oleh Hana Cosmetics, Surabaya
+              {t('producedBy')}
             </span>
           </div>
 
@@ -160,7 +162,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
               onClick={onClose}
               className="px-4 py-2.5 rounded-md bg-white hover:bg-[#EAEFEF] text-[#5C726E] hover:text-[#243330] border border-[#E3E8E6] text-xs font-semibold uppercase tracking-wider transition cursor-pointer"
             >
-              Tutup
+              {t('close')}
             </button>
           </div>
         </div>

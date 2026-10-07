@@ -11,6 +11,7 @@ import {
   isProductInCategory,
   getProductCategoryCount
 } from '../data/photoProducts';
+import { useLanguage } from '../LanguageContext';
 
 interface ProductsPageProps {
   onSelectProduct: (product: Product) => void;
@@ -25,6 +26,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   selectedCategory = 'all',
   onCategoryChange 
 }) => {
+  const { language, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<ProductCategory>(selectedCategory);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -41,11 +43,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   };
 
   const categories: { id: ProductCategory; label: string; count: number }[] = [
-    { id: 'all', label: 'Semua Produk', count: getProductCategoryCount('all') },
-    { id: 'body', label: 'Perawatan Tubuh', count: getProductCategoryCount('body') },
-    { id: 'hair', label: 'Perawatan Rambut', count: getProductCategoryCount('hair') },
-    { id: 'face', label: 'Perawatan Wajah', count: getProductCategoryCount('face') },
-    { id: 'nail', label: 'Perawatan Kuku', count: getProductCategoryCount('nail') },
+    { id: 'all', label: t('allProducts'), count: getProductCategoryCount('all') },
+    { id: 'body', label: t('bodyCare'), count: getProductCategoryCount('body') },
+    { id: 'hair', label: t('hairCare'), count: getProductCategoryCount('hair') },
+    { id: 'face', label: t('faceCare'), count: getProductCategoryCount('face') },
+    { id: 'nail', label: t('nailCare'), count: getProductCategoryCount('nail') },
   ];
 
   const filteredProducts = useMemo(() => {
@@ -71,9 +73,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const hasActiveFilters = searchQuery !== '' || activeCategory !== 'all';
 
   const breadcrumbItems: BreadcrumbItem[] = [
-    { name: 'Beranda', url: '/', onClick: () => onNavigate?.('home') },
+    { name: t('homeBreadcrumb'), url: '/', onClick: () => onNavigate?.('home') },
     {
-      name: 'Katalog Produk',
+      name: t('productList'),
       url: '/produk',
       onClick: () => {
         handleCategorySelect('all');
@@ -82,11 +84,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       current: activeCategory === 'all' && !searchQuery
     },
     ...(activeCategory !== 'all' ? [{
-      name: categories.find(c => c.id === activeCategory)?.label || 'Kategori',
+      name: categories.find(c => c.id === activeCategory)?.label || (language === 'id' ? 'Kategori' : 'Category'),
       current: !searchQuery
     }] : []),
     ...(searchQuery ? [{
-      name: `Cari: "${searchQuery}"`,
+      name: `${language === 'id' ? 'Cari' : 'Search'}: "${searchQuery}"`,
       current: true
     }] : [])
   ];
@@ -114,14 +116,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Cari produk..."
+                placeholder={t('searchProducts')}
                 className="w-full pl-11 pr-10 py-3 bg-[#F6F8F7] border border-[#E3E8E6] rounded-lg text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:border-[#5C726E] focus:bg-white outline-hidden transition"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
                   className="w-6 h-6 rounded-md bg-[#E3E8E6] text-[#5C726E] hover:text-[#243330] absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-xs transition cursor-pointer"
-                  title="Hapus pencarian"
+                  title={t('clearSearch')}
                 >
                   <XMarkIcon className="w-3.5 h-3.5" />
                 </button>
@@ -131,11 +133,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             {hasActiveFilters && (
               <button
                 onClick={handleResetFilters}
-                title="Reset Semua Filter"
+                title={t('resetAllFilters')}
                 className="p-3 rounded-lg bg-[#F6F8F7] hover:bg-rose-50 text-[#8A9E9A] hover:text-rose-600 border border-[#E3E8E6] transition cursor-pointer shrink-0 flex items-center gap-1.5 text-xs font-medium"
               >
                 <ArrowPathIcon className="w-4 h-4" />
-                <span className="hidden sm:inline">Reset</span>
+                <span className="hidden sm:inline">{t('reset')}</span>
               </button>
             )}
 
@@ -169,12 +171,12 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         <div className="flex items-center justify-between text-xs text-[#5C726E] mb-6 px-1">
           <span className="font-medium">
             {activeCategory === 'all' && !searchQuery
-              ? 'Koleksi produk resmi Heviny & Hana Cosmetics'
+              ? t('productCollection')
               : (
                 <>
-                  Menampilkan produk
-                  {activeCategory !== 'all' && ` kategori ${categories.find(c => c.id === activeCategory)?.label}`}
-                  {searchQuery && ` dengan kata kunci "${searchQuery}"`}
+                  {t('showingProducts')}
+                  {activeCategory !== 'all' && ` ${language === 'id' ? 'kategori' : 'in'} ${categories.find(c => c.id === activeCategory)?.label}`}
+                  {searchQuery && ` ${language === 'id' ? 'dengan kata kunci' : 'matching'} "${searchQuery}"`}
                 </>
               )}
           </span>
@@ -184,7 +186,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               onClick={handleResetFilters}
               className="text-xs text-[#5C726E] hover:text-[#243330] underline cursor-pointer"
             >
-              Reset filter
+              {t('resetFilters')}
             </button>
           )}
         </div>
@@ -192,16 +194,16 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
           <div className="p-12 sm:p-16 text-center bg-white rounded-xl border border-[#E3E8E6] space-y-4 shadow-xs">
-            <h3 className="font-serif text-xl text-[#243330]">Produk Tidak Ditemukan</h3>
+            <h3 className="font-serif text-xl text-[#243330]">{t('noProducts')}</h3>
             <p className="text-xs sm:text-sm text-[#5C726E] max-w-md mx-auto leading-relaxed">
-              Tidak ada produk yang cocok dengan pencarian kata kunci <em>"{searchQuery}"</em>. Silakan gunakan kata kunci lain atau hubungi layanan perusahaan.
+              {language === 'id' ? 'Tidak ada produk yang cocok dengan pencarian kata kunci' : 'No products match the search term'} <em>"{searchQuery}"</em>. {t('noProductsDescription')}
             </p>
             <div className="pt-2">
               <button
                 onClick={handleResetFilters}
                 className="px-6 py-2.5 rounded-md bg-[#243330] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1B2624] transition cursor-pointer"
               >
-                Tampilkan Semua Produk
+                {t('showAllProducts')}
               </button>
             </div>
           </div>
@@ -220,7 +222,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 <div className="p-3 sm:p-4">
                   <p className="mb-1 text-[9px] font-semibold uppercase tracking-wider text-[#8A9E9A]">{product.brand} · {categories.find(category => category.id === product.category)?.label}</p>
                   <h2 className="min-h-10 text-xs font-semibold leading-5 text-[#243330] sm:text-sm">{product.name}</h2>
-                  <p className="mt-2 text-[10px] text-[#5C726E]">Kemasan: {product.size}</p>
+                  <p className="mt-2 text-[10px] text-[#5C726E]">{t('packaging')} {product.size}</p>
                 </div>
               </article>
             ))}

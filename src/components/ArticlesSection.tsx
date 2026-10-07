@@ -1,3 +1,4 @@
+import { useLanguage } from '../LanguageContext';
 import React, { useState } from 'react';
 import { 
   ArrowRightIcon, 
@@ -16,6 +17,7 @@ interface ArticlesSectionProps {
 }
 
 export const ArticlesSection: React.FC<ArticlesSectionProps> = ({ onSelectProductByName }) => {
+  const { language, t } = useLanguage();
   const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -87,7 +89,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({ onSelectProduc
               <div className="p-6 sm:p-7 pt-0">
                 <div className="pt-3.5 border-t border-[#EAEFEF] flex items-center justify-end text-xs">
                   <div className="flex items-center gap-1 font-semibold text-[#243330] group-hover:text-[#3B5D55] group-hover:translate-x-1 transition-all uppercase tracking-wider text-[11px]">
-                    <span>Baca Artikel</span>
+                    <span>{t('readArticle')}</span>
                     <ArrowRightIcon className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -202,7 +204,7 @@ export const ArticlesSection: React.FC<ArticlesSectionProps> = ({ onSelectProduc
                   className="px-4 py-2 rounded-lg border border-[#E3E8E6] text-xs font-semibold text-[#5C726E] hover:bg-[#FAFBFB] transition-colors flex items-center gap-2 cursor-pointer"
                 >
                   {copied ? <CheckIcon className="w-3.5 h-3.5 text-emerald-600" /> : <ShareIcon className="w-3.5 h-3.5" />}
-                  <span>{copied ? 'Tautan Disalin' : 'Bagikan'}</span>
+                  <span>{copied ? (language === 'en' ? 'Link Copied' : 'Tautan Disalin') : (language === 'en' ? 'Share' : 'Bagikan')}</span>
                 </button>
                 <button
                   id="btn-close-article-bottom"

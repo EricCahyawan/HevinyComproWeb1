@@ -126,7 +126,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ isOpen, onClose }) => {
 
               <div className="bg-white p-3 rounded-lg border border-stone-200">
                 <strong className="text-stone-900 block">4. Transparansi Legalitas Hana Cosmetics</strong>
-                <span className="text-stone-600">Pencantuman nomor resmi BPOM RI, Halal MUI, alamat perusahaan Surabaya, dan integrasi WhatsApp otomatis.</span>
+                <span className="text-stone-600">Pencantuman nomor resmi BPOM RI, Halal MUI, alamat perusahaan Surabaya, dan formulir kontak email.</span>
               </div>
             </div>
           </div>

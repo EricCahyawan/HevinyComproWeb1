@@ -4,6 +4,7 @@ import { ARTICLES_DATA } from '../data/articles';
 import { ArticleItem, ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
 import { BotanicalArticleVisual } from '../components/BotanicalArticleVisual';
+import { useLanguage } from '../LanguageContext';
 
 const JOURNAL_SEO = {
   title: 'Edukasi Hana Cosmetics & Heviny | Panduan Kosmetik Murah & Suplai Salon BPOM',
@@ -35,6 +36,7 @@ interface JournalPageProps {
 }
 
 export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName, onNavigate }) => {
+  const { language, t } = useLanguage();
   const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(() => getArticleFromPath());
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -103,7 +105,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
     },
     articleSection: selectedArticle.category,
     keywords: selectedArticle.tags?.join(', '),
-    inLanguage: 'id-ID',
+    inLanguage: language === 'id' ? 'id-ID' : 'en-US',
     mainEntityOfPage: `${window.location.origin}${ARTICLE_PATH}/${selectedArticle.id}`
   } : null;
 
@@ -113,8 +115,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
     'Body Care',
     'Nail Care',
     'Face Care',
-    'Bahan Alami',
-    'Bisnis & Salon'
+    language === 'id' ? 'Bahan Alami' : 'Natural Ingredients',
+    language === 'id' ? 'Bisnis & Salon' : 'Business & Salons'
   ];
 
   const filteredArticles = useMemo(() => {
@@ -132,9 +134,9 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
           matchesCat = artCatNorm.includes('nail') || artCatNorm.includes('kuku');
         } else if (selectedCategory === 'Face Care') {
           matchesCat = artCatNorm.includes('face') || artCatNorm.includes('wajah');
-        } else if (selectedCategory === 'Bahan Alami') {
+        } else if (selectedCategory === 'Bahan Alami' || selectedCategory === 'Natural Ingredients') {
           matchesCat = artCatNorm.includes('bahan') || artCatNorm.includes('alami') || artCatNorm.includes('herbal');
-        } else if (selectedCategory === 'Bisnis & Salon') {
+        } else if (selectedCategory === 'Bisnis & Salon' || selectedCategory === 'Business & Salons') {
           matchesCat = artCatNorm.includes('bisnis') || artCatNorm.includes('salon');
         } else {
           matchesCat = artCatNorm.includes(catNorm);
@@ -168,9 +170,9 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
   };
 
   const breadcrumbItems: BreadcrumbItem[] = [
-    { name: 'Beranda', url: '/', onClick: () => onNavigate('home') },
+    { name: t('homeBreadcrumb'), url: '/', onClick: () => onNavigate('home') },
     {
-      name: 'Artikel Edukasi',
+      name: t('articles'),
       url: '/artikel',
       onClick: () => {
         closeArticle();
@@ -184,7 +186,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
       current: !searchQuery
     }] : []),
     ...(searchQuery && !selectedArticle ? [{
-      name: `Cari: "${searchQuery}"`,
+      name: `${language === 'id' ? 'Cari' : 'Search'}: "${searchQuery}"`,
       current: true
     }] : []),
     ...(selectedArticle ? [
@@ -217,7 +219,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
             <input
               type="text"
               id="input-search-articles"
-              placeholder="Cari topik artikel: misalnya 'rontok', 'air mawar', 'lulur pengantin', 'creambath', 'salon'..."
+              placeholder={t('articleSearch')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-11 pr-10 py-3 rounded-lg bg-white border border-[#E3E8E6] text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:outline-none focus:border-[#243330] focus:ring-1 focus:ring-[#243330] transition"
@@ -226,7 +228,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               <button
                 onClick={() => setSearchQuery('')}
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8A9E9A] hover:text-[#243330] p-1 text-xs"
-                title="Hapus pencarian"
+                title={t('deleteSearch')}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -246,7 +248,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                     : 'bg-white text-[#5C726E] hover:bg-[#EAEFEF] border border-[#E3E8E6]'
                 }`}
               >
-                {cat}
+                {cat === 'Semua' ? t('allArticles') : cat}
               </button>
             ))}
           </div>
@@ -261,7 +263,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 }}
                 className="text-xs font-semibold text-emerald-800 hover:underline cursor-pointer"
               >
-                Reset Filter
+                {t('resetFilter')}
               </button>
             </div>
           )}
@@ -271,9 +273,9 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
         {filteredArticles.length === 0 && (
           <div className="text-center py-16 px-4 bg-[#F6F8F7] rounded-xl border border-[#E3E8E6] space-y-4">
             <BookOpen className="w-12 h-12 text-[#8A9E9A] mx-auto opacity-60" />
-            <h3 className="font-serif text-xl text-[#243330]">Tidak Ada Artikel yang Cocok</h3>
+            <h3 className="font-serif text-xl text-[#243330]">{t('noArticles')}</h3>
             <p className="text-xs sm:text-sm text-[#5C726E] max-w-md mx-auto">
-              Coba gunakan kata kunci pencarian lain atau klik tombol di bawah untuk melihat seluruh koleksi artikel kami.
+              {t('noArticlesDescription')}
             </p>
             <button
               onClick={() => {
@@ -282,7 +284,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               }}
               className="px-6 py-2.5 rounded-md bg-[#243330] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1A2624] transition cursor-pointer"
             >
-              Tampilkan Semua Artikel
+              {t('showAllArticles')}
             </button>
           </div>
         )}
@@ -339,7 +341,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               <div className="p-6 sm:p-7 pt-0">
                 <div className="pt-3.5 border-t border-[#EAEFEF] flex items-center justify-end text-xs">
                   <div className="flex items-center gap-1 font-semibold text-[#243330] group-hover:text-[#3B5D55] group-hover:translate-x-1 transition-all uppercase tracking-wider text-[11px]">
-                    <span>Baca Artikel</span>
+                    <span>{t('readArticle')}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -363,7 +365,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 id="btn-close-article-reader-top"
                 onClick={closeArticle}
                 className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white border border-[#E3E8E6] hover:bg-[#243330] hover:text-white text-[#5C726E] flex items-center justify-center transition-colors cursor-pointer shadow-xs z-20"
-                aria-label="Tutup Artikel"
+                aria-label={t('closeArticle')}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -390,7 +392,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                   <div className="flex items-center gap-2 text-[#243330]">
                     <ShieldCheck className="w-4 h-4 text-emerald-700" />
                     <span className="text-xs font-semibold uppercase tracking-wider">
-                      Poin Intisari Edukasi & Khasiat:
+                      {t('articleHighlights')}
                     </span>
                   </div>
                   <ul className="text-xs sm:text-[13px] text-[#3B544E] space-y-1.5 pl-5 list-disc leading-relaxed">
@@ -422,7 +424,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               {/* Tags Cloud */}
               {selectedArticle.tags && selectedArticle.tags.length > 0 && (
                 <div className="pt-3 border-t border-[#E3E8E6] flex flex-wrap items-center gap-2">
-                  <span className="text-[11px] font-semibold text-[#8A9E9A] uppercase tracking-wider">Topik Terkait:</span>
+                  <span className="text-[11px] font-semibold text-[#8A9E9A] uppercase tracking-wider">{t('relatedTopics')}</span>
                   {selectedArticle.tags.map((t, idx) => (
                     <span
                       key={idx}
@@ -439,11 +441,11 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 <div className="p-5 sm:p-6 rounded-lg bg-[#F6F8F7] border border-[#E3E8E6] space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-semibold uppercase tracking-wider text-[#243330]">
-                      Rekomendasi Produk Resmi Heviny Terkait:
+                      {t('relatedProducts')}
                     </span>
                   </div>
                   <p className="text-[11px] text-[#5C726E]">
-                    Klik produk di bawah untuk melihat spesifikasi formulasi, ukuran kemasan, izin BPOM, dan legalitas resmi di katalog kami:
+                    {t('relatedProductsDescription')}
                   </p>
 
                   <div className="flex flex-wrap gap-2 pt-1">
@@ -471,7 +473,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                   }}
                   className="text-xs font-semibold text-[#5C726E] hover:text-[#243330] flex items-center gap-1 cursor-pointer"
                 >
-                  <span>Lihat Semua Produk</span>
+                  <span>{t('seeAllProducts')}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </button>
                 <button
@@ -479,7 +481,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                   onClick={closeArticle}
                   className="px-6 py-2.5 rounded-md bg-[#243330] text-white text-xs font-semibold hover:bg-[#1A2624] transition cursor-pointer"
                 >
-                  Tutup Artikel
+                  {t('closeArticle')}
                 </button>
               </div>
 

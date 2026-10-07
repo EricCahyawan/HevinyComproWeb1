@@ -11,6 +11,7 @@ import { ProductModal } from './components/ProductModal';
 import { Product, ActivePage, ProductCategory } from './types';
 import { HEVINY_PRODUCTS } from './data/products';
 import { ARTICLES_DATA } from './data/articles';
+import { LanguageProvider } from './LanguageContext';
 
 // Path-to-Page and Page-to-Path maps for clean URL routing and SEO indexing
 const PAGE_PATH_MAP: Record<ActivePage, string> = {
@@ -86,7 +87,7 @@ const getPageFromPath = (pathname: string): ActivePage => {
   return 'home';
 };
 
-export default function App() {
+function AppContent() {
   const [activePage, setActivePage] = useState<ActivePage>(() => getPageFromPath(window.location.pathname));
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>(() => getCategoryFromQuery());
@@ -145,8 +146,8 @@ export default function App() {
       },
       contact: {
         title: 'Kontak Resmi Hana Cosmetics Surabaya (Heviny) | Pemesanan Grosir Pabrik Tangan Pertama',
-        description: 'Hubungi kantor pemasaran dan pabrik Hana Cosmetics di Surabaya untuk pemesanan grosir kosmetik murah, distributor salon, sampo jerigen 5L/20L harga pabrik termurah, atau kemitraan reseller melalui WhatsApp resmi.',
-        keywords: 'kontak hana cosmetics, alamat hana cosmetics surabaya, telepon hana cosmetics, kontak heviny, distributor kosmetik murah, supplier kosmetik murah tangan pertama, supplier salon termurah, harga grosir kosmetik salon, pabrik kosmetik murah surabaya'
+        description: 'Hubungi kantor pemasaran dan pabrik Hana Cosmetics di Surabaya untuk pemesanan grosir kosmetik, distributor salon, atau kemitraan reseller.',
+        keywords: 'kontak hana cosmetics, alamat hana cosmetics surabaya, kontak heviny, distributor kosmetik, supplier kosmetik tangan pertama, supplier salon, harga grosir kosmetik salon, pabrik kosmetik surabaya'
       }
     };
 
@@ -346,5 +347,13 @@ export default function App() {
       )}
 
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }

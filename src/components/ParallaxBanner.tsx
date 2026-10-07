@@ -1,6 +1,7 @@
 import React, { useRef, memo } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { useLanguage } from '../LanguageContext';
 
 interface ParallaxBannerProps {
   onNavigateProducts?: () => void;
@@ -11,6 +12,7 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
   onNavigateProducts,
   onNavigateContact
 }) => {
+  const { language, t } = useLanguage();
   const bannerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -53,12 +55,14 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
 
           <div className="space-y-3 sm:space-y-4">
             <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light text-white leading-tight">
-              Harmoni Formulasi Botani & <br className="hidden sm:inline" />
-              <span className="italic font-normal">Keahlian Kosmetik Nusantara</span>
+              {language === 'en' ? 'Botanical Formulation Harmony &' : 'Harmoni Formulasi Botani &'} <br className="hidden sm:inline" />
+              <span className="italic font-normal">{language === 'en' ? 'Indonesian Cosmetic Expertise' : 'Keahlian Kosmetik Nusantara'}</span>
             </h2>
 
             <p className="max-w-xl mx-auto text-xs sm:text-sm text-white/80 leading-relaxed font-sans">
-              Menghadirkan rangkaian kosmetik higienis bersertifikasi CPKB BPOM RI dan Halal resmi yang telah dipercaya ribuan salon, spa, dan mitra bisnis sejak 2006.
+              {language === 'en'
+                ? 'Our hygienically produced cosmetics meet CPKB, BPOM RI, and Halal standards, and have been trusted by thousands of salons, spas, and business partners since 2006.'
+                : 'Menghadirkan rangkaian kosmetik higienis bersertifikasi CPKB BPOM RI dan Halal resmi yang telah dipercaya ribuan salon, spa, dan mitra bisnis sejak 2006.'}
             </p>
           </div>
 
@@ -68,7 +72,7 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
                 onClick={onNavigateProducts}
                 className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-md bg-white text-[#243330] hover:bg-[#F3F5F4] text-xs font-semibold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:scale-102 cursor-pointer"
               >
-                <span>Jelajahi Produk Kami</span>
+                <span>{language === 'en' ? 'Explore Our Products' : 'Jelajahi Produk Kami'}</span>
                 <ArrowRightIcon className="w-3.5 h-3.5" />
               </button>
             )}
@@ -78,7 +82,7 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
                 onClick={onNavigateContact}
                 className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-md bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer hover:scale-102"
               >
-                <span>Hubungi Kontak Resmi</span>
+                <span>{t('contactCompany')}</span>
               </button>
             )}
           </div>

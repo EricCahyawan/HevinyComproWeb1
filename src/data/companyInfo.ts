@@ -9,9 +9,6 @@ export const COMPANY_INFO = {
   taglineSub: 'Perawatan Kecantikan Alami & Ragam Produk Salon Terpercaya',
   establishedYear: 2006,
   address: 'Jl. Rungkut Lor RL 2A/21, Rungkut, Surabaya, Jawa Timur, Indonesia',
-  phone: '0813-34070067',
-  whatsapp: '+6281334070067',
-  whatsappDisplay: '+62 813-3407-0067',
   shopeeUrl: 'https://shopee.co.id/hevinystore',
   shopeeDisplay: 'Shopee Official Store',
   email: 'hevinycs@gmail.com',
@@ -132,7 +129,7 @@ export const TESTIMONIALS: Testimonial[] = [
     city: 'Batu / Malang',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
     rating: 5,
-    comment: 'Heviny menyediakan kebutuhan bulk shower gel, bath foam, dan shampoo 5 Liter untuk kamar hotel kami. Kualitas busanya lembut, tidak bikin kulit tamu kering, dan kemasannya aman dikirim tanpa bocor. Pelayanan respon WhatsApp-nya cepat sekali.',
+    comment: 'Heviny menyediakan kebutuhan bulk shower gel, bath foam, dan shampoo 5 Liter untuk kamar hotel kami. Kualitas busanya lembut, tidak bikin kulit tamu kering, dan kemasannya aman dikirim tanpa bocor. Pelayanannya responsif dan profesional.',
     productUsed: 'Heviny Shower Gel Botanical 5L & Bath Foam'
   },
   {
@@ -205,7 +202,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq-6',
     category: 'Informasi Perusahaan',
     question: 'Bagaimana cara menghubungi pabrik Hana Cosmetics / Heviny untuk pemesanan grosir salon dan distributor?',
-    answer: 'Anda dapat menghubungi kantor pemasaran Hana Cosmetics di Surabaya melalui formulir di halaman Kontak atau WhatsApp resmi kami (+62 813-3407-0067). Kami melayani suplai grosir tangan pertama untuk salon kecantikan, barbershop, spa, toko kosmetik, reseller, serta maklon ke seluruh Indonesia.'
+    answer: 'Anda dapat menghubungi kantor pemasaran Hana Cosmetics di Surabaya melalui formulir di halaman Kontak atau email resmi kami. Kami melayani suplai grosir tangan pertama untuk salon kecantikan, barbershop, spa, toko kosmetik, reseller, serta maklon ke seluruh Indonesia.'
   }
 ];
 
@@ -219,13 +216,13 @@ export const UX_AUDIT_POINTS: AuditPoint[] = [
   {
     category: 'Arsitektur Informasi',
     issueOldSite: 'Katalog produk statis tanpa fitur pencarian, filter kategori, keterangan kandungan alami, cara pemakaian, atau transparansi nomor BPOM.',
-    solutionNewSite: 'Menyediakan Dynamic Interactive Catalog dengan filter 5 kategori, live search, drawer detail produk lengkap (kandungan, cara pakai, ukuran varian, status BPOM & Halal), serta tombol order instan ke WhatsApp.',
+    solutionNewSite: 'Menyediakan Dynamic Interactive Catalog dengan filter 5 kategori, live search, drawer detail produk lengkap (kandungan, cara pakai, ukuran varian, status BPOM & Halal), serta formulir pemesanan melalui email.',
     impact: 'Critical'
   },
   {
     category: 'Konversi Bisnis (B2B/B2C)',
     issueOldSite: 'Tidak membedakan target konsumen retail dengan pemilik Salon, Spa, dan Hotel. Peluang transaksi grosir besar terlewatkan.',
-    solutionNewSite: 'Menambahkan katalog khusus ukuran Jerigen 5L & 20L, spesifikasi packing karton resmi, kalkulator pesanan grosir, serta jalur kontak langsung ke WhatsApp resmi.',
+    solutionNewSite: 'Menambahkan katalog khusus ukuran Jerigen 5L & 20L, spesifikasi packing karton resmi, kalkulator pesanan grosir, serta jalur kontak melalui email resmi.',
     impact: 'High'
   },
   {

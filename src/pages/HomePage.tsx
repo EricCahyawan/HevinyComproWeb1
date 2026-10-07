@@ -11,6 +11,8 @@ import { HEVINY_PRODUCTS } from '../data/products';
 import { Product, ActivePage } from '../types';
 import { ParallaxBanner } from '../components/ParallaxBanner';
 import { ProductCard } from '../components/ProductCard';
+import { useLanguage } from '../LanguageContext';
+import { ENGLISH_INGREDIENTS, ENGLISH_TESTIMONIALS } from '../data/englishContent';
 
 interface HomePageProps {
   onNavigate: (page: ActivePage) => void;
@@ -21,6 +23,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onSelectProduct
 }) => {
+  const { language, t } = useLanguage();
   // Signature bestseller products
   const favoriteProducts = useMemo(() => {
     return HEVINY_PRODUCTS.filter(p => p.popular || p.isSalonFavorite).slice(0, 6);
@@ -68,13 +71,13 @@ export const HomePage: React.FC<HomePageProps> = ({
         >
           {/* Heading */}
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] drop-shadow-sm">
-            Kemurnian Ekstrak Botani <br />
-            <span className="italic font-normal">Untuk Mahkota & Kulit Alami</span>
+            {t('heroTitle')} <br />
+            <span className="italic font-normal">{t('heroSubtitle')}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/90 font-sans leading-relaxed drop-shadow-xs">
-            Rangkaian kosmetik perawatan rambut, tubuh, dan spa terpercaya bersertifikasi CPKB BPOM RI & Halal. Menghadirkan kualitas terbaik dengan harga terjangkau untuk salon kecantikan dan perawatan harian di rumah.
+            {t('heroDescription')}
           </p>
         </motion.div>
 
@@ -85,8 +88,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               <ShieldCheckIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-emerald-300" />
             </div>
             <div>
-              <span className="font-semibold block text-white text-[11px] sm:text-sm">BPOM RI Terdaftar</span>
-              <span className="text-[9px] sm:text-[10px] text-white/80">Izin Edar Resmi</span>
+              <span className="font-semibold block text-white text-[11px] sm:text-sm">{t('bpomRegistered')}</span>
+              <span className="text-[9px] sm:text-[10px] text-white/80">{t('officialDistribution')}</span>
             </div>
           </div>
 
@@ -97,8 +100,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               <ShieldCheckIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-300" />
             </div>
             <div>
-              <span className="font-semibold block text-white text-[11px] sm:text-sm">Halal Indonesia</span>
-              <span className="text-[9px] sm:text-[10px] text-white/80">Sertifikat BPJPH</span>
+              <span className="font-semibold block text-white text-[11px] sm:text-sm">{t('halalIndonesia')}</span>
+              <span className="text-[9px] sm:text-[10px] text-white/80">{t('halalCertificate')}</span>
             </div>
           </div>
         </div>
@@ -111,7 +114,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
             <div>
               <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
-                Pilihan <span className="italic font-normal">Paling Diminati</span>
+                {t('bestLoved')}
               </h2>
             </div>
 
@@ -120,7 +123,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               onClick={() => onNavigate('products')}
               className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#243330] hover:text-[#5C726E] transition cursor-pointer self-start md:self-auto"
             >
-              <span>Lihat Semua Produk di Halaman Produk</span>
+              <span>{t('viewAllProducts')}</span>
               <ArrowRightIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
@@ -145,18 +148,20 @@ export const HomePage: React.FC<HomePageProps> = ({
           
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-3">
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#5C726E] font-semibold block">
-              THE BEAUTY OF NATURE • KANDUNGAN BOTANI ALAMI
+              {t('botanicalLabel')}
             </span>
             <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
-              Kearifan Bahan Alami <span className="italic font-normal">Nusantara</span>
+              {t('botanicalTitle')}
             </h2>
             <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed font-sans">
-              Setiap tetes dan formulasi Heviny diperkaya ekstrak botani murni yang terbukti secara turun-temurun merawat keindahan rambut dan kelembutan kulit.
+              {t('botanicalDescription')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-            {NATURAL_INGREDIENTS.slice(0, 3).map((item) => (
+            {NATURAL_INGREDIENTS.slice(0, 3).map((item) => {
+              const ingredient = language === 'en' ? ENGLISH_INGREDIENTS[item.id] : item;
+              return (
               <div
                 key={item.id}
                 className="bg-white rounded-xl p-4 sm:p-6 border border-[#E3E8E6] shadow-xs space-y-3 sm:space-y-4 flex flex-col justify-between hover:shadow-xl transition-all duration-300"
@@ -165,7 +170,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <div className="aspect-[16/10] rounded-lg overflow-hidden bg-[#F6F8F7] relative group">
                     <img
                       src={item.image}
-                      alt={item.name}
+                      alt={ingredient.name}
                       loading="lazy"
                       decoding="async"
                       onError={(e) => {
@@ -182,17 +187,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                     {item.latinName}
                   </span>
                   <h3 className="font-serif text-base sm:text-lg font-medium text-[#243330]">
-                    {item.name}
+                    {ingredient.name}
                   </h3>
                   <p className="text-xs text-[#5C726E] leading-relaxed">
-                    {item.description}
+                    {ingredient.description}
                   </p>
                 </div>
 
                 <div className="pt-2 sm:pt-3 border-t border-[#F0F3F2]">
-                  <span className="text-[10px] font-semibold text-[#243330] block mb-1">Manfaat Utama:</span>
+                  <span className="text-[10px] font-semibold text-[#243330] block mb-1">{t('mainBenefits')}</span>
                   <ul className="text-[11px] text-[#5C726E] space-y-1">
-                    {item.benefits.slice(0, 2).map((b, i) => (
+                    {ingredient.benefits.slice(0, 2).map((b, i) => (
                       <li key={i} className="flex items-center gap-1.5">
                         <CheckCircleIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                         <span>{b}</span>
@@ -201,7 +206,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </ul>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="text-center mt-8 sm:mt-12">
@@ -209,7 +215,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               onClick={() => onNavigate('journal')}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-md"
             >
-              <span>Pelajari Edukasi & Ritual di Halaman Artikel</span>
+              <span>{t('learnArticles')}</span>
               <ArrowRightIcon className="w-4 h-4" />
             </button>
           </div>
@@ -225,7 +231,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         {/* Continuous Marquee Track (Repeated for seamless infinite scroll) */}
         <div className="animate-marquee-scroll flex gap-4 sm:gap-6 px-4">
-          {[...TESTIMONIALS, ...TESTIMONIALS].map((testi, idx) => (
+          {[...TESTIMONIALS, ...TESTIMONIALS].map((testi, idx) => {
+            const testimonial = language === 'en' ? ENGLISH_TESTIMONIALS[testi.id] : testi;
+            return (
             <div
               key={`${testi.id}-${idx}`}
               className="w-[300px] sm:w-[380px] shrink-0 p-5 sm:p-6 rounded-xl bg-[#F6F8F7] border border-[#E3E8E6] hover:border-[#243330]/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-4 cursor-default select-none"
@@ -237,7 +245,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   ))}
                 </div>
                 <p className="text-xs sm:text-sm text-[#243330] leading-relaxed italic font-serif">
-                  "{testi.comment}"
+                  "{testimonial.comment}"
                 </p>
               </div>
 
@@ -247,7 +255,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </h4>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -258,13 +267,13 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
             <div className="max-w-2xl space-y-2 sm:space-y-3">
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#5C726E] font-semibold">
-                ARTIKEL EDUKASI & TIPS RESMI HEVINY
+                {t('officialArticles')}
               </span>
               <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
-                Panduan Edukasi & <span className="italic font-normal">Ritual Perawatan Botani</span>
+                {t('careGuide')}
               </h2>
               <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed">
-                Pelajari wawasan perawatan rambut salon profesional, manfaat lulur rempah tradisional, hingga panduan menjaga keindahan kuku alami langsung dari formulator kami.
+                {t('careGuideDescription')}
               </p>
             </div>
 
@@ -272,7 +281,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               onClick={() => onNavigate('journal')}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition cursor-pointer self-start md:self-auto shrink-0 shadow-md"
             >
-              <span>Jelajahi Artikel</span>
+              <span>{t('exploreArticles')}</span>
               <ArrowRightIcon className="w-3.5 h-3.5" />
             </button>
           </div>

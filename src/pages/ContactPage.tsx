@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import {
-  PhoneIcon,
   EnvelopeIcon,
   PaperAirplaneIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  CheckCircleIcon,
-  ChatBubbleLeftRightIcon
+  CheckCircleIcon
 } from '@heroicons/react/24/outline';
 import { COMPANY_INFO, FAQS } from '../data/companyInfo';
 import { ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
 import { ShopeeIcon } from '../components/ShopeeIcon';
+import { useLanguage } from '../LanguageContext';
+import { ENGLISH_FAQS } from '../data/englishContent';
 
 interface ContactPageProps {
   onNavigate?: (page: ActivePage) => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
+  const { language, t } = useLanguage();
   const [openFaqId, setOpenFaqId] = useState<string>('faq-1');
   const [formState, setFormState] = useState({
     name: '',
@@ -30,15 +31,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     e.preventDefault();
     if (!formState.name.trim() || !formState.message.trim()) return;
 
-    const waText = `Halo Heviny Official,\n\n` +
-      `Saya ingin bertanya / konsultasi melalui website:\n` +
-      `• Nama / Usaha: ${formState.name}\n` +
-      (formState.email ? `• Email: ${formState.email}\n` : '') +
-      `• Pesan / Kebutuhan:\n${formState.message}\n\n` +
-      `Mohon informasinya lebih lanjut. Terima kasih.`;
-
+    const subject = language === 'id' ? 'Pertanyaan melalui website Heviny' : 'Inquiry from the Heviny website';
+    const body = `${language === 'id' ? 'Nama' : 'Name'}: ${formState.name}\n` +
+      (formState.email ? `Email: ${formState.email}\n` : '') +
+      `${language === 'id' ? 'Pesan' : 'Message'}:\n${formState.message}`;
+    window.location.href = `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setIsSubmitted(true);
-    window.open(`https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}?text=${encodeURIComponent(waText)}`, '_blank');
   };
 
   const toggleFaq = (id: string) => {
@@ -47,7 +45,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
   const breadcrumbItems: BreadcrumbItem[] = [
     { name: 'Beranda', url: '/', onClick: () => onNavigate?.('home') },
-    { name: 'Kontak Resmi', url: '/kontak', current: true }
+    { name: t('officialContact'), url: '/kontak', current: true }
   ];
 
   return (
@@ -67,7 +65,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             <div className="bg-[#F6F8F7] p-6 sm:p-8 rounded-xl border border-[#E3E8E6] space-y-6">
               <div>
                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#5C726E] block">
-                  PRODUSEN RESMI SEJAK 2006
+                  {t('officialSince')}
                 </span>
                 <h2 className="font-serif text-2xl font-normal text-[#243330] mt-1">
                   {COMPANY_INFO.legalEntity}
@@ -76,42 +74,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
               <div className="space-y-4 text-xs text-[#5C726E]">
 
-                {/* WhatsApp */}
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white text-[#243330] flex items-center justify-center shrink-0 border border-[#E3E8E6]">
-                    <ChatBubbleLeftRightIcon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-semibold text-[#243330] block">WhatsApp Resmi:</span>
-                    <a
-                      href={`https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#243330] hover:underline font-medium"
-                    >
-                      {COMPANY_INFO.whatsappDisplay}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white text-[#243330] flex items-center justify-center shrink-0 border border-[#E3E8E6]">
-                    <PhoneIcon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-semibold text-[#243330] block">Telepon Kantor:</span>
-                    <span>{COMPANY_INFO.phone}</span>
-                  </div>
-                </div>
-
                 {/* Email */}
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-lg bg-white text-[#243330] flex items-center justify-center shrink-0 border border-[#E3E8E6]">
                     <EnvelopeIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-semibold text-[#243330] block">Email Resmi:</span>
+                    <span className="font-semibold text-[#243330] block">{t('officialEmail')}</span>
                     <a
                       href={`mailto:${COMPANY_INFO.email}`}
                       className="text-[#243330] hover:underline font-medium"
@@ -142,33 +111,33 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7 bg-[#F6F8F7] p-6 sm:p-8 rounded-xl border border-[#E3E8E6]">
             <h2 className="font-serif text-2xl font-light text-[#243330] mb-1">
-              Kirim Formulir Pesan
+              {t('messageForm')}
             </h2>
             <p className="text-xs text-[#5C726E] mb-6">
-              Hubungi untuk bertanya lebih lanjut atau kerja sama.
+              {t('contactForInfo')}
             </p>
 
             {isSubmitted ? (
               <div className="bg-white border border-emerald-200 rounded-lg p-8 text-center space-y-3">
                 <CheckCircleIcon className="w-10 h-10 text-emerald-600 mx-auto" />
                 <h3 className="font-serif font-medium text-[#243330] text-lg">
-                  Pesan Siap Terkirim ke WhatsApp Perusahaan
+                  {t('emailReady')}
                 </h3>
                 <p className="text-xs text-[#5C726E] max-w-md mx-auto">
-                  Jendela WhatsApp telah terbuka untuk melanjutkan percakapan dengan Customer Care Heviny.
+                  {t('emailReadyDescription')}
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
                   className="px-5 py-2 rounded-md bg-[#243330] text-white text-xs font-semibold"
                 >
-                  Kirim Pesan Lain
+                  {t('sendAnother')}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Lengkap / Nama Salon *</label>
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('fullName')}</label>
                     <input
                       type="text"
                       required
@@ -178,7 +147,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Alamat Email (Opsional)</label>
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('emailOptional')}</label>
                     <input
                       type="email"
                       value={formState.email}
@@ -189,7 +158,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Catatan / Pesan *</label>
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('noteMessage')}</label>
                   <textarea
                     rows={4}
                     required
@@ -204,7 +173,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   className="w-full py-3.5 px-6 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
                 >
                   <PaperAirplaneIcon className="w-3.5 h-3.5" />
-                  <span>Kirim Pesan ke WhatsApp Resmi Perusahaan</span>
+                  <span>{t('sendEmail')}</span>
                 </button>
               </form>
             )}
@@ -216,7 +185,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         <div className="pt-10 border-t border-[#E3E8E6] space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#5C726E] font-semibold block">
-              PERTANYAAN UMUM
+              {t('faq')}
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[#243330] font-light">
               Frequently Asked Questions
@@ -226,6 +195,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           <div className="max-w-3xl mx-auto space-y-3">
             {FAQS.map((faq) => {
               const isOpen = openFaqId === faq.id;
+              const localizedFaq = language === 'en' ? ENGLISH_FAQS[faq.id] : faq;
               return (
                 <div
                   key={faq.id}
@@ -235,7 +205,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     onClick={() => toggleFaq(faq.id)}
                     className="w-full p-5 text-left flex items-center justify-between gap-4 font-serif text-base text-[#243330] hover:text-[#5C726E] cursor-pointer"
                   >
-                    <span>{faq.question}</span>
+                    <span>{localizedFaq.question}</span>
                     {isOpen ? (
                       <ChevronUpIcon className="w-4 h-4 text-[#5C726E] shrink-0" />
                     ) : (
@@ -245,7 +215,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                   {isOpen && (
                     <div className="px-5 pb-5 text-xs text-[#5C726E] leading-relaxed border-t border-[#E3E8E6] pt-3 font-sans">
-                      {faq.answer}
+                      {localizedFaq.answer}
                     </div>
                   )}
                 </div>

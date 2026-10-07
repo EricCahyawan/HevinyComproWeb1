@@ -12,6 +12,7 @@ import { OFFICIAL_HEVINY_CATEGORIES } from '../data/categories';
 import { getProductCategoryCount } from '../data/photoProducts';
 import { COMPANY_INFO } from '../data/companyInfo';
 import { ShopeeIcon } from './ShopeeIcon';
+import { useLanguage } from '../LanguageContext';
 
 interface NavbarProps {
   activePage: ActivePage;
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   activePage,
   onNavigate
 }) => {
+  const { language, toggleLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -225,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-white/75 hover:text-white'
                 }`}
               >
-                BERANDA
+                {t('home')}
                 {activePage === 'home' && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
                 )}
@@ -237,7 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={handleCatalogDownload}
                 className="transition-all py-1 cursor-pointer text-white/75 hover:text-white"
               >
-                KATALOG
+                {t('catalog')}
               </button>
 
               {/* PRODUK with Touch-Friendly & Auto-Bounds Dropdown */}
@@ -258,7 +260,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       : 'text-white/75 hover:text-white'
                   }`}
                 >
-                  <span>PRODUK</span>
+                  <span>{t('products')}</span>
                   <ChevronDownIcon className={`w-3 h-3 transition-transform duration-200 ${isProductMenuOpen ? 'rotate-180 text-amber-300' : ''}`} />
                   {activePage === 'products' && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
@@ -330,7 +332,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-white/75 hover:text-white'
                 }`}
               >
-                TENTANG KAMI
+                {t('about')}
                 {activePage === 'about' && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
                 )}
@@ -349,7 +351,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-white/75 hover:text-white'
                 }`}
               >
-                ARTIKEL
+                {t('articles')}
                 {activePage === 'journal' && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
                 )}
@@ -368,7 +370,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-white/75 hover:text-white'
                 }`}
               >
-                KONTAK
+                {t('contact')}
                 {activePage === 'contact' && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
                 )}
@@ -387,10 +389,26 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <ShopeeIcon className="w-5 h-5" />
                 </a>
               </div>
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                aria-label={`${t('language')}: ${language === 'id' ? 'English' : 'Bahasa Indonesia'}`}
+                className="px-2.5 py-1.5 rounded border border-white/25 text-[10px] font-semibold tracking-wider text-white hover:bg-white/10 transition"
+              >
+                {language === 'id' ? 'EN' : 'ID'}
+              </button>
             </nav>
 
             {/* Mobile Actions: Shopee Logo + Menu Toggle */}
             <div className="flex md:hidden items-center gap-3">
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                aria-label={`${t('language')}: ${language === 'id' ? 'English' : 'Bahasa Indonesia'}`}
+                className="px-2.5 py-1.5 rounded border border-white/25 text-[10px] font-semibold tracking-wider text-white hover:bg-white/10 transition"
+              >
+                {language === 'id' ? 'EN' : 'ID'}
+              </button>
               <a
                 href={COMPANY_INFO.shopeeUrl}
                 target="_blank"
@@ -405,7 +423,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="w-9 h-9 rounded-md border border-white/20 text-white flex items-center justify-center cursor-pointer"
-                aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
+                  aria-label={mobileMenuOpen ? t('closeMenu') : t('openMenu')}
               >
                 {mobileMenuOpen ? <XMarkIcon className="w-5 h-5" /> : <Bars3Icon className="w-5 h-5" />}
               </button>
@@ -439,7 +457,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     activePage === 'home' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  BERANDA
+                  {t('home')}
                 </button>
 
                 <button
@@ -447,7 +465,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={handleCatalogDownload}
                   className="w-full py-2.5 px-3 text-left rounded-lg transition font-medium text-sm text-white/80 hover:text-white hover:bg-white/5"
                 >
-                  KATALOG PDF
+                  {t('catalogPdf')}
                 </button>
 
                 {/* PRODUK */}
@@ -458,7 +476,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     activePage === 'products' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  PRODUK
+                  {t('products')}
                 </button>
 
                 {/* TENTANG KAMI */}
@@ -469,7 +487,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     activePage === 'about' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  TENTANG KAMI
+                  {t('about')}
                 </button>
 
                 {/* ARTIKEL */}
@@ -480,7 +498,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     activePage === 'journal' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  ARTIKEL
+                  {t('articles')}
                 </button>
 
                 {/* KONTAK */}
@@ -491,7 +509,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     activePage === 'contact' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  KONTAK
+                  {t('contact')}
                 </button>
               </div>
             </div>
@@ -508,15 +526,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <ShopeeIcon className="w-6 h-6" />
               </a>
-              <a
-                href={`https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
+              <button
+                type="button"
+                onClick={() => handleNavClick('contact')}
                 className="flex-1 py-2.5 px-3 rounded-md bg-emerald-700/80 hover:bg-emerald-700 text-white font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer transition shadow-xs"
               >
-                <span>Konsultasi WhatsApp</span>
-              </a>
+                <span>{t('contactCompany')}</span>
+              </button>
             </div>
           </motion.div>
         )}

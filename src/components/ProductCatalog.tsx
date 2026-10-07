@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage } from '../LanguageContext';
 import { MagnifyingGlassIcon, ArrowTopRightOnSquareIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
 import { HEVINY_PRODUCTS } from '../data/products';
 import { Product, ProductCategory } from '../types';
@@ -9,6 +10,7 @@ interface ProductCatalogProps {
 }
 
 export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct }) => {
+  const { language, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<ProductCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [onlySalonFavorites, setOnlySalonFavorites] = useState(false);
@@ -19,10 +21,10 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
   };
 
   const categories: { id: ProductCategory; label: string; count: number }[] = [
-    { id: 'all', label: 'Semua Produk', count: HEVINY_PRODUCTS.length },
-    { id: 'body', label: 'Perawatan Tubuh', count: HEVINY_PRODUCTS.filter(p => isProductInCategory(p, 'body')).length },
-    { id: 'hair', label: 'Perawatan Rambut', count: HEVINY_PRODUCTS.filter(p => isProductInCategory(p, 'hair')).length },
-    { id: 'face', label: 'Perawatan Wajah', count: HEVINY_PRODUCTS.filter(p => isProductInCategory(p, 'face')).length },
+    { id: 'all', label: t('allProducts'), count: HEVINY_PRODUCTS.length },
+    { id: 'body', label: t('bodyCare'), count: HEVINY_PRODUCTS.filter(p => isProductInCategory(p, 'body')).length },
+    { id: 'hair', label: t('hairCare'), count: HEVINY_PRODUCTS.filter(p => isProductInCategory(p, 'hair')).length },
+    { id: 'face', label: t('faceCare'), count: HEVINY_PRODUCTS.filter(p => isProductInCategory(p, 'face')).length },
   ];
 
   const filteredProducts = useMemo(() => {

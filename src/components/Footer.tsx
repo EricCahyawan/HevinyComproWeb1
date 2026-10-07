@@ -4,12 +4,14 @@ import { COMPANY_INFO } from '../data/companyInfo';
 import { ActivePage } from '../types';
 import { HevinyLogo } from './HevinyLogo';
 import { ShopeeIcon } from './ShopeeIcon';
+import { useLanguage } from '../LanguageContext';
 
 interface FooterProps {
   onNavigate?: (page: ActivePage) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const { language, t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -35,7 +37,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             <p className="text-white/60 leading-relaxed text-xs max-w-sm font-sans">
-              <strong className="text-white/80 font-medium">Hana Cosmetics (Hana Cosmetic)</strong> adalah pabrik produsen kosmetik dan pemilik resmi merek <strong className="text-white/80 font-medium">Heviny</strong> di Surabaya sejak 2006. Memproduksi formulasi botani berstandar resmi CPKB BPOM RI dan sertifikasi Halal untuk suplai salon dan perawatan harian.
+              {language === 'en' ? (
+                <><strong className="text-white/80 font-medium">Hana Cosmetics</strong> is the manufacturer and owner of the <strong className="text-white/80 font-medium">Heviny</strong> brand in Surabaya, Indonesia, since 2006. We produce botanical formulas to CPKB, BPOM RI, and Halal standards for salons and everyday care.</>
+              ) : (
+                <><strong className="text-white/80 font-medium">Hana Cosmetics (Hana Cosmetic)</strong> adalah pabrik produsen kosmetik dan pemilik resmi merek <strong className="text-white/80 font-medium">Heviny</strong> di Surabaya sejak 2006. Memproduksi formulasi botani berstandar resmi CPKB BPOM RI dan sertifikasi Halal untuk suplai salon dan perawatan harian.</>
+              )}
             </p>
 
             {/* Marketplace Link - Pure Shopee Logo */}
@@ -57,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="lg:col-span-3 space-y-4">
             <div className="h-8 flex items-center">
               <h4 className="font-serif text-sm tracking-widest uppercase text-white/90">
-                Navigasi Halaman
+                {t('pagesNavigation')}
               </h4>
             </div>
             <ul className="space-y-2 text-white/60 text-xs font-sans">
@@ -70,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   }}
                   className="hover:text-white transition cursor-pointer text-left block"
                 >
-                  Beranda Utama
+                  {t('mainHome')}
                 </a>
               </li>
               <li>
@@ -82,7 +88,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   }}
                   className="hover:text-white transition cursor-pointer text-left block"
                 >
-                  Daftar Produk
+                  {t('productList')}
                 </a>
               </li>
               <li>
@@ -94,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   }}
                   className="hover:text-white transition cursor-pointer text-left block"
                 >
-                  Tentang Kami (Profil Pabrik & CPKB)
+                  {t('aboutFactory')}
                 </a>
               </li>
               <li>
@@ -106,7 +112,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   }}
                   className="hover:text-white transition cursor-pointer text-left block"
                 >
-                  Artikel & Tips Perawatan
+                  {t('careArticles')}
                 </a>
               </li>
               <li>
@@ -118,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   }}
                   className="hover:text-white transition cursor-pointer text-left block"
                 >
-                  Kontak & Pemesanan Grosir
+                  {t('contactCompany')}
                 </a>
               </li>
             </ul>
@@ -128,15 +134,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="lg:col-span-4 space-y-4 text-xs font-sans">
             <div className="h-8 flex items-center">
               <h4 className="font-serif text-sm tracking-widest uppercase text-white/90">
-                Kantor & Perusahaan
+                {t('officeCompany')}
               </h4>
             </div>
             <p className="text-white/60 leading-relaxed">
               {COMPANY_INFO.address}
             </p>
             <div className="space-y-1.5 text-white/60 pt-1">
-              <div>WhatsApp: <a href={`https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}`} target="_blank" rel="noopener noreferrer" className="text-white hover:underline">{COMPANY_INFO.whatsappDisplay}</a></div>
-              <div>Telepon: <span className="text-white">{COMPANY_INFO.phone}</span></div>
               <div>Email: <a href={`mailto:${COMPANY_INFO.email}`} className="text-white hover:underline">{COMPANY_INFO.email}</a></div>
             </div>
           </div>
@@ -146,14 +150,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
           <div>
-            © {new Date().getFullYear()} Heviny. Seluruh Hak Cipta Dilindungi Undang-Undang.
+            © {new Date().getFullYear()} Heviny. {t('allRights')}
           </div>
 
           <button
             onClick={scrollToTop}
             className="inline-flex items-center gap-1.5 text-white/60 hover:text-white transition cursor-pointer"
           >
-            <span>Kembali ke Atas</span>
+            <span>{t('backToTop')}</span>
             <ArrowUpIcon className="w-3.5 h-3.5" />
           </button>
         </div>

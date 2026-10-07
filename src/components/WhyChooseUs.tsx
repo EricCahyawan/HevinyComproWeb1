@@ -1,7 +1,9 @@
 import React from 'react';
 import { COMPANY_INFO } from '../data/companyInfo';
+import { useLanguage } from '../LanguageContext';
 
 export const WhyChooseUs: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section id="keunggulan" className="py-16 sm:py-20 bg-white border-b border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -89,7 +91,7 @@ export const WhyChooseUs: React.FC = () => {
               href="#kontak"
               className="px-5 py-3 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-xs text-center border border-stone-700 transition"
             >
-              Hubungi Kontak Kami
+              {t('contactCompany')}
             </a>
           </div>
         </div>
