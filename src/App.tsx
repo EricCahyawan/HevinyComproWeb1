@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { WhatsAppFloat } from './components/WhatsAppFloat';
 import { HomePage } from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
 import { AboutPage } from './pages/AboutPage';
@@ -337,6 +338,8 @@ function AppContent() {
       <Footer
         onNavigate={handleNavigate}
       />
+
+      <WhatsAppFloat />
 
       {/* Product Detail Modal */}
       {selectedProduct && (
