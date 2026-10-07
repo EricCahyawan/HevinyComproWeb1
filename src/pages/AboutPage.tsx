@@ -177,25 +177,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   className="p-7 sm:p-12 bg-[#243330] text-white space-y-6"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase tracking-widest text-amber-300 font-semibold block">
+                    <span className="text-[10px] uppercase tracking-widest text-[#4fe843] font-semibold block">
                       PANDANGAN MASA DEPAN & REPUTASI
                     </span>
-                    <span className="text-xs text-amber-200/80 font-mono">EST. 2006</span>
+                    <span className="text-xs text-[#4fe843]/90 font-mono">EST. 2006</span>
                   </div>
-                  <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl font-light italic text-amber-100 leading-snug">
+                  <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl font-light italic text-white/95 leading-snug">
                     "{COMPANY_INFO.vision}"
                   </blockquote>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-6 border-t border-white/15 text-xs text-white/80">
                     <div className="space-y-1">
-                      <span className="text-amber-300 font-semibold block text-sm">Sejak 2006</span>
+                      <span className="text-[#4fe843] font-semibold block text-sm">Sejak 2006</span>
                       <p className="leading-relaxed">Hampir dua dekade konsisten menjaga mutu formulasi dan kepercayaan mitra kecantikan.</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-amber-300 font-semibold block text-sm">Kualitas Salon</span>
+                      <span className="text-[#4fe843] font-semibold block text-sm">Kualitas Salon</span>
                       <p className="leading-relaxed">Hasil perawatan profesional nyata dengan efisiensi harga yang bersahabat untuk margin mitra.</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-amber-300 font-semibold block text-sm">Pasokan Berkelanjutan</span>
+                      <span className="text-[#4fe843] font-semibold block text-sm">Pasokan Berkelanjutan</span>
                       <p className="leading-relaxed">Distribusi lancar siap kirim ke seluruh kota di Indonesia langsung dari fasilitas pabrik.</p>
                     </div>
                   </div>

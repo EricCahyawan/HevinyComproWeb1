@@ -127,7 +127,7 @@ export const ContactSection: React.FC = () => {
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
+                      className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#4fe843]/30 focus:border-[#4fe843]"
                     />
                   </div>
 
@@ -137,7 +137,7 @@ export const ContactSection: React.FC = () => {
                       type="email"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
+                      className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#4fe843]/30 focus:border-[#4fe843]"
                     />
                   </div>
                 </div>
@@ -149,13 +149,13 @@ export const ContactSection: React.FC = () => {
                     required
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
+                    className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#4fe843]/30 focus:border-[#4fe843]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-full bg-[#243330] hover:bg-[#1A2624] text-white font-semibold text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 px-6 rounded-full bg-[#4fe843] hover:bg-[#43d438] text-[#0F2415] font-bold text-xs uppercase tracking-wider transition shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <PaperAirplaneIcon className="w-3.5 h-3.5" />
                   <span>Kirim via WhatsApp Resmi</span>

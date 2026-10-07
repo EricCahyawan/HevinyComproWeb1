@@ -7,9 +7,9 @@ import {
 import { Product, ProductCategory, ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
 import { 
-  photoEntries,
+  photoEntries, 
   isProductInCategory,
-  getProductCategoryCount,
+  getProductCategoryCount
 } from '../data/photoProducts';
 
 interface ProductsPageProps {
@@ -115,7 +115,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari produk..."
-                className="w-full pl-11 pr-10 py-3 bg-[#F6F8F7] border border-[#E3E8E6] rounded-lg text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:border-[#5C726E] focus:bg-white outline-hidden transition"
+                className="w-full pl-11 pr-10 py-3 bg-[#F6F8F7] border border-[#E3E8E6] rounded-lg text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:border-[#4fe843] focus:ring-1 focus:ring-[#4fe843] focus:bg-white outline-hidden transition"
               />
               {searchQuery && (
                 <button
@@ -152,13 +152,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     onClick={() => handleCategorySelect(cat.id)}
                     className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                       isActive
-                        ? 'bg-[#243330] text-white shadow-xs'
+                        ? 'bg-[#243330] text-white shadow-xs border border-[#4fe843]/60'
                         : 'bg-[#F6F8F7] text-[#5C726E] hover:bg-[#EAEFEF] border border-[#E3E8E6]'
                     }`}
                   >
                     <span>{cat.label}</span>
                     <span className={`text-[10px] px-2 py-0.5 rounded-xs font-mono font-bold ${
-                      isActive ? 'bg-white/20 text-white' : 'bg-white text-[#8A9E9A] border border-[#E3E8E6]'
+                      isActive ? 'bg-[#4fe843] text-[#0F2415]' : 'bg-white text-[#8A9E9A] border border-[#E3E8E6]'
                     }`}>
                       {cat.count}
                     </span>

@@ -58,7 +58,7 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
         
         {/* Header */}
         <div className="text-center space-y-3 mb-10">
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold border border-amber-400/30">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#4fe843]/15 text-[#4fe843] text-xs font-semibold border border-[#4fe843]/30">
             <span>PANDUAN PEMILIHAN PRODUK</span>
           </div>
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
@@ -75,15 +75,15 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
           {/* Step Progress */}
           {step < 4 && (
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-stone-700 text-xs font-medium text-stone-400">
-              <span className={step >= 1 ? 'text-amber-400 font-bold' : ''}>
+              <span className={step >= 1 ? 'text-[#4fe843] font-bold' : ''}>
                 1. Area Perawatan
               </span>
               <span>•</span>
-              <span className={step >= 2 ? 'text-amber-400 font-bold' : ''}>
+              <span className={step >= 2 ? 'text-[#4fe843] font-bold' : ''}>
                 2. Masalah Utama
               </span>
               <span>•</span>
-              <span className={step >= 3 ? 'text-amber-400 font-bold' : ''}>
+              <span className={step >= 3 ? 'text-[#4fe843] font-bold' : ''}>
                 3. Aroma Pilihan
               </span>
             </div>
@@ -108,9 +108,9 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
                       setFocusArea(opt.title);
                       setStep(2);
                     }}
-                    className="p-4 rounded-xl border border-stone-700 bg-stone-900/60 hover:bg-amber-950/40 hover:border-amber-500 text-left transition cursor-pointer group"
+                    className="p-4 rounded-xl border border-stone-700 bg-stone-900/60 hover:bg-[#4fe843]/10 hover:border-[#4fe843] text-left transition cursor-pointer group"
                   >
-                    <div className="font-bold text-sm text-white group-hover:text-amber-300 transition">
+                    <div className="font-bold text-sm text-white group-hover:text-[#4fe843] transition">
                       {opt.title}
                     </div>
                     <div className="text-xs text-stone-400 mt-1">
@@ -141,9 +141,9 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
                       setConcern(opt.title);
                       setStep(3);
                     }}
-                    className="p-4 rounded-xl border border-stone-700 bg-stone-900/60 hover:bg-amber-950/40 hover:border-amber-500 text-left transition cursor-pointer group"
+                    className="p-4 rounded-xl border border-stone-700 bg-stone-900/60 hover:bg-[#4fe843]/10 hover:border-[#4fe843] text-left transition cursor-pointer group"
                   >
-                    <div className="font-bold text-sm text-white group-hover:text-amber-300 transition">
+                    <div className="font-bold text-sm text-white group-hover:text-[#4fe843] transition">
                       {opt.title}
                     </div>
                     <div className="text-xs text-stone-400 mt-1">
@@ -182,9 +182,9 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
                       setPreferredScent(opt.title);
                       handleCalculateRecommendation();
                     }}
-                    className="p-4 rounded-xl border border-stone-700 bg-stone-900/60 hover:bg-amber-950/40 hover:border-amber-500 text-left transition cursor-pointer group"
+                    className="p-4 rounded-xl border border-stone-700 bg-stone-900/60 hover:bg-[#4fe843]/10 hover:border-[#4fe843] text-left transition cursor-pointer group"
                   >
-                    <div className="font-bold text-sm text-white group-hover:text-amber-300 transition">
+                    <div className="font-bold text-sm text-white group-hover:text-[#4fe843] transition">
                       {opt.title}
                     </div>
                     <div className="text-xs text-stone-400 mt-1">
@@ -209,7 +209,7 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
             <div className="space-y-6 animate-in fade-in duration-300">
               <div className="flex items-center justify-between border-b border-stone-700 pb-4">
                 <div>
-                  <span className="text-xs text-amber-400 font-bold uppercase tracking-wider block">
+                  <span className="text-xs text-[#4fe843] font-bold uppercase tracking-wider block">
                     Hasil Diagnostik Anda
                   </span>
                   <h3 className="font-serif text-xl font-bold text-white mt-0.5">
@@ -231,7 +231,7 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
                   <div
                     key={product.id}
                     onClick={() => onSelectProduct(product)}
-                    className="bg-stone-900 rounded-xl border border-stone-700 p-4 hover:border-amber-500 transition cursor-pointer flex flex-col justify-between group"
+                    className="bg-stone-900 rounded-xl border border-stone-700 p-4 hover:border-[#4fe843] transition cursor-pointer flex flex-col justify-between group"
                   >
                     <div>
                       <div className="aspect-square rounded-lg overflow-hidden mb-3 bg-stone-950">
@@ -241,10 +241,10 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
                           className="w-full h-full object-contain object-center"
                         />
                       </div>
-                      <span className="text-[10px] text-amber-400 font-mono block">
+                      <span className="text-[10px] text-[#4fe843] font-mono block">
                         {product.bpomNumber}
                       </span>
-                      <h4 className="font-serif font-bold text-sm text-white group-hover:text-amber-300 transition mt-1 line-clamp-1">
+                      <h4 className="font-serif font-bold text-sm text-white group-hover:text-[#4fe843] transition mt-1 line-clamp-1">
                         {product.name}
                       </h4>
                       <p className="text-xs text-stone-400 mt-1 line-clamp-2">
@@ -252,7 +252,7 @@ export const SkinConsultation: React.FC<SkinConsultationProps> = ({ onSelectProd
                       </p>
                     </div>
 
-                    <button className="mt-3 w-full py-2 rounded-lg bg-stone-800 group-hover:bg-amber-800 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                    <button className="mt-3 w-full py-2 rounded-lg bg-stone-800 group-hover:bg-[#4fe843] group-hover:text-[#0F2415] text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
                       <span>Lihat Detail Produk</span>
                       <ArrowRightIcon className="w-3.5 h-3.5" />
                     </button>

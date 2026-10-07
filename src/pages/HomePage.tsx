@@ -1,5 +1,5 @@
-import React, { useRef, useState, useMemo } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import React, { useRef, useMemo } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import {
   ArrowRightIcon,
   ShieldCheckIcon,
@@ -21,15 +21,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onSelectProduct
 }) => {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'hair' | 'body' | 'face' | 'nail'>('all');
-
-  // Dynamic filter for signature bestseller products
-  const filteredProducts = useMemo(() => {
-    const list = HEVINY_PRODUCTS.filter(p => p.popular || p.isSalonFavorite);
-    if (activeCategory === 'all') return list.slice(0, 6);
-    const byCat = HEVINY_PRODUCTS.filter(p => p.category === activeCategory);
-    return byCat.length > 0 ? byCat.slice(0, 6) : list.slice(0, 6);
-  }, [activeCategory]);
+  // Signature bestseller products
+  const favoriteProducts = useMemo(() => {
+    return HEVINY_PRODUCTS.filter(p => p.popular || p.isSalonFavorite).slice(0, 6);
+  }, []);
 
   // 1. HERO PARALLAX (Direct GPU transform without CPU-heavy spring physics loop)
   const heroRef = useRef<HTMLDivElement>(null);
@@ -113,13 +108,10 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section className="relative py-14 sm:py-24 bg-white border-b border-[#E3E8E6] overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
             <div>
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#5C726E] font-semibold block mb-1.5 sm:mb-2">
-                KOLEKSI UNGGULAN & SALON FAVORIT
-              </span>
               <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
-                Pilihan Perawatan <span className="italic font-normal">Paling Diminati</span>
+                Pilihan <span className="italic font-normal">Paling Diminati</span>
               </h2>
             </div>
 
@@ -133,49 +125,16 @@ export const HomePage: React.FC<HomePageProps> = ({
             </button>
           </div>
 
-          {/* Interactive Category Filter Pills */}
-          <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none border-b border-[#E3E8E6]">
-            {[
-              { key: 'all', label: 'Semua Favorit' },
-              { key: 'hair', label: 'Hair Care & Salon' },
-              { key: 'body', label: 'Body & Bath' },
-              { key: 'face', label: 'Face Care' },
-              { key: 'nail', label: 'Nail & Foot' }
-            ].map((cat) => (
-              <button
-                key={cat.key}
-                type="button"
-                onClick={() => setActiveCategory(cat.key as any)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-all cursor-pointer shrink-0 ${
-                  activeCategory === cat.key
-                    ? 'bg-[#243330] text-white shadow-xs'
-                    : 'bg-[#F6F8F7] text-[#5C726E] hover:bg-[#EEF2F0] hover:text-[#243330] border border-[#E3E8E6]'
-                }`}
-              >
-                {cat.label}
-              </button>
+          {/* Products Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8">
+            {favoriteProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onSelect={onSelectProduct}
+              />
             ))}
           </div>
-
-          {/* Dynamic Animated Grid */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8"
-            >
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onSelect={onSelectProduct}
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
 
         </div>
       </section>

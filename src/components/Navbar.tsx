@@ -227,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 BERANDA
                 {activePage === 'home' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4fe843] rounded-full shadow-[0_0_8px_#4fe843]" />
                 )}
               </a>
 
@@ -259,9 +259,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }`}
                 >
                   <span>PRODUK</span>
-                  <ChevronDownIcon className={`w-3 h-3 transition-transform duration-200 ${isProductMenuOpen ? 'rotate-180 text-amber-300' : ''}`} />
+                  <ChevronDownIcon className={`w-3 h-3 transition-transform duration-200 ${isProductMenuOpen ? 'rotate-180 text-[#4fe843]' : ''}`} />
                   {activePage === 'products' && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4fe843] rounded-full shadow-[0_0_8px_#4fe843]" />
                   )}
                 </button>
 
@@ -283,13 +283,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                     >
                       <div className="py-3 bg-black/25">
                         <div className="px-3.5 pb-2 mb-1 border-b border-white/10 flex items-center justify-between gap-3">
-                          <span className="text-[10px] font-bold text-amber-200 tracking-widest uppercase font-sans">
+                          <span className="text-[10px] font-bold text-[#4fe843] tracking-widest uppercase font-sans">
                             Kategori
                           </span>
                           <button
                             type="button"
                             onClick={() => handleNavClick('products')}
-                            className="text-[10px] font-semibold text-amber-200 hover:text-white transition cursor-pointer whitespace-nowrap"
+                            className="text-[10px] font-semibold text-[#4fe843] hover:text-white transition cursor-pointer whitespace-nowrap"
                           >
                             Lihat Semua <span aria-hidden="true">&rarr;</span>
                           </button>
@@ -337,7 +337,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 TENTANG KAMI
                 {activePage === 'about' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4fe843] rounded-full shadow-[0_0_8px_#4fe843]" />
                 )}
               </a>
 
@@ -356,7 +356,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 ARTIKEL
                 {activePage === 'journal' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4fe843] rounded-full shadow-[0_0_8px_#4fe843]" />
                 )}
               </a>
 
@@ -375,7 +375,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 KONTAK
                 {activePage === 'contact' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4fe843] rounded-full shadow-[0_0_8px_#4fe843]" />
                 )}
               </a>
 
@@ -441,7 +441,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="button"
                   onClick={() => handleNavClick('home')}
                   className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
-                    activePage === 'home' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
+                    activePage === 'home' ? 'bg-white/15 text-[#4fe843] font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   BERANDA
@@ -460,7 +460,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="button"
                   onClick={() => handleNavClick('products')}
                   className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
-                    activePage === 'products' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
+                    activePage === 'products' ? 'bg-white/15 text-[#4fe843] font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   PRODUK
@@ -471,7 +471,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="button"
                   onClick={() => handleNavClick('about')}
                   className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
-                    activePage === 'about' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
+                    activePage === 'about' ? 'bg-white/15 text-[#4fe843] font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   TENTANG KAMI
@@ -482,7 +482,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="button"
                   onClick={() => handleNavClick('journal')}
                   className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
-                    activePage === 'journal' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
+                    activePage === 'journal' ? 'bg-white/15 text-[#4fe843] font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   ARTIKEL
@@ -493,7 +493,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="button"
                   onClick={() => handleNavClick('contact')}
                   className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
-                    activePage === 'contact' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
+                    activePage === 'contact' ? 'bg-white/15 text-[#4fe843] font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   KONTAK
@@ -518,7 +518,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex-1 py-2.5 px-3 rounded-md bg-emerald-700/80 hover:bg-emerald-700 text-white font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer transition shadow-xs"
+                className="flex-1 py-2.5 px-3 rounded-md bg-[#4fe843] hover:bg-[#43d438] text-[#0F2415] font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer transition shadow-xs"
               >
                 <span>Konsultasi WhatsApp</span>
               </a>
@@ -565,7 +565,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={confirmCatalogDownload}
-                  className="rounded-md bg-amber-300 px-4 py-2 text-sm font-semibold text-[#243330] transition hover:bg-amber-200"
+                  className="rounded-md bg-[#4fe843] px-4 py-2 text-sm font-bold text-[#0F2415] transition hover:bg-[#43d438]"
                 >
                   Unduh PDF
                 </button>

@@ -65,6 +65,14 @@ export const photoProducts: PhotoProduct[] = (() => {
   return Array.from(products.values());
 })();
 
+export const isProductInCategory = (
+  p: { category: Exclude<ProductCategory, 'all'> },
+  catId: ProductCategory
+) => {
+  if (catId === 'all') return true;
+  return p.category === catId;
+};
+
 export const photoEntries: PhotoEntry[] = photoProducts.flatMap((product) =>
   product.variants.map((variant) => ({
     ...variant,
@@ -72,13 +80,8 @@ export const photoEntries: PhotoEntry[] = photoProducts.flatMap((product) =>
     brand: product.brand,
     name: product.name,
     category: product.category,
-  })),
+  }))
 );
-
-export const isProductInCategory = (p: Pick<PhotoEntry, 'category'>, catId: ProductCategory) => {
-  if (catId === 'all') return true;
-  return p.category === catId;
-};
 
 export const getProductCategoryCount = (catId: ProductCategory): number => {
   if (catId === 'all') return photoEntries.length;

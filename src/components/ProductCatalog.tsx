@@ -73,7 +73,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                 placeholder="Cari produk (contoh: rose water, kemiri, creambath, bengkuang, 5L)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-14 py-3 rounded-md bg-white border border-[#E3E8E6] text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E] transition"
+                className="w-full pl-10 pr-14 py-3 rounded-md bg-white border border-[#E3E8E6] text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:outline-none focus:ring-1 focus:ring-[#4fe843] focus:border-[#4fe843] transition"
               />
               {searchQuery && (
                 <button
@@ -91,7 +91,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                 type="checkbox"
                 checked={onlySalonFavorites}
                 onChange={(e) => setOnlySalonFavorites(e.target.checked)}
-                className="rounded text-[#5C726E] focus:ring-[#5C726E] border-[#CAD3D1]"
+                className="rounded text-[#4fe843] focus:ring-[#4fe843] border-[#CAD3D1]"
               />
               <span>Favorit Salon</span>
             </label>
@@ -107,14 +107,14 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct 
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition cursor-pointer flex items-center gap-2 ${
                   activeCategory === cat.id
-                    ? 'bg-[#243330] text-white shadow-xs'
+                    ? 'bg-[#243330] text-white shadow-xs border border-[#4fe843]/60'
                     : 'bg-white text-[#5C726E] hover:bg-[#EAEFEF] border border-[#E3E8E6]'
                 }`}
               >
                 <span>{cat.label}</span>
                 <span
-                  className={`text-[10px] px-2 py-0.5 rounded-sm font-mono ${
-                    activeCategory === cat.id ? 'bg-white/20 text-white' : 'bg-[#F6F8F7] text-[#5C726E]'
+                  className={`text-[10px] px-2 py-0.5 rounded-sm font-mono font-bold ${
+                    activeCategory === cat.id ? 'bg-[#4fe843] text-[#0F2415]' : 'bg-[#F6F8F7] text-[#5C726E]'
                   }`}
                 >
                   {cat.count}
