@@ -4,19 +4,25 @@ import { ProductImage } from './ProductImage';
 
 interface ProductCardProps {
   product: Product;
-  onSelect: (product: Product) => void;
+  onSelect?: (product: Product) => void;
   priority?: boolean;
+  className?: string;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = memo(({
   product,
   onSelect,
-  priority = false
+  priority = false,
+  className = ''
 }) => {
   return (
     <div
-      onClick={() => onSelect(product)}
-      className="group bg-white rounded-xl border border-[#E3E8E6] hover:border-[#5C726E] transition-all duration-300 ease-out flex flex-col overflow-hidden hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full isolate transform-gpu"
+      onClick={onSelect ? () => onSelect(product) : undefined}
+      className={`group bg-white rounded-xl border border-[#E3E8E6] transition-all duration-300 ease-out flex flex-col overflow-hidden shadow-xs h-full isolate transform-gpu ${
+        onSelect
+          ? 'hover:border-[#5C726E] hover:shadow-xl hover:-translate-y-1 cursor-pointer'
+          : 'cursor-default'
+      } ${className}`}
     >
       {/* Visual Box */}
       <div className="relative w-full overflow-hidden bg-white rounded-t-xl">

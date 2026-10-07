@@ -8,7 +8,6 @@ import { ProductsPage } from './pages/ProductsPage';
 import { AboutPage } from './pages/AboutPage';
 import { JournalPage } from './pages/JournalPage';
 import { ContactPage } from './pages/ContactPage';
-import { ProductModal } from './components/ProductModal';
 import { Product, ActivePage, ProductCategory } from './types';
 import { HEVINY_PRODUCTS } from './data/products';
 import { ARTICLES_DATA } from './data/articles';
@@ -90,7 +89,6 @@ const getPageFromPath = (pathname: string): ActivePage => {
 
 function AppContent() {
   const [activePage, setActivePage] = useState<ActivePage>(() => getPageFromPath(window.location.pathname));
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>(() => getCategoryFromQuery());
 
   // Normalize legacy URLs from Google search sitelinks on initial landing
@@ -170,13 +168,7 @@ function AppContent() {
       ogUrlEl.setAttribute('content', canonicalUrl);
     }
 
-    if (selectedProduct) {
-      document.title = `${selectedProduct.name} | Hana Cosmetics (Heviny)`;
-      const descEl = document.querySelector('meta[name="description"]');
-      if (descEl) descEl.setAttribute('content', `${selectedProduct.name} (${selectedProduct.categoryLabel}) diproduksi resmi oleh Hana Cosmetics Surabaya. ${selectedProduct.description}`);
-      const kwEl = document.querySelector('meta[name="keywords"]');
-      if (kwEl) kwEl.setAttribute('content', `${selectedProduct.name}, hana cosmetics, hana cosmetic, produk hana cosmetics, heviny, ${selectedProduct.categoryLabel}, kosmetik murah bpom`);
-    } else if (routeArticle) {
+    if (routeArticle) {
       document.title = `${routeArticle.title} | Hana Cosmetics (Heviny)`;
       const description = routeArticle.metaDescription || routeArticle.summary;
       const descEl = document.querySelector('meta[name="description"]');
@@ -208,7 +200,7 @@ function AppContent() {
       const ogDescEl = document.querySelector('meta[property="og:description"]');
       if (ogDescEl) ogDescEl.setAttribute('content', currentMeta.description);
     }
-  }, [activePage, selectedProduct]);
+  }, [activePage]);
 
   const handleNavigate = (page: ActivePage, category?: ProductCategory) => {
     setActivePage(page);
@@ -227,18 +219,8 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSelectProduct = (product: Product) => {
-    setSelectedProduct(product);
-  };
-
-  const handleSelectProductByName = (productName: string) => {
-    const found = HEVINY_PRODUCTS.find(p => 
-      p.name.toLowerCase().includes(productName.toLowerCase()) ||
-      productName.toLowerCase().includes(p.name.toLowerCase())
-    );
-    if (found) {
-      setSelectedProduct(found);
-    }
+  const handleSelectProductByName = () => {
+    handleNavigate('products');
   };
 
   return (
@@ -263,7 +245,6 @@ function AppContent() {
             >
               <HomePage
                 onNavigate={handleNavigate}
-                onSelectProduct={handleSelectProduct}
               />
             </motion.div>
           )}
@@ -277,7 +258,6 @@ function AppContent() {
               transition={{ duration: 0.25 }}
             >
               <ProductsPage
-                onSelectProduct={handleSelectProduct}
                 onNavigate={handleNavigate}
                 selectedCategory={selectedCategory}
                 onCategoryChange={(cat) => {
@@ -340,14 +320,6 @@ function AppContent() {
       />
 
       <WhatsAppFloat />
-
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
 
     </div>
   );

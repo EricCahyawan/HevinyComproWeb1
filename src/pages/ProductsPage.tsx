@@ -14,14 +14,13 @@ import {
 import { useLanguage } from '../LanguageContext';
 
 interface ProductsPageProps {
-  onSelectProduct: (product: Product) => void;
+  onSelectProduct?: (product: Product) => void;
   onNavigate?: (page: ActivePage, category?: ProductCategory) => void;
   selectedCategory?: ProductCategory;
   onCategoryChange?: (category: ProductCategory) => void;
 }
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({ 
-  onSelectProduct, 
   onNavigate,
   selectedCategory = 'all',
   onCategoryChange 
@@ -36,6 +35,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   }, [selectedCategory]);
 
   const handleCategorySelect = (catId: ProductCategory) => {
+    if (catId === activeCategory) return;
     setActiveCategory(catId);
     if (onCategoryChange) {
       onCategoryChange(catId);
@@ -210,7 +210,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
             {filteredProducts.map((product, index) => (
-              <article key={product.id} className="group min-w-0 overflow-hidden rounded-lg border border-[#E3E8E6] bg-white transition-shadow hover:shadow-lg">
+              <article
+                key={product.id}
+                className="group min-w-0 overflow-hidden rounded-lg border border-[#E3E8E6] bg-white transition-shadow hover:shadow-lg"
+              >
                 <div className="aspect-square w-full overflow-hidden bg-white">
                   <img
                     src={product.image}
