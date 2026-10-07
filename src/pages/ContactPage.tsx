@@ -22,20 +22,31 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [openFaqId, setOpenFaqId] = useState<string>('faq-1');
   const [formState, setFormState] = useState({
     name: '',
-    email: '',
-    message: ''
+    buyerType: '',
+    products: '',
+    quantity: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name.trim() || !formState.message.trim()) return;
+    if (!formState.name.trim() || !formState.buyerType || !formState.products.trim() || !formState.quantity.trim()) return;
 
-    const subject = language === 'id' ? 'Pertanyaan melalui website Heviny' : 'Inquiry from the Heviny website';
-    const body = `${language === 'id' ? 'Nama' : 'Name'}: ${formState.name}\n` +
-      (formState.email ? `Email: ${formState.email}\n` : '') +
-      `${language === 'id' ? 'Pesan' : 'Message'}:\n${formState.message}`;
-    window.location.href = `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const catalogUrl = window.location.origin + '/katalog-heviny.pdf';
+    
+    let text = `Halo! Terima kasih sudah menghubungi *Hana Cosmetic* 🌸\n\n`;
+    text += `Kami akan segera informasikan harganya setelah mengetahui kebutuhan Kakak lebih lanjut.\n\n`;
+    text += `Sambil menunggu, kami lampirkan *catalogue produk* kami — lengkap dengan pilihan produk dan varian yang tersedia. Kakak juga bisa melihat produk kami di website: ${catalogUrl}\n\n`;
+    text += `*--- FORM ORDER ---* 📋\n`;
+    text += `📝 Nama                          : ${formState.name}\n`;
+    text += `🏷️ Jenis                            : ${formState.buyerType}\n`;
+    text += `🛍️ Produk yang diminati : ${formState.products}\n`;
+    text += `📦 Jumlah                        : ${formState.quantity}\n`;
+    text += `*-----------------*\n\n`;
+    text += `Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Terima kasih! 🙏`;
+
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/6281334070067?text=${encodedText}`, '_blank');
     setIsSubmitted(true);
   };
 
@@ -111,59 +122,77 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7 bg-[#F6F8F7] p-6 sm:p-8 rounded-xl border border-[#E3E8E6]">
             <h2 className="font-serif text-2xl font-light text-[#243330] mb-1">
-              {t('messageForm')}
+              Formulir Pesanan (WhatsApp)
             </h2>
             <p className="text-xs text-[#5C726E] mb-6">
-              {t('contactForInfo')}
+              Isi form di bawah ini untuk memesan atau bertanya langsung melalui WhatsApp kami.
             </p>
 
             {isSubmitted ? (
               <div className="bg-white border border-emerald-200 rounded-lg p-8 text-center space-y-3">
                 <CheckCircleIcon className="w-10 h-10 text-emerald-600 mx-auto" />
                 <h3 className="font-serif font-medium text-[#243330] text-lg">
-                  {t('emailReady')}
+                  Membuka WhatsApp...
                 </h3>
                 <p className="text-xs text-[#5C726E] max-w-md mx-auto">
-                  {t('emailReadyDescription')}
+                  Anda akan segera dialihkan ke WhatsApp dengan pesan yang sudah terisi.
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="px-5 py-2 rounded-md bg-[#243330] text-white text-xs font-semibold"
+                  className="px-5 py-2 rounded-md bg-[#243330] text-white text-xs font-semibold cursor-pointer"
                 >
-                  {t('sendAnother')}
+                  Kirim Pesan Lain
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('fullName')}</label>
-                    <input
-                      type="text"
-                      required
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('emailOptional')}</label>
-                    <input
-                      type="email"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
-                    />
-                  </div>
+                <div className="space-y-1">
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Lengkap *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                  />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('noteMessage')}</label>
-                  <textarea
-                    rows={4}
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Jenis Pelanggan *</label>
+                  <select
                     required
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                    value={formState.buyerType}
+                    onChange={(e) => setFormState({ ...formState, buyerType: e.target.value })}
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                  >
+                    <option value="" disabled>Pilih Jenis</option>
+                    <option value="Toko">Toko</option>
+                    <option value="Reseller">Reseller</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Spa">Spa</option>
+                    <option value="Salon">Salon</option>
+                    <option value="Pribadi">Pribadi</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Produk yang diminati *</label>
+                  <textarea
+                    rows={2}
+                    required
+                    value={formState.products}
+                    onChange={(e) => setFormState({ ...formState, products: e.target.value })}
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Jumlah *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formState.quantity}
+                    onChange={(e) => setFormState({ ...formState, quantity: e.target.value })}
                     className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
                   />
                 </div>
@@ -173,7 +202,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   className="w-full py-3.5 px-6 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
                 >
                   <PaperAirplaneIcon className="w-3.5 h-3.5" />
-                  <span>{t('sendEmail')}</span>
+                  <span>Kirim ke WhatsApp</span>
                 </button>
               </form>
             )}
@@ -228,3 +257,4 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     </div>
   );
 };
+

@@ -1,33 +1,55 @@
 import React, { useState } from 'react';
 import { EnvelopeIcon, PaperAirplaneIcon, ChevronDownIcon, ChevronUpIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import { COMPANY_INFO, FAQS } from '../data/companyInfo';
-import { useLanguage } from '../LanguageContext';
 import { ENGLISH_FAQS } from '../data/englishContent';
+import { useLanguage } from '../LanguageContext';
+import { ShopeeIcon } from './ShopeeIcon';
 
 export const ContactSection: React.FC = () => {
   const { language, t } = useLanguage();
   const [openFaqId, setOpenFaqId] = useState<string>('faq-1');
   const [formState, setFormState] = useState({
     name: '',
-    email: '',
-    message: ''
+    type: 'Pribadi',
+    product: '',
+    quantity: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name.trim() || !formState.message.trim()) return;
+    if (!formState.name.trim() || !formState.product.trim()) return;
 
-    const subject = language === 'id' ? 'Pertanyaan melalui website Heviny' : 'Inquiry from the Heviny website';
-    const body = `${language === 'id' ? 'Nama' : 'Name'}: ${formState.name}\n` +
-      (formState.email ? `Email: ${formState.email}\n` : '') +
-      `${language === 'id' ? 'Pesan' : 'Message'}:\n${formState.message}`;
-    window.location.href = `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://hevinycosmetics.com';
+    const pdfUrl = `${origin}/katalog-heviny.pdf`;
+
+    const message = `Halo! Terima kasih sudah menghubungi *Hana Cosmetic* 🌸
+
+Kami akan segera informasikan harganya setelah mengetahui kebutuhan Kakak lebih lanjut.
+
+Sambil menunggu, kami lampirkan *catalogue produk* kami pada tautan berikut:
+🔗 ${pdfUrl}
+(lengkap dengan pilihan produk dan varian yang tersedia)
+
+Mohon bantu isi form berikut ya kak:
+
+*--- FORM ORDER ---* 📋
+📝 Nama                          : ${formState.name}
+🏷️ Jenis                            : ${formState.type}
+🛍️ Produk yang diminati : ${formState.product}
+📦 Jumlah                        : ${formState.quantity}
+*-----------------*
+
+Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Terima kasih! 🙏`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/6281334070067?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
     setIsSubmitted(true);
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 bg-white border-b border-[#E3E8E6] relative">
+    <section id="kontak" className="py-24 sm:py-32 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Header */}
@@ -83,55 +105,92 @@ export const ContactSection: React.FC = () => {
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7 bg-[#F6F8F7] p-6 sm:p-8 rounded-3xl border border-[#E3E8E6]">
             <h3 className="font-serif text-2xl font-light text-[#243330] mb-1">
-              {t('messageForm')}
+              Formulir Pesanan (WhatsApp)
             </h3>
             <p className="text-xs text-[#5C726E] mb-6">
-              {t('contactForInfo')}
+              Isi form berikut dan pesan Anda akan dikirim langsung ke WhatsApp resmi kami.
             </p>
 
             {isSubmitted ? (
               <div className="bg-white border border-emerald-200 rounded-2xl p-6 text-center space-y-2">
                 <CheckCircleIcon className="w-8 h-8 text-emerald-600 mx-auto" />
                 <h4 className="font-serif font-medium text-[#243330] text-base">
-                  {t('emailReady')}
+                  {language === 'en' ? 'WhatsApp Opened' : 'WhatsApp Telah Dibuka'}
                 </h4>
                 <p className="text-xs text-[#5C726E]">
-                  Tim kami siap merespons kebutuhan Anda segera.
+                  {language === 'en' ? 'Silakan lanjutkan percakapan di aplikasi WhatsApp Anda.' : 'Silakan lanjutkan percakapan pesanan di aplikasi WhatsApp Anda.'}
                 </p>
+                <button
+                  onClick={() => {
+                    setFormState({ name: '', type: 'Pribadi', product: '', quantity: '' });
+                    setIsSubmitted(false);
+                  }}
+                  className="mt-4 px-4 py-2 rounded-lg border border-[#E3E8E6] text-xs font-semibold text-[#5C726E] hover:bg-[#FAFBFB] transition-colors cursor-pointer"
+                >
+                  {language === 'en' ? 'Send Another Message' : 'Kirim Pesan Lagi'}
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('fullName')}</label>
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">
+                      {language === 'en' ? 'Name *' : 'Nama Lengkap / Nama Salon *'}
+                    </label>
                     <input
                       type="text"
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
+                      placeholder={language === 'en' ? 'Enter your name' : 'Masukkan nama Anda'}
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('emailOptional')}</label>
-                    <input
-                      type="email"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">
+                      {language === 'en' ? 'Buyer Type' : 'Jenis Pembeli'}
+                    </label>
+                    <select
+                      value={formState.type}
+                      onChange={(e) => setFormState({ ...formState, type: e.target.value })}
                       className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
-                    />
+                    >
+                      <option value="Toko">Toko</option>
+                      <option value="Reseller">Reseller</option>
+                      <option value="Hotel">Hotel</option>
+                      <option value="Spa">Spa</option>
+                      <option value="Salon">Salon</option>
+                      <option value="Pribadi">Pribadi</option>
+                    </select>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">{t('noteMessage')}</label>
-                  <textarea
-                    rows={4}
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">
+                    {language === 'en' ? 'Interested Products *' : 'Produk yang diminati *'}
+                  </label>
+                  <input
+                    type="text"
                     required
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                    value={formState.product}
+                    onChange={(e) => setFormState({ ...formState, product: e.target.value })}
                     className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
+                    placeholder={language === 'en' ? 'Example: Shower Gel, Hair Tonic' : 'Contoh: Shower Gel, Hair Tonic'}
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">
+                    {language === 'en' ? 'Quantity *' : 'Jumlah Produk *'}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formState.quantity}
+                    onChange={(e) => setFormState({ ...formState, quantity: e.target.value })}
+                    className="w-full p-3 rounded-2xl border border-[#E3E8E6] bg-white focus:outline-none focus:ring-2 focus:ring-[#5C726E]/20 focus:border-[#5C726E]"
+                    placeholder={language === 'en' ? 'Example: 10 bottles, 2 jerrycans 5L' : 'Contoh: 10 botol, 2 jerigen 5L'}
                   />
                 </div>
 
@@ -140,7 +199,7 @@ export const ContactSection: React.FC = () => {
                   className="w-full py-3.5 px-6 rounded-full bg-[#243330] hover:bg-[#1A2624] text-white font-semibold text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <PaperAirplaneIcon className="w-3.5 h-3.5" />
-                  <span>{t('sendEmail')}</span>
+                  <span>{language === 'en' ? 'Send via WhatsApp' : 'Kirim Pesan via WhatsApp'}</span>
                 </button>
               </form>
             )}
