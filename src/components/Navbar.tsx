@@ -99,6 +99,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     };
   }, [isProductMenuOpen]);
 
+  // Check for auto-download catalog param
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('download_catalog') === 'true') {
+        setCatalogConfirmOpen(true);
+        // Clean up URL without reloading
+        const url = new URL(window.location.href);
+        url.searchParams.delete('download_catalog');
+        window.history.replaceState({}, '', url.pathname + url.search);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let scrollStopTimer: NodeJS.Timeout | null = null;

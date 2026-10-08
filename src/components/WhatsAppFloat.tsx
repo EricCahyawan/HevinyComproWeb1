@@ -15,7 +15,7 @@ export const WhatsAppFloat: React.FC = () => {
     e.preventDefault();
     
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://hevinycosmetics.com';
-    const pdfUrl = `${origin}/katalog-heviny.pdf`;
+    const pdfUrl = `${origin}/?download_catalog=true`;
 
     const message = `Halo! Terima kasih sudah menghubungi *Hana Cosmetic* 🌸
 
