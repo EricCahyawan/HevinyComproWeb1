@@ -110,14 +110,14 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       if (params.get('download_catalog') === 'true') {
-        setCatalogConfirmOpen(true);
+        onOpenCatalogModal();
         // Clean up URL without reloading
         const url = new URL(window.location.href);
         url.searchParams.delete('download_catalog');
         window.history.replaceState({}, '', url.pathname + url.search);
       }
     }
-  }, []);
+  }, [onOpenCatalogModal]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;

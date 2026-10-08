@@ -9,6 +9,7 @@ export const COMPANY_INFO = {
   taglineSub: 'Perawatan Kecantikan Alami & Ragam Produk Salon Terpercaya',
   establishedYear: 2006,
   address: 'Jl. Rungkut Lor RL 2A/21, Rungkut, Surabaya, Jawa Timur, Indonesia',
+  phone: '+62 813-3407-0067',
   shopeeUrl: 'https://shopee.co.id/hevinystore',
   shopeeDisplay: 'Shopee Official Store',
   email: 'hevinycs@gmail.com',
