@@ -41,13 +41,32 @@ const getCategoryFromQuery = (): ProductCategory => {
   return 'all';
 };
 
+const isCatalogPathOrParam = (pathname: string, search: string): boolean => {
+  const cleanPath = pathname.toLowerCase().replace(/\/$/, '') || '/';
+  const params = new URLSearchParams(search);
+  return (
+    cleanPath === '/katalog' ||
+    cleanPath === '/katalog-pdf' ||
+    cleanPath === '/unduh-katalog' ||
+    params.get('katalog') === 'download' ||
+    params.get('katalog') === 'true' ||
+    params.get('download') === 'katalog' ||
+    params.has('download-katalog')
+  );
+};
+
 const getPageFromPath = (pathname: string): ActivePage => {
   if (typeof window === 'undefined') return 'home';
   const cleanPath = pathname.toLowerCase().replace(/\/$/, '') || '/';
 
+  // Catalog routes land on the home view with the catalog confirmation modal activated
+  if (cleanPath === '/katalog' || cleanPath === '/katalog-pdf' || cleanPath === '/unduh-katalog') {
+    return 'home';
+  }
+
   // Products and Legacy Product URLs from old WordPress / Google sitelinks
   if (
-    cleanPath === '/produk' || cleanPath === '/products' || cleanPath === '/katalog' ||
+    cleanPath === '/produk' || cleanPath === '/products' ||
     cleanPath.startsWith('/produk/') || cleanPath.startsWith('/products/') ||
     cleanPath.startsWith('/category/') || cleanPath.startsWith('/kategori') ||
     cleanPath.startsWith('/product-category') || cleanPath.startsWith('/shop') || cleanPath.startsWith('/toko') ||
@@ -90,12 +109,41 @@ const getPageFromPath = (pathname: string): ActivePage => {
 function AppContent() {
   const [activePage, setActivePage] = useState<ActivePage>(() => getPageFromPath(window.location.pathname));
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>(() => getCategoryFromQuery());
+  const [isCatalogModalOpen, setIsCatalogModalOpen] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return isCatalogPathOrParam(window.location.pathname, window.location.search);
+  });
+
+  const handleOpenCatalogModal = () => {
+    setIsCatalogModalOpen(true);
+  };
+
+  const handleCloseCatalogModal = () => {
+    setIsCatalogModalOpen(false);
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+      if (path === '/katalog' || path === '/katalog-pdf' || path === '/unduh-katalog' || window.location.search.includes('katalog')) {
+        const targetPath = activePage === 'products'
+          ? (selectedCategory !== 'all' ? `/produk?kategori=${selectedCategory}` : '/produk')
+          : PAGE_PATH_MAP[activePage] || '/';
+        window.history.replaceState({ page: activePage, category: selectedCategory }, '', targetPath);
+      }
+    }
+  };
 
   // Normalize legacy URLs from Google search sitelinks on initial landing
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
-      const isKnownClean = path === '/' || path === '/produk' || path === '/tentang-kami' || path === '/artikel' || path === '/kontak' ||
+      const isKnownClean =
+        path === '/' ||
+        path === '/katalog' ||
+        path === '/katalog-pdf' ||
+        path === '/unduh-katalog' ||
+        path === '/produk' ||
+        path === '/tentang-kami' ||
+        path === '/artikel' ||
+        path === '/kontak' ||
         ARTICLES_DATA.some(article => path === `/artikel/${article.id}`);
       if (!isKnownClean) {
         const targetPath = activePage === 'products'
@@ -109,6 +157,12 @@ function AppContent() {
   // Sync browser back/forward buttons with HTML5 History API
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
+      if (typeof window !== 'undefined') {
+        const isCatalog = isCatalogPathOrParam(window.location.pathname, window.location.search);
+        if (isCatalog) {
+          setIsCatalogModalOpen(true);
+        }
+      }
       const page = getPageFromPath(window.location.pathname);
       setActivePage(page);
       if (page === 'products') {
@@ -230,6 +284,9 @@ function AppContent() {
       <Navbar
         activePage={activePage}
         onNavigate={handleNavigate}
+        isCatalogModalOpen={isCatalogModalOpen}
+        onOpenCatalogModal={handleOpenCatalogModal}
+        onCloseCatalogModal={handleCloseCatalogModal}
       />
 
       {/* Main Content Area - Page-by-Page View with Smooth Transitions */}
@@ -317,6 +374,7 @@ function AppContent() {
       {/* Universal Footer with Page Navigation */}
       <Footer
         onNavigate={handleNavigate}
+        onOpenCatalogModal={handleOpenCatalogModal}
       />
 
       <WhatsAppFloat />

@@ -4,7 +4,8 @@ import {
   Bars3Icon, 
   XMarkIcon,
   ChevronDownIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  ArrowDownTrayIcon
 } from '@heroicons/react/24/outline';
 import { ActivePage, ProductCategory } from '../types';
 import { HevinyLogo } from './HevinyLogo';
@@ -17,17 +18,22 @@ import { useLanguage } from '../LanguageContext';
 interface NavbarProps {
   activePage: ActivePage;
   onNavigate: (page: ActivePage, category?: ProductCategory) => void;
+  isCatalogModalOpen: boolean;
+  onOpenCatalogModal: () => void;
+  onCloseCatalogModal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activePage,
-  onNavigate
+  onNavigate,
+  isCatalogModalOpen,
+  onOpenCatalogModal,
+  onCloseCatalogModal
 }) => {
   const { language, toggleLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [catalogConfirmOpen, setCatalogConfirmOpen] = useState(false);
   
   // Dropdown states for Desktop & Tablet
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
@@ -151,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const handleCatalogDownload = () => {
-    setCatalogConfirmOpen(true);
+    onOpenCatalogModal();
   };
 
   const confirmCatalogDownload = () => {
@@ -161,20 +167,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     document.body.appendChild(downloadLink);
     downloadLink.click();
     downloadLink.remove();
-    setCatalogConfirmOpen(false);
+    onCloseCatalogModal();
     setMobileMenuOpen(false);
   };
 
   useEffect(() => {
-    if (!catalogConfirmOpen) return;
+    if (!isCatalogModalOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setCatalogConfirmOpen(false);
+      if (event.key === 'Escape') onCloseCatalogModal();
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [catalogConfirmOpen]);
+  }, [isCatalogModalOpen, onCloseCatalogModal]);
 
   const handleMouseEnterProducts = () => {
     if (!isMouseDevice()) return;
@@ -237,9 +243,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={handleCatalogDownload}
-                className="transition-all py-1 cursor-pointer text-white/75 hover:text-white"
+                className={`transition-all py-1 cursor-pointer relative ${
+                  isCatalogModalOpen
+                    ? 'text-white font-semibold'
+                    : 'text-white/75 hover:text-white'
+                }`}
               >
                 {t('catalog')}
+                {isCatalogModalOpen && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
+                )}
               </button>
 
               {/* PRODUK with Touch-Friendly & Auto-Bounds Dropdown */}
@@ -463,7 +476,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={handleCatalogDownload}
-                  className="w-full py-2.5 px-3 text-left rounded-lg transition font-medium text-sm text-white/80 hover:text-white hover:bg-white/5"
+                  className={`w-full py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
+                    isCatalogModalOpen
+                      ? 'bg-white/15 text-amber-200 font-semibold'
+                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                  }`}
                 >
                   {t('catalogPdf')}
                 </button>
@@ -539,46 +556,79 @@ export const Navbar: React.FC<NavbarProps> = ({
       </AnimatePresence>
 
       <AnimatePresence>
-        {catalogConfirmOpen && (
+        {isCatalogModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={(event) => {
-              if (event.target === event.currentTarget) setCatalogConfirmOpen(false);
-            }}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 px-4"
+            onClick={onCloseCatalogModal}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-xs px-4"
           >
             <motion.div
-              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              initial={{ opacity: 0, y: 14, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.98 }}
-              transition={{ duration: 0.18 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.2 }}
               role="dialog"
               aria-modal="true"
               aria-labelledby="catalog-confirm-title"
-              className="w-full max-w-md rounded-lg border border-white/10 bg-[#243330] p-6 text-white shadow-2xl"
+              className="w-full max-w-md rounded-2xl border border-white/15 bg-[#1F2C29] p-6 text-white shadow-2xl relative"
+              onClick={(e) => e.stopPropagation()}
             >
-              <h2 id="catalog-confirm-title" className="text-lg font-semibold">
-                Unduh katalog PDF?
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-white/75">
-                Katalog Produk Heviny akan diunduh ke perangkat Anda dalam format PDF.
+              {/* Close Button at top-right */}
+              <button
+                type="button"
+                onClick={onCloseCatalogModal}
+                className="absolute top-4 right-4 p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition cursor-pointer"
+                aria-label={t('cancel')}
+              >
+                <XMarkIcon className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-start gap-4 mb-4 pr-6">
+                <div className="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/30">
+                  <ArrowDownTrayIcon className="w-6 h-6 stroke-[2]" />
+                </div>
+                <div>
+                  <span className="text-[11px] font-semibold uppercase tracking-widest text-amber-300 block mb-0.5">
+                    Hana Cosmetics • Heviny
+                  </span>
+                  <h2 id="catalog-confirm-title" className="text-lg font-bold text-white leading-snug">
+                    {t('catalogDownloadTitle')}
+                  </h2>
+                </div>
+              </div>
+
+              <p className="text-sm leading-relaxed text-stone-300 mb-4">
+                {t('catalogDownloadDescription')}
               </p>
-              <div className="mt-6 flex justify-end gap-3">
+
+              {/* File Specs Box */}
+              <div className="bg-black/25 border border-white/10 rounded-xl p-3 flex items-center justify-between text-xs text-white/80 mb-6">
+                <div className="flex items-center gap-2">
+                  <span className="px-1.5 py-0.5 rounded bg-red-500/25 text-red-300 font-mono font-bold text-[10px] border border-red-500/30">
+                    PDF
+                  </span>
+                  <span className="font-mono text-stone-200">katalog-heviny.pdf</span>
+                </div>
+                <span className="text-amber-200/90 font-medium">±51 KB • Versi Resmi</span>
+              </div>
+
+              <div className="flex items-center justify-end gap-3">
                 <button
                   type="button"
-                  onClick={() => setCatalogConfirmOpen(false)}
-                  className="rounded-md border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 hover:text-white"
+                  onClick={onCloseCatalogModal}
+                  className="rounded-xl border border-white/20 px-4 py-2.5 text-xs uppercase tracking-wider font-semibold text-white/80 transition hover:bg-white/10 hover:text-white cursor-pointer"
                 >
-                  Batal
+                  {t('cancel')}
                 </button>
                 <button
                   type="button"
                   onClick={confirmCatalogDownload}
-                  className="rounded-md bg-amber-300 px-4 py-2 text-sm font-semibold text-[#243330] transition hover:bg-amber-200"
+                  className="rounded-xl bg-amber-300 hover:bg-amber-200 px-5 py-2.5 text-xs uppercase tracking-wider font-bold text-[#1F2C29] transition shadow-md hover:shadow-lg inline-flex items-center gap-2 cursor-pointer"
                 >
-                  Unduh PDF
+                  <ArrowDownTrayIcon className="w-4 h-4 stroke-[2.5]" />
+                  <span>{t('download')} PDF</span>
                 </button>
               </div>
             </motion.div>
