@@ -589,43 +589,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="w-full max-w-md rounded-2xl border border-white/15 bg-[#1F2C29] p-6 text-white shadow-2xl relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button at top-right */}
-              <button
-                type="button"
-                onClick={onCloseCatalogModal}
-                className="absolute top-4 right-4 p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition cursor-pointer"
-                aria-label={t('cancel')}
-              >
-                <XMarkIcon className="w-5 h-5" />
-              </button>
-
-              <div className="flex items-start gap-4 mb-4 pr-6">
-                <div className="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/30">
-                  <ArrowDownTrayIcon className="w-6 h-6 stroke-[2]" />
-                </div>
-                <div>
-                  <span className="text-[11px] font-semibold uppercase tracking-widest text-amber-300 block mb-0.5">
-                    Hana Cosmetics • Heviny
-                  </span>
-                  <h2 id="catalog-confirm-title" className="text-lg font-bold text-white leading-snug">
-                    {t('catalogDownloadTitle')}
-                  </h2>
-                </div>
-              </div>
-
-              <p className="text-sm leading-relaxed text-stone-300 mb-4">
-                {t('catalogDownloadDescription')}
-              </p>
-
-              {/* File Specs Box */}
-              <div className="bg-black/25 border border-white/10 rounded-xl p-3 flex items-center justify-between text-xs text-white/80 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="px-1.5 py-0.5 rounded bg-red-500/25 text-red-300 font-mono font-bold text-[10px] border border-red-500/30">
-                    PDF
-                  </span>
-                  <span className="font-mono text-stone-200">katalog-heviny.pdf</span>
-                </div>
-                <span className="text-amber-200/90 font-medium">±51 KB • Versi Resmi</span>
+              <div className="mb-6">
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-amber-300 block mb-0.5">
+                  Hana Cosmetics • Heviny
+                </span>
+                <h2 id="catalog-confirm-title" className="text-lg font-bold text-white leading-snug">
+                  {t('catalogDownloadTitle')}
+                </h2>
               </div>
 
               <div className="flex items-center justify-end gap-3">
