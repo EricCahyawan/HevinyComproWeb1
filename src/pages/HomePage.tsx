@@ -16,12 +16,11 @@ import { ENGLISH_INGREDIENTS, ENGLISH_TESTIMONIALS } from '../data/englishConten
 
 interface HomePageProps {
   onNavigate: (page: ActivePage) => void;
-  onSelectProduct: (product: Product) => void;
+  onSelectProduct?: (product: Product) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
-  onNavigate,
-  onSelectProduct
+  onNavigate
 }) => {
   const { language, t } = useLanguage();
   // Signature bestseller products
@@ -29,8 +28,9 @@ export const HomePage: React.FC<HomePageProps> = ({
     return HEVINY_PRODUCTS.filter(p => p.popular || p.isSalonFavorite).slice(0, 6);
   }, []);
 
-  // 1. HERO PARALLAX (Direct GPU transform without CPU-heavy spring physics loop)
+  // 1. HERO PARALLAX
   const heroRef = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start']
@@ -71,8 +71,16 @@ export const HomePage: React.FC<HomePageProps> = ({
         >
           {/* Heading */}
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] drop-shadow-sm">
-            {t('heroTitle')} <br />
-            <span className="italic font-normal">{t('heroSubtitle')}</span>
+            <span className="block overflow-hidden pb-1">
+              <span className="inline-block">
+                {t('heroTitle')}
+              </span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="inline-block italic font-normal">
+                {t('heroSubtitle')}
+              </span>
+            </span>
           </h1>
 
           {/* Subtitle */}
@@ -134,7 +142,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               <ProductCard
                 key={product.id}
                 product={product}
-                onSelect={onSelectProduct}
               />
             ))}
           </div>
@@ -260,36 +267,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* 5. ARTIKEL EDUKASI RESMI */}
-      <section className="relative py-12 sm:py-16 bg-[#F6F8F7] border-b border-[#E3E8E6] overflow-hidden">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
-            <div className="max-w-2xl space-y-2 sm:space-y-3">
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#5C726E] font-semibold">
-                {t('officialArticles')}
-              </span>
-              <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
-                {t('careGuide')}
-              </h2>
-              <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed">
-                {t('careGuideDescription')}
-              </p>
-            </div>
-
-            <button
-              onClick={() => onNavigate('journal')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition cursor-pointer self-start md:self-auto shrink-0 shadow-md"
-            >
-              <span>{t('exploreArticles')}</span>
-              <ArrowRightIcon className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 6. CONSOLIDATED MASTER PARALLAX & CTA BANNER */}
+      {/* 5. CONSOLIDATED MASTER PARALLAX & CTA BANNER */}
       <ParallaxBanner
         onNavigateProducts={() => onNavigate('products')}
         onNavigateContact={() => onNavigate('contact')}

@@ -6,7 +6,7 @@ import { HEVINY_PRODUCTS } from '../data/products';
 import { Product, ProductCategory } from '../types';
 
 interface ProductCatalogProps {
-  onSelectProduct: (product: Product) => void;
+  onSelectProduct?: (product: Product) => void;
 }
 
 export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectProduct }) => {

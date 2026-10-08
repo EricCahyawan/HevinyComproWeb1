@@ -8,9 +8,10 @@ import { useLanguage } from '../LanguageContext';
 
 interface FooterProps {
   onNavigate?: (page: ActivePage) => void;
+  onOpenCatalogModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCatalogModal }) => {
   const { language, t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -90,6 +91,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 >
                   {t('productList')}
                 </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onOpenCatalogModal) onOpenCatalogModal();
+                  }}
+                  className="hover:text-white transition cursor-pointer text-left block"
+                >
+                  {t('catalogPdf')}
+                </button>
               </li>
               <li>
                 <a

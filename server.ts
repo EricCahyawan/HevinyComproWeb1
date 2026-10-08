@@ -15,6 +15,10 @@ async function startServer() {
     res.status(200).send("OK");
   });
 
+  // Serve public assets explicitly (including katalog-heviny.pdf and images)
+  const publicPath = path.join(process.cwd(), "public");
+  app.use(express.static(publicPath));
+
   // Vite middleware in development vs static file serving in production
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
