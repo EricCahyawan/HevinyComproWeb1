@@ -181,7 +181,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 {formState.buyerType && formState.buyerType !== 'Pribadi' && (
                   <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Usaha / Instansi *</label>
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Usaha *</label>
                     <input
                       type="text"
                       required={formState.buyerType !== 'Pribadi'}

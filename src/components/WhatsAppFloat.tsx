@@ -30,7 +30,7 @@ Mohon bantu isi form berikut ya kak:
 
 *--- FORM ORDER ---* 📋
 📝 Nama                          : ${form.name}
-🏷️ Jenis                            : ${form.type}${form.type !== 'Pribadi' && form.institutionName ? `\n🏢 Nama Usaha/Instansi: ${form.institutionName}` : ''}
+🏷️ Jenis                            : ${form.type}${form.type !== 'Pribadi' && form.institutionName ? `\n🏢 Nama Usaha               : ${form.institutionName}` : ''}
 🛍️ Produk yang diminati : ${form.product}
 📦 Jumlah                        : ${form.quantity}
 *-----------------*
@@ -120,7 +120,7 @@ Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Teri
 
                   {form.type !== 'Pribadi' && (
                     <div className="space-y-1.5">
-                      <label className="font-semibold text-stone-700">Nama Usaha / Instansi <span className="text-red-500">*</span></label>
+                      <label className="font-semibold text-stone-700">Nama Usaha <span className="text-red-500">*</span></label>
                       <input
                         type="text"
                         required={form.type !== 'Pribadi'}
