@@ -7,6 +7,7 @@ export const WhatsAppFloat: React.FC = () => {
   const [form, setForm] = useState({
     name: '',
     type: 'Pribadi',
+    institutionName: '',
     product: '',
     quantity: ''
   });
@@ -29,7 +30,7 @@ Mohon bantu isi form berikut ya kak:
 
 *--- FORM ORDER ---* 📋
 📝 Nama                          : ${form.name}
-🏷️ Jenis                            : ${form.type}
+🏷️ Jenis                            : ${form.type}${form.type !== 'Pribadi' && form.institutionName ? `\n🏢 Nama Usaha/Instansi: ${form.institutionName}` : ''}
 🛍️ Produk yang diminati : ${form.product}
 📦 Jumlah                        : ${form.quantity}
 *-----------------*
@@ -116,6 +117,20 @@ Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Teri
                       <option value="Pribadi">Pribadi</option>
                     </select>
                   </div>
+
+                  {form.type !== 'Pribadi' && (
+                    <div className="space-y-1.5">
+                      <label className="font-semibold text-stone-700">Nama Usaha / Instansi <span className="text-red-500">*</span></label>
+                      <input
+                        type="text"
+                        required={form.type !== 'Pribadi'}
+                        value={form.institutionName}
+                        onChange={(e) => setForm({ ...form, institutionName: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-stone-200 bg-stone-50 focus:outline-none focus:ring-2 focus:ring-[#25D366]/30 focus:border-[#25D366]"
+                        placeholder={`Contoh: ${form.type === 'Toko' ? 'Toko Kosmetik ABC' : form.type === 'Hotel' ? 'Hotel Bintang' : form.type === 'Salon' ? 'Salon Cantik' : 'Nama ' + form.type}`}
+                      />
+                    </div>
+                  )}
 
                   <div className="space-y-1.5">
                     <label className="font-semibold text-stone-700">Produk yang diminati <span className="text-red-500">*</span></label>

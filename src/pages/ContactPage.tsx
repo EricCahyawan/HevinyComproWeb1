@@ -23,6 +23,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [formState, setFormState] = useState({
     name: '',
     buyerType: '',
+    institutionName: '',
     products: '',
     quantity: ''
   });
@@ -40,6 +41,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     text += `*--- FORM ORDER ---* 📋\n`;
     text += `📝 Nama                          : ${formState.name}\n`;
     text += `🏷️ Jenis                            : ${formState.buyerType}\n`;
+    if (formState.buyerType !== 'Pribadi' && formState.institutionName) {
+      text += `🏢 Nama Usaha               : ${formState.institutionName}\n`;
+    }
     text += `🛍️ Produk yang diminati : ${formState.products}\n`;
     text += `📦 Jumlah                        : ${formState.quantity}\n`;
     text += `*-----------------*\n\n`;
@@ -174,6 +178,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <option value="Pribadi">Pribadi</option>
                   </select>
                 </div>
+
+                {formState.buyerType && formState.buyerType !== 'Pribadi' && (
+                  <div className="space-y-1">
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Usaha / Instansi *</label>
+                    <input
+                      type="text"
+                      required={formState.buyerType !== 'Pribadi'}
+                      value={formState.institutionName}
+                      onChange={(e) => setFormState({ ...formState, institutionName: e.target.value })}
+                      className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-none"
+                      placeholder={`Contoh: ${formState.buyerType === 'Toko' ? 'Toko Kosmetik ABC' : formState.buyerType === 'Hotel' ? 'Hotel Bintang' : formState.buyerType === 'Salon' ? 'Salon Cantik' : 'Nama ' + formState.buyerType}`}
+                    />
+                  </div>
+                )}
 
                 <div className="space-y-1">
                   <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Produk yang diminati *</label>
