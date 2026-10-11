@@ -12,6 +12,8 @@ export const COMPANY_INFO = {
   phone: '+62 813-3407-0067',
   shopeeUrl: 'https://shopee.co.id/hevinystore',
   shopeeDisplay: 'Shopee Official Store',
+  phone: '+62 813-3407-0067',
+  whatsapp: '+62 813-3407-0067',
   email: 'hevinycs@gmail.com',
   website: 'hevinycosmetics.com',
   vision: 'Best Quality Best Price.',
