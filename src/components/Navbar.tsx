@@ -14,6 +14,7 @@ import { getProductCategoryCount } from '../data/photoProducts';
 import { COMPANY_INFO } from '../data/companyInfo';
 import { ShopeeIcon } from './ShopeeIcon';
 import { useLanguage } from '../LanguageContext';
+import { useCart } from '../CartContext';
 
 interface NavbarProps {
   activePage: ActivePage;
@@ -31,6 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onCloseCatalogModal
 }) => {
   const { language, toggleLanguage, t } = useLanguage();
+  const { totalCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -391,13 +393,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleNavClick('contact');
                 }}
-                className={`transition-all py-1 cursor-pointer relative ${
+                className={`transition-all py-1 cursor-pointer relative flex items-center gap-1.5 ${
                   activePage === 'contact'
                     ? 'text-white font-semibold'
                     : 'text-white/75 hover:text-white'
                 }`}
               >
-                {t('contact')}
+                <span>{t('contact')}</span>
+                {totalCount > 0 && (
+                  <span
+                    className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold bg-amber-400 text-[#1B2624] rounded-full shadow-xs leading-none"
+                    title={`${totalCount} produk dipilih`}
+                  >
+                    {totalCount}
+                  </span>
+                )}
                 {activePage === 'contact' && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300 rounded-full" />
                 )}
@@ -536,11 +546,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   type="button"
                   onClick={() => handleNavClick('contact')}
-                  className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm ${
+                  className={`py-2.5 px-3 text-left rounded-lg transition font-medium text-sm flex items-center justify-between ${
                     activePage === 'contact' ? 'bg-white/15 text-amber-200 font-semibold' : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  {t('contact')}
+                  <span>{t('contact')}</span>
+                  {totalCount > 0 && (
+                    <span className="px-2 py-0.5 text-xs font-bold bg-amber-400 text-[#1B2624] rounded-full">
+                      {totalCount}
+                    </span>
+                  )}
                 </button>
               </div>
             </div>

@@ -85,5 +85,5 @@ export const photoEntries: PhotoEntry[] = photoProducts.flatMap((product) =>
 
 export const getProductCategoryCount = (catId: ProductCategory): number => {
   if (catId === 'all') return photoEntries.length;
-  return photoEntries.filter((entry) => isProductInCategory(entry, catId)).length;
+  return photoEntries.filter((p) => isProductInCategory(p, catId)).length;
 };

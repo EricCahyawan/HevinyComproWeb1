@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   EnvelopeIcon,
   PaperAirplaneIcon,
@@ -12,6 +12,7 @@ import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
 import { ShopeeIcon } from '../components/ShopeeIcon';
 import { useLanguage } from '../LanguageContext';
 import { ENGLISH_FAQS } from '../data/englishContent';
+import { useCart, EMPTY_CART_PRODUCTS_TEXT } from '../CartContext';
 
 interface ContactPageProps {
   onNavigate?: (page: ActivePage) => void;
@@ -19,22 +20,38 @@ interface ContactPageProps {
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const { language, t } = useLanguage();
+  const { items, totalCount, formattedProductsText, formattedQuantityText } = useCart();
   const [openFaqId, setOpenFaqId] = useState<string>('faq-1');
   const [formState, setFormState] = useState({
     name: '',
     buyerType: '',
     institutionName: '',
-    products: '',
+    products: EMPTY_CART_PRODUCTS_TEXT,
     quantity: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    setFormState((prev) => ({
+      ...prev,
+      products: formattedProductsText,
+      quantity: formattedQuantityText || (items.length === 0 ? '' : prev.quantity)
+    }));
+  }, [formattedProductsText, formattedQuantityText, items.length]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name.trim() || !formState.buyerType || !formState.products.trim() || !formState.quantity.trim()) return;
 
-    const catalogUrl = window.location.origin + '/katalog-heviny.pdf';
-    
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://hevinycosmetics.com';
+    const catalogUrl = `${origin}/?download_catalog=true`;
+
+    const productFormatted = formState.products.includes('\n')
+      ? `\n${formState.products}`
+      : ` ${formState.products}`;
+
+    const quantityFormatted = formState.quantity || (totalCount > 0 ? `${totalCount} pcs` : '-');
+
     let text = `Halo! Terima kasih sudah menghubungi *Hana Cosmetic* 🌸\n\n`;
     text += `Kami akan segera informasikan harganya setelah mengetahui kebutuhan Kakak lebih lanjut.\n\n`;
     text += `Sambil menunggu, kami lampirkan *catalogue produk* kami — lengkap dengan pilihan produk dan varian yang tersedia. Kakak juga bisa melihat produk kami di website: ${catalogUrl}\n\n`;
@@ -44,8 +61,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     if (formState.buyerType !== 'Pribadi' && formState.institutionName) {
       text += `🏢 Nama Usaha               : ${formState.institutionName}\n`;
     }
-    text += `🛍️ Produk yang diminati : ${formState.products}\n`;
-    text += `📦 Jumlah                        : ${formState.quantity}\n`;
+    text += `🛍️ Produk yang diminati :${productFormatted}\n`;
+    text += `📦 Jumlah                        : ${quantityFormatted}\n`;
     text += `*-----------------*\n\n`;
     text += `Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Terima kasih! 🙏`;
 
@@ -193,14 +210,43 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
                 )}
 
-                <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Produk yang diminati *</label>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Produk yang diminati *</label>
+                    {totalCount > 0 ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                          {totalCount} item terpilih
+                        </span>
+                        {onNavigate && (
+                          <button
+                            type="button"
+                            onClick={() => onNavigate('products')}
+                            className="text-[10px] text-[#5C726E] hover:text-[#243330] underline cursor-pointer"
+                          >
+                            Ubah di Produk &rarr;
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      onNavigate && (
+                        <button
+                          type="button"
+                          onClick={() => onNavigate('products')}
+                          className="text-[10px] text-amber-700 hover:text-amber-900 underline font-medium cursor-pointer"
+                        >
+                          Pilih dari Halaman Produk &rarr;
+                        </button>
+                      )
+                    )}
+                  </div>
                   <textarea
-                    rows={2}
+                    rows={formState.products.includes('\n') ? Math.min(Math.max(formState.products.split('\n').length + 1, 3), 6) : 3}
                     required
                     value={formState.products}
                     onChange={(e) => setFormState({ ...formState, products: e.target.value })}
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden leading-relaxed"
+                    placeholder="Pilih produk dari halaman produk pada website heviny.com"
                   />
                 </div>
 

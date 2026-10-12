@@ -12,6 +12,7 @@ import { Product, ActivePage, ProductCategory } from './types';
 import { HEVINY_PRODUCTS } from './data/products';
 import { ARTICLES_DATA } from './data/articles';
 import { LanguageProvider } from './LanguageContext';
+import { CartProvider } from './CartContext';
 
 // Path-to-Page and Page-to-Path maps for clean URL routing and SEO indexing
 const PAGE_PATH_MAP: Record<ActivePage, string> = {
@@ -386,7 +387,9 @@ function AppContent() {
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
     </LanguageProvider>
   );
 }

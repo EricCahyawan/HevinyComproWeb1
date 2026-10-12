@@ -2,7 +2,9 @@ import React, { useState, useMemo, useEffect } from 'react';
 import {
   MagnifyingGlassIcon,
   XMarkIcon,
-  ArrowPathIcon
+  ArrowPathIcon,
+  PlusIcon,
+  MinusIcon
 } from '@heroicons/react/24/outline';
 import { Product, ProductCategory, ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
@@ -12,6 +14,7 @@ import {
   getProductCategoryCount
 } from '../data/photoProducts';
 import { useLanguage } from '../LanguageContext';
+import { useCart } from '../CartContext';
 
 interface ProductsPageProps {
   onSelectProduct?: (product: Product) => void;
@@ -26,6 +29,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   onCategoryChange 
 }) => {
   const { language, t } = useLanguage();
+  const { addItem, decreaseItem, getItemQuantity, totalCount } = useCart();
   const [activeCategory, setActiveCategory] = useState<ProductCategory>(selectedCategory);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -209,28 +213,101 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
-            {filteredProducts.map((product, index) => (
-              <article
-                key={product.id}
-                className="group min-w-0 overflow-hidden rounded-lg border border-[#E3E8E6] bg-white transition-shadow hover:shadow-lg"
-              >
-                <div className="aspect-square w-full overflow-hidden bg-white">
-                  <img
-                    src={product.image}
-                    alt={`${product.brand} ${product.name} ${product.size}`}
-                    loading={index < 8 ? 'eager' : 'lazy'}
-                    className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-3 sm:p-4">
-                  <p className="mb-1 text-[9px] font-semibold uppercase tracking-wider text-[#8A9E9A]">{product.brand} · {categories.find(category => category.id === product.category)?.label}</p>
-                  <h2 className="min-h-10 text-xs font-semibold leading-5 text-[#243330] sm:text-sm">{product.name}</h2>
-                  <p className="mt-2 text-[10px] text-[#5C726E]">{t('packaging')} {product.size}</p>
-                </div>
-              </article>
-            ))}
+            {filteredProducts.map((product, index) => {
+              const currentQty = getItemQuantity(product.id, product.size);
+              return (
+                <article
+                  key={product.id}
+                  className={`group min-w-0 overflow-hidden rounded-xl border transition-all duration-200 bg-white flex flex-col justify-between ${
+                    currentQty > 0
+                      ? 'border-[#243330] shadow-md ring-1 ring-[#243330]/20'
+                      : 'border-[#E3E8E6] hover:border-[#5C726E] hover:shadow-lg'
+                  }`}
+                >
+                  <div>
+                    <div className="aspect-square w-full overflow-hidden bg-[#FAFBFB] relative">
+                      <img
+                        src={product.image}
+                        alt={`${product.brand} ${product.name} ${product.size}`}
+                        loading={index < 8 ? 'eager' : 'lazy'}
+                        className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-3 sm:p-4 pb-2">
+                      <p className="mb-1 text-[9px] font-semibold uppercase tracking-wider text-[#8A9E9A]">
+                        {product.brand} · {categories.find(category => category.id === product.category)?.label}
+                      </p>
+                      <h2 className="min-h-10 text-xs font-semibold leading-5 text-[#243330] sm:text-sm line-clamp-2">
+                        {product.name}
+                      </h2>
+                      <p className="mt-1 text-[10px] text-[#5C726E]">
+                        {t('packaging')} {product.size}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3 sm:p-4 pt-1">
+                    {currentQty === 0 ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addItem({
+                            productId: product.id,
+                            name: product.name,
+                            brand: product.brand,
+                            size: product.size,
+                            category: product.category,
+                            image: product.image
+                          })
+                        }
+                        className="w-full h-9 sm:h-10 rounded-lg bg-[#243330] hover:bg-[#1B2624] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs active:scale-[0.98]"
+                        title="Tambah ke keranjang"
+                      >
+                        <PlusIcon className="w-4 h-4 stroke-[2.5]" />
+                        <span>Tambah</span>
+                      </button>
+                    ) : (
+                      <div className="w-full h-9 sm:h-10 rounded-lg bg-[#F1F5F8] border border-[#E2E8F0] flex items-center justify-between px-2.5 py-1">
+                        <button
+                          type="button"
+                          onClick={() => decreaseItem(product.id, product.size)}
+                          className="w-7 h-7 flex items-center justify-center rounded-md text-[#243330] hover:bg-black/5 transition cursor-pointer text-base font-bold active:scale-90"
+                          aria-label="Kurangi jumlah"
+                          title="Kurangi 1"
+                        >
+                          <MinusIcon className="w-4 h-4 stroke-[2.5]" />
+                        </button>
+                        <span className="text-xs sm:text-sm font-bold text-[#243330] select-none text-center px-2">
+                          {currentQty}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            addItem({
+                              productId: product.id,
+                              name: product.name,
+                              brand: product.brand,
+                              size: product.size,
+                              category: product.category,
+                              image: product.image
+                            })
+                          }
+                          className="w-7 h-7 flex items-center justify-center rounded-md bg-[#243330] hover:bg-[#1B2624] text-white transition cursor-pointer text-sm font-bold active:scale-90 shadow-xs"
+                          aria-label="Tambah jumlah"
+                          title="Tambah 1"
+                        >
+                          <PlusIcon className="w-4 h-4 stroke-[2.5]" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         )}
+
+        {/* Products Grid Ends */}
 
       </div>
     </div>
