@@ -26,7 +26,7 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
   return (
     <section
       ref={bannerRef}
-      className="relative overflow-hidden py-16 sm:py-28 bg-[#1E2B28] text-white border-t border-[#354844]"
+      className="relative overflow-hidden py-16 sm:py-28 bg-brand-900 text-white border-t border-brand-800"
     >
       {/* High-Clarity Parallax Background Layer */}
       <motion.div
@@ -41,8 +41,8 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
           className="w-full h-full object-cover opacity-40 brightness-105"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1E2B28]/95 via-[#1E2B28]/80 to-[#1E2B28]/95" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E2B28] via-transparent to-[#1E2B28]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-900/95 via-brand-900/80 to-brand-900/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-900 via-transparent to-brand-900" />
       </motion.div>
 
       {/* Editorial Content */}
@@ -70,7 +70,7 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
             {onNavigateProducts && (
               <button
                 onClick={onNavigateProducts}
-                className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-md bg-white text-[#243330] hover:bg-[#F3F5F4] text-xs font-semibold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:scale-102 cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-md bg-white text-ink hover:bg-surface text-xs font-semibold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:scale-102 cursor-pointer"
               >
                 <span>{language === 'en' ? 'Explore Our Products' : 'Jelajahi Produk Kami'}</span>
                 <ArrowRightIcon className="w-3.5 h-3.5" />

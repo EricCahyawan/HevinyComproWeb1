@@ -75,7 +75,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
                         item.onClick();
                       }
                     }}
-                    className="hover:text-[#243330] hover:underline underline-offset-4 transition-colors flex items-center gap-1 font-medium text-neutral-600"
+                    className="hover:text-ink hover:underline underline-offset-4 transition-colors flex items-center gap-1 font-medium text-neutral-600"
                   >
                     {index === 0 && showHomeIcon && (
                       <HomeIcon className="w-3.5 h-3.5 text-neutral-400 shrink-0" aria-hidden="true" />
@@ -85,7 +85,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
                 ) : (
                   <span
                     itemProp="name"
-                    className="text-[#243330] font-semibold truncate max-w-[220px] sm:max-w-md"
+                    className="text-ink font-semibold truncate max-w-[220px] sm:max-w-md"
                     aria-current={isCurrent ? 'page' : undefined}
                   >
                     {item.name}

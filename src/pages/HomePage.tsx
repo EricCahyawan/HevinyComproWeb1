@@ -45,7 +45,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* 1. HERO SECTION WITH PROMINENT PARALLAX BACKGROUND */}
       <section
         ref={heroRef}
-        className="relative min-h-[90vh] flex flex-col justify-between pt-32 pb-16 bg-[#4D635F] text-white overflow-hidden"
+        className="relative min-h-[90vh] flex flex-col justify-between pt-32 pb-16 bg-brand-700 text-white overflow-hidden"
       >
         {/* Parallax Background Imagery */}
         <motion.div
@@ -60,8 +60,8 @@ export const HomePage: React.FC<HomePageProps> = ({
             decoding="async"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#4D635F]/85 via-[#4D635F]/55 to-[#4D635F]" />
-          <div className="absolute inset-0 bg-radial from-transparent via-[#4D635F]/40 to-[#4D635F]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-700/85 via-brand-700/55 to-brand-700" />
+          <div className="absolute inset-0 bg-radial from-transparent via-brand-700/40 to-brand-700" />
         </motion.div>
 
         {/* Hero Main Content with Subtle Parallax Elevation */}
@@ -93,7 +93,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="relative z-10 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/20 flex items-center justify-center gap-6 sm:gap-14 text-left backdrop-blur-xs">
           <div className="flex items-center gap-2.5 sm:gap-3 text-xs text-white/95">
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shrink-0 shadow-sm">
-              <ShieldCheckIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-emerald-300" />
+              <ShieldCheckIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-brand-100" />
             </div>
             <div>
               <span className="font-semibold block text-white text-[11px] sm:text-sm">{t('bpomRegistered')}</span>
@@ -116,12 +116,12 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 2. SIGNATURE BESTSELLERS SECTION */}
-      <section className="relative py-14 sm:py-24 bg-white border-b border-[#E3E8E6] overflow-hidden">
+      <section className="relative py-14 sm:py-24 bg-white border-b border-line overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
             <div>
-              <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
+              <h2 className="font-serif text-2xl sm:text-4xl text-ink font-light">
                 {t('bestLoved')}
               </h2>
             </div>
@@ -129,7 +129,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <button
               type="button"
               onClick={() => onNavigate('products')}
-              className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#243330] hover:text-[#5C726E] transition cursor-pointer self-start md:self-auto"
+              className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink hover:text-ink-soft transition cursor-pointer self-start md:self-auto"
             >
               <span>{t('viewAllProducts')}</span>
               <ArrowRightIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -150,17 +150,17 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 3. BOTANICAL INGREDIENTS SPOTLIGHT */}
-      <section className="relative py-14 sm:py-28 bg-[#F6F8F7] border-b border-[#E3E8E6] overflow-hidden">
+      <section className="relative py-14 sm:py-28 bg-surface border-b border-line overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16 space-y-2 sm:space-y-3">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#5C726E] font-semibold block">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-ink-soft font-semibold block">
               {t('botanicalLabel')}
             </span>
-            <h2 className="font-serif text-2xl sm:text-4xl text-[#243330] font-light">
+            <h2 className="font-serif text-2xl sm:text-4xl text-ink font-light">
               {t('botanicalTitle')}
             </h2>
-            <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-ink-soft leading-relaxed font-sans">
               {t('botanicalDescription')}
             </p>
           </div>
@@ -171,10 +171,10 @@ export const HomePage: React.FC<HomePageProps> = ({
               return (
               <div
                 key={item.id}
-                className="bg-white rounded-xl p-4 sm:p-6 border border-[#E3E8E6] shadow-xs space-y-3 sm:space-y-4 flex flex-col justify-between hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-xl p-4 sm:p-6 border border-line shadow-xs space-y-3 sm:space-y-4 flex flex-col justify-between hover:shadow-xl transition-all duration-300"
               >
                 <div className="space-y-2 sm:space-y-3">
-                  <div className="aspect-[16/10] rounded-lg overflow-hidden bg-[#F6F8F7] relative group">
+                  <div className="aspect-[16/10] rounded-lg overflow-hidden bg-surface relative group">
                     <img
                       src={item.image}
                       alt={ingredient.name}
@@ -190,23 +190,23 @@ export const HomePage: React.FC<HomePageProps> = ({
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <span className="text-[9px] sm:text-[10px] font-mono text-[#8A9E9A] uppercase tracking-wider block">
+                  <span className="text-[9px] sm:text-[10px] font-mono text-ink-muted uppercase tracking-wider block">
                     {item.latinName}
                   </span>
-                  <h3 className="font-serif text-base sm:text-lg font-medium text-[#243330]">
+                  <h3 className="font-serif text-base sm:text-lg font-medium text-ink">
                     {ingredient.name}
                   </h3>
-                  <p className="text-xs text-[#5C726E] leading-relaxed">
+                  <p className="text-xs text-ink-soft leading-relaxed">
                     {ingredient.description}
                   </p>
                 </div>
 
-                <div className="pt-2 sm:pt-3 border-t border-[#F0F3F2]">
-                  <span className="text-[10px] font-semibold text-[#243330] block mb-1">{t('mainBenefits')}</span>
-                  <ul className="text-[11px] text-[#5C726E] space-y-1">
+                <div className="pt-2 sm:pt-3 border-t border-line">
+                  <span className="text-[10px] font-semibold text-ink block mb-1">{t('mainBenefits')}</span>
+                  <ul className="text-[11px] text-ink-soft space-y-1">
                     {ingredient.benefits.slice(0, 2).map((b, i) => (
                       <li key={i} className="flex items-center gap-1.5">
-                        <CheckCircleIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <CheckCircleIcon className="w-3.5 h-3.5 text-brand-600 shrink-0" />
                         <span>{b}</span>
                       </li>
                     ))}
@@ -220,7 +220,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="text-center mt-8 sm:mt-12">
             <button
               onClick={() => onNavigate('journal')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-md"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-md"
             >
               <span>{t('learnArticles')}</span>
               <ArrowRightIcon className="w-4 h-4" />
@@ -231,7 +231,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 4. CONTINUOUS TESTIMONIALS MARQUEE (NO STATIC HEADER, CONTINUOUS RIGHT-TO-LEFT GLIDE) */}
-      <section className="relative py-10 sm:py-14 bg-white border-b border-[#E3E8E6] overflow-hidden">
+      <section className="relative py-10 sm:py-14 bg-white border-b border-line overflow-hidden">
         {/* Soft edge gradient fade masks */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
@@ -243,7 +243,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             return (
             <div
               key={`${testi.id}-${idx}`}
-              className="w-[300px] sm:w-[380px] shrink-0 p-5 sm:p-6 rounded-xl bg-[#F6F8F7] border border-[#E3E8E6] hover:border-[#243330]/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-4 cursor-default select-none"
+              className="w-[300px] sm:w-[380px] shrink-0 p-5 sm:p-6 rounded-xl bg-surface border border-line hover:border-brand-500/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-4 cursor-default select-none"
             >
               <div className="space-y-3">
                 <div className="flex items-center gap-1 text-amber-500">
@@ -251,13 +251,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <StarIcon key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-xs sm:text-sm text-[#243330] leading-relaxed italic font-serif">
+                <p className="text-xs sm:text-sm text-ink leading-relaxed italic font-serif">
                   "{testimonial.comment}"
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-[#E3E8E6] flex items-center justify-between">
-                <h4 className="font-semibold text-xs sm:text-sm text-[#243330] truncate">
+              <div className="pt-3 border-t border-line flex items-center justify-between">
+                <h4 className="font-semibold text-xs sm:text-sm text-ink truncate">
                   {testi.name}
                 </h4>
               </div>

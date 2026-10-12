@@ -74,7 +74,7 @@ Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Teri
         >
           {totalCount > 0 && (
             <span
-              className="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1 bg-amber-400 text-[#1B2624] font-black text-xs rounded-full flex items-center justify-center shadow-lg border-2 border-white pointer-events-none transform translate-x-0.5 -translate-y-0.5"
+              className="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1 bg-amber-400 text-ink font-black text-xs rounded-full flex items-center justify-center shadow-lg border-2 border-white pointer-events-none transform translate-x-0.5 -translate-y-0.5"
               title={`${totalCount} produk di keranjang`}
             >
               {totalCount}
@@ -163,11 +163,7 @@ Setelah form terisi, kami segera proses dan informasikan harga untuk Kakak. Teri
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
                       <label className="font-semibold text-stone-700">Produk yang diminati <span className="text-red-500">*</span></label>
-                      {totalCount > 0 ? (
-                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                          {totalCount} item terpilih
-                        </span>
-                      ) : (
+                      {totalCount > 0 ? null : (
                         <span className="text-[10px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
                           Belum pilih produk
                         </span>

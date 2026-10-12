@@ -15,7 +15,7 @@ export const BotanicalArticleVisual: React.FC<BotanicalArticleVisualProps> = ({
 
   // Category thematic pure color palette (Pure minimal color - No SVGs, no illustrations)
   let theme = {
-    bg: 'from-[#1E362F] to-[#2B4B42]'
+    bg: 'from-brand-800 to-brand-600'
   };
 
   if (catNorm.includes('face') || catNorm.includes('skincare') || catNorm.includes('wajah')) {
@@ -24,19 +24,19 @@ export const BotanicalArticleVisual: React.FC<BotanicalArticleVisualProps> = ({
     };
   } else if (catNorm.includes('body') || catNorm.includes('spa') || catNorm.includes('lulur') || catNorm.includes('tubuh')) {
     theme = {
-      bg: 'from-[#333D34] to-[#48564A]'
+      bg: 'from-brand-900 to-brand-700'
     };
   } else if (catNorm.includes('hair') || catNorm.includes('rambut')) {
     theme = {
-      bg: 'from-[#1A332B] to-[#264A3E]'
+      bg: 'from-brand-700 to-brand-500'
     };
   } else if (catNorm.includes('bahan') || catNorm.includes('alami') || catNorm.includes('herbal')) {
     theme = {
-      bg: 'from-[#1E3B33] to-[#2D5449]'
+      bg: 'from-brand-800 to-brand-500'
     };
   } else if (catNorm.includes('bisnis') || catNorm.includes('salon')) {
     theme = {
-      bg: 'from-[#263133] to-[#364447]'
+      bg: 'from-brand-950 to-brand-800'
     };
   }
 

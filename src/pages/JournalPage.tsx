@@ -211,23 +211,23 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
         </div>
 
         {/* Search & Category Filter Toolbar */}
-        <div className="bg-[#F6F8F7] p-4 sm:p-6 rounded-xl border border-[#E3E8E6] mb-10 space-y-5 shadow-xs">
+        <div className="bg-surface p-4 sm:p-6 rounded-xl border border-line mb-10 space-y-5 shadow-xs">
           
           {/* Search Box */}
           <div className="relative">
-            <Search className="w-4 h-4 text-[#8A9E9A] absolute left-4 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-ink-muted absolute left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               id="input-search-articles"
               placeholder={t('articleSearch')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-10 py-3 rounded-lg bg-white border border-[#E3E8E6] text-xs sm:text-sm text-[#243330] placeholder-[#8A9E9A] focus:outline-none focus:border-[#243330] focus:ring-1 focus:ring-[#243330] transition"
+              className="w-full pl-11 pr-10 py-3 rounded-lg bg-white border border-line text-xs sm:text-sm text-ink placeholder-ink-muted focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8A9E9A] hover:text-[#243330] p-1 text-xs"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-ink-muted hover:text-ink p-1 text-xs"
                 title={t('deleteSearch')}
               >
                 <X className="w-4 h-4" />
@@ -244,8 +244,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition cursor-pointer whitespace-nowrap ${
                   selectedCategory === cat
-                    ? 'bg-[#243330] text-white shadow-xs'
-                    : 'bg-white text-[#5C726E] hover:bg-[#EAEFEF] border border-[#E3E8E6]'
+                    ? 'bg-brand-600 text-white shadow-xs'
+                    : 'bg-white text-ink-soft hover:bg-surface-alt border border-line'
                 }`}
               >
                 {cat === 'Semua' ? t('allArticles') : cat}
@@ -255,13 +255,13 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
           {/* Active Filter Reset */}
           {(selectedCategory !== 'Semua' || searchQuery) && (
-            <div className="flex items-center justify-end text-xs text-[#5C726E] pt-2 border-t border-[#E3E8E6]/60">
+            <div className="flex items-center justify-end text-xs text-ink-soft pt-2 border-t border-line/60">
               <button
                 onClick={() => {
                   setSelectedCategory('Semua');
                   setSearchQuery('');
                 }}
-                className="text-xs font-semibold text-emerald-800 hover:underline cursor-pointer"
+                className="text-xs font-semibold text-brand-800 hover:underline cursor-pointer"
               >
                 {t('resetFilter')}
               </button>
@@ -271,10 +271,10 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
         {/* Empty State if No Match */}
         {filteredArticles.length === 0 && (
-          <div className="text-center py-16 px-4 bg-[#F6F8F7] rounded-xl border border-[#E3E8E6] space-y-4">
-            <BookOpen className="w-12 h-12 text-[#8A9E9A] mx-auto opacity-60" />
-            <h3 className="font-serif text-xl text-[#243330]">{t('noArticles')}</h3>
-            <p className="text-xs sm:text-sm text-[#5C726E] max-w-md mx-auto">
+          <div className="text-center py-16 px-4 bg-surface rounded-xl border border-line space-y-4">
+            <BookOpen className="w-12 h-12 text-ink-muted mx-auto opacity-60" />
+            <h3 className="font-serif text-xl text-ink">{t('noArticles')}</h3>
+            <p className="text-xs sm:text-sm text-ink-soft max-w-md mx-auto">
               {t('noArticlesDescription')}
             </p>
             <button
@@ -282,7 +282,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 setSelectedCategory('Semua');
                 setSearchQuery('');
               }}
-              className="px-6 py-2.5 rounded-md bg-[#243330] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1A2624] transition cursor-pointer"
+              className="px-6 py-2.5 rounded-md bg-brand-600 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 transition cursor-pointer"
             >
               {t('showAllArticles')}
             </button>
@@ -300,7 +300,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 event.preventDefault();
                 openArticle(article);
               }}
-              className="group bg-white rounded-2xl border border-[#E3E8E6] hover:border-[#5C726E] transition-all duration-300 flex flex-col justify-between cursor-pointer hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
+              className="group bg-white rounded-2xl border border-line hover:border-brand-400 transition-all duration-300 flex flex-col justify-between cursor-pointer hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
             >
               <div>
                 {/* Pure Minimal Color Header (No AI Images, No SVG Vectors) */}
@@ -312,12 +312,12 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
                 <div className="p-6 sm:p-7 space-y-3.5">
                   {/* Title */}
-                  <h2 className="font-serif text-lg sm:text-xl font-normal text-[#243330] group-hover:text-[#3B5D55] transition-colors leading-snug line-clamp-2">
+                  <h2 className="font-serif text-lg sm:text-xl font-normal text-ink group-hover:text-brand-600 transition-colors leading-snug line-clamp-2">
                     {article.title}
                   </h2>
 
                   {/* Clean Excerpt (flowing without vertical line) */}
-                  <p className="text-xs sm:text-[13px] text-[#5C726E] line-clamp-3 leading-relaxed">
+                  <p className="text-xs sm:text-[13px] text-ink-soft line-clamp-3 leading-relaxed">
                     {article.summary}
                   </p>
 
@@ -327,7 +327,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                       {article.tags.slice(0, 3).map((t, tidx) => (
                         <span
                           key={tidx}
-                          className="inline-flex items-center text-[10px] px-2.5 py-0.5 rounded-sm bg-[#F6F8F7] text-[#5C726E] border border-[#E3E8E6]"
+                          className="inline-flex items-center text-[10px] px-2.5 py-0.5 rounded-sm bg-surface text-ink-soft border border-line"
                         >
                           #{t}
                         </span>
@@ -339,8 +339,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
               {/* Action Read More */}
               <div className="p-6 sm:p-7 pt-0">
-                <div className="pt-3.5 border-t border-[#EAEFEF] flex items-center justify-end text-xs">
-                  <div className="flex items-center gap-1 font-semibold text-[#243330] group-hover:text-[#3B5D55] group-hover:translate-x-1 transition-all uppercase tracking-wider text-[11px]">
+                <div className="pt-3.5 border-t border-line flex items-center justify-end text-xs">
+                  <div className="flex items-center gap-1 font-semibold text-ink group-hover:text-brand-600 group-hover:translate-x-1 transition-all uppercase tracking-wider text-[11px]">
                     <span>{t('readArticle')}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
@@ -357,14 +357,14 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/65 backdrop-blur-sm overflow-y-auto">
           <div
             id="modal-article-reader"
-            className="bg-white rounded-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl border border-[#E3E8E6] animate-in fade-in zoom-in-95 duration-200 my-auto"
+            className="bg-white rounded-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl border border-line animate-in fade-in zoom-in-95 duration-200 my-auto"
           >
             {/* Modal Editorial Header */}
-            <div className="bg-[#FAFBFB] p-6 sm:p-10 border-b border-[#E3E8E6] relative">
+            <div className="bg-surface-soft p-6 sm:p-10 border-b border-line relative">
               <button
                 id="btn-close-article-reader-top"
                 onClick={closeArticle}
-                className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white border border-[#E3E8E6] hover:bg-[#243330] hover:text-white text-[#5C726E] flex items-center justify-center transition-colors cursor-pointer shadow-xs z-20"
+                className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white border border-line hover:bg-brand-600 hover:text-white text-ink-soft flex items-center justify-center transition-colors cursor-pointer shadow-xs z-20"
                 aria-label={t('closeArticle')}
               >
                 <X className="w-4 h-4" />
@@ -372,13 +372,13 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
               <div className="max-w-2xl space-y-4">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-sm bg-[#EBF2F0] text-[#2D4D44] border border-[#D5E3DF]">
+                  <span className="inline-flex items-center text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-sm bg-surface-alt text-brand-800 border border-brand-200">
                     {selectedArticle.category}
                   </span>
-                  <span className="text-[11px] font-mono text-[#8A9E9A]">• {selectedArticle.readTime}</span>
+                  <span className="text-[11px] font-mono text-ink-muted">• {selectedArticle.readTime}</span>
                 </div>
 
-                <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#1E2B28] leading-tight">
+                <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-ink leading-tight">
                   {selectedArticle.title}
                 </h1>
               </div>
@@ -388,14 +388,14 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               
               {/* Key Takeaways Callout Box */}
               {selectedArticle.keyTakeaways && selectedArticle.keyTakeaways.length > 0 && (
-                <div className="p-5 rounded-lg bg-[#F0F5F3] border border-[#D5E4DF] space-y-2.5">
-                  <div className="flex items-center gap-2 text-[#243330]">
-                    <ShieldCheck className="w-4 h-4 text-emerald-700" />
+                <div className="p-5 rounded-lg bg-surface border border-brand-200 space-y-2.5">
+                  <div className="flex items-center gap-2 text-ink">
+                    <ShieldCheck className="w-4 h-4 text-brand-700" />
                     <span className="text-xs font-semibold uppercase tracking-wider">
                       {t('articleHighlights')}
                     </span>
                   </div>
-                  <ul className="text-xs sm:text-[13px] text-[#3B544E] space-y-1.5 pl-5 list-disc leading-relaxed">
+                  <ul className="text-xs sm:text-[13px] text-ink space-y-1.5 pl-5 list-disc leading-relaxed">
                     {selectedArticle.keyTakeaways.map((point, pIdx) => (
                       <li key={pIdx}>{point}</li>
                     ))}
@@ -404,15 +404,15 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               )}
 
               {/* Article Content Paragraphs with Editorial Typography */}
-              <div className="space-y-4 text-xs sm:text-sm text-[#2D3748] leading-relaxed font-sans">
+              <div className="space-y-4 text-xs sm:text-sm text-ink leading-relaxed font-sans">
                 {selectedArticle.contentParagraphs.map((para, idx) => (
                   <p 
                     key={idx} 
                     className={
                       para.startsWith('1.') || para.startsWith('2.') || para.startsWith('3.') || para.startsWith('4.') || para.startsWith('5.') || para.startsWith('6.') 
-                        ? 'font-medium text-[#243330] bg-[#FAFBFB] p-4 rounded-xl border-l-3 border-[#5C726E] my-3' 
+                        ? 'font-medium text-ink bg-surface-soft p-4 rounded-xl border-l-3 border-brand-400 my-3' 
                         : idx === 0 
-                          ? 'first-letter:font-serif first-letter:text-4xl first-letter:float-left first-letter:mr-2.5 first-letter:text-[#1E2B28] leading-relaxed' 
+                          ? 'first-letter:font-serif first-letter:text-4xl first-letter:float-left first-letter:mr-2.5 first-letter:text-ink leading-relaxed' 
                           : 'leading-relaxed'
                     }
                   >
@@ -423,12 +423,12 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
               {/* Tags Cloud */}
               {selectedArticle.tags && selectedArticle.tags.length > 0 && (
-                <div className="pt-3 border-t border-[#E3E8E6] flex flex-wrap items-center gap-2">
-                  <span className="text-[11px] font-semibold text-[#8A9E9A] uppercase tracking-wider">{t('relatedTopics')}</span>
+                <div className="pt-3 border-t border-line flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-semibold text-ink-muted uppercase tracking-wider">{t('relatedTopics')}</span>
                   {selectedArticle.tags.map((t, idx) => (
                     <span
                       key={idx}
-                      className="text-[11px] px-3 py-1 rounded-sm bg-[#F6F8F7] text-[#5C726E] border border-[#E3E8E6]"
+                      className="text-[11px] px-3 py-1 rounded-sm bg-surface text-ink-soft border border-line"
                     >
                       #{t}
                     </span>
@@ -438,13 +438,13 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
               {/* Recommended Heviny Products */}
               {selectedArticle.recommendedProducts && selectedArticle.recommendedProducts.length > 0 && (
-                <div className="p-5 sm:p-6 rounded-lg bg-[#F6F8F7] border border-[#E3E8E6] space-y-3">
+                <div className="p-5 sm:p-6 rounded-lg bg-surface border border-line space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[#243330]">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-ink">
                       {t('relatedProducts')}
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#5C726E]">
+                  <p className="text-[11px] text-ink-soft">
                     {t('relatedProductsDescription')}
                   </p>
 
@@ -454,7 +454,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                         key={idx}
                         id={`btn-recommended-prod-${idx}`}
                         onClick={() => handleProductClick(prodName)}
-                        className="px-4 py-2 rounded-md bg-white hover:bg-[#243330] text-[#243330] hover:text-white border border-[#E3E8E6] text-xs font-medium transition cursor-pointer shadow-2xs flex items-center gap-1.5"
+                        className="px-4 py-2 rounded-md bg-white hover:bg-brand-600 text-ink hover:text-white border border-line text-xs font-medium transition cursor-pointer shadow-2xs flex items-center gap-1.5"
                       >
                         <span>{prodName}</span>
                         <ArrowRight className="w-3 h-3" />
@@ -465,13 +465,13 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
               )}
 
               {/* Bottom Close Button */}
-              <div className="pt-4 border-t border-[#E3E8E6] flex items-center justify-between">
+              <div className="pt-4 border-t border-line flex items-center justify-between">
                 <button
                   onClick={() => {
                     closeArticle();
                     onNavigate('products');
                   }}
-                  className="text-xs font-semibold text-[#5C726E] hover:text-[#243330] flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-semibold text-ink-soft hover:text-ink flex items-center gap-1 cursor-pointer"
                 >
                   <span>{t('seeAllProducts')}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -479,7 +479,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 <button
                   id="btn-close-article-bottom"
                   onClick={closeArticle}
-                  className="px-6 py-2.5 rounded-md bg-[#243330] text-white text-xs font-semibold hover:bg-[#1A2624] transition cursor-pointer"
+                  className="px-6 py-2.5 rounded-md bg-brand-600 text-white text-xs font-semibold hover:bg-brand-700 transition cursor-pointer"
                 >
                   {t('closeArticle')}
                 </button>

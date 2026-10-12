@@ -279,7 +279,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#2D3748] flex flex-col selection:bg-[#1B4332]/20 selection:text-[#1B4332]">
+    <div className="min-h-screen bg-surface-soft text-ink flex flex-col selection:bg-brand-500/20 selection:text-brand-800">
       
       {/* Universal Sticky Navbar */}
       <Navbar

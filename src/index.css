@@ -4,12 +4,36 @@
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, Cambria, serif;
   --font-display: "Cormorant Garamond", Georgia, serif;
+
+  /* Brand: fresh jade green, inspired by (but distinct from) WhatsApp #25D366 */
+  --color-brand-50: #E9FBF2;
+  --color-brand-100: #C8F4DF;
+  --color-brand-200: #93E8C2;
+  --color-brand-300: #52D69E;
+  --color-brand-400: #1FC27F;
+  --color-brand-500: #0FA86C;
+  --color-brand-600: #05875A;
+  --color-brand-700: #036E4A;
+  --color-brand-800: #055A3D;
+  --color-brand-900: #064A33;
+  --color-brand-950: #022B1D;
+
+  /* Text */
+  --color-ink: #123D30;
+  --color-ink-soft: #4B6E62;
+  --color-ink-muted: #85A398;
+
+  /* Surfaces & lines */
+  --color-surface: #F3FBF7;
+  --color-surface-alt: #E6F7EE;
+  --color-surface-soft: #F9FDFB;
+  --color-line: #D6EDE2;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #F6F8F7;
-  color: #243330;
+  background-color: var(--color-surface);
+  color: var(--color-ink);
   overflow-x: hidden;
 }
 
@@ -27,14 +51,14 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #E8ECEB;
+  background: var(--color-surface-alt);
 }
 ::-webkit-scrollbar-thumb {
-  background: #A0B3AF;
+  background: var(--color-brand-300);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #738C87;
+  background: var(--color-brand-500);
 }
 
 /* Editorial typography text balance */

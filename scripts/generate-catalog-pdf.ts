@@ -12,7 +12,7 @@ async function generateCatalogPDF() {
     format: 'a4'
   });
 
-  const PRIMARY = [27, 38, 35]; // #1B2623 Botanical Deep
+  const PRIMARY = [14, 124, 86]; // #0E7C56 Brand Jade
   const GOLD = [217, 163, 67]; // #D9A343 Warm Gold
   const DARK = [45, 55, 72];
   const MUTED = [100, 116, 139];

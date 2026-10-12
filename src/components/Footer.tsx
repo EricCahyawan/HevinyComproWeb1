@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCatalogModal }
   };
 
   return (
-    <footer className="bg-[#1A2624] text-white/80 pt-20 pb-12 border-t border-[#2D3E3A]">
+    <footer className="bg-brand-900 text-white/80 pt-20 pb-12 border-t border-brand-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid */}

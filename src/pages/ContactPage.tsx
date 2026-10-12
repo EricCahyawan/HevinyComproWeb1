@@ -94,28 +94,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           
           {/* Left Column: Official Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-[#F6F8F7] p-6 sm:p-8 rounded-xl border border-[#E3E8E6] space-y-6">
+            <div className="bg-surface p-6 sm:p-8 rounded-xl border border-line space-y-6">
               <div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#5C726E] block">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft block">
                   {t('officialSince')}
                 </span>
-                <h2 className="font-serif text-2xl font-normal text-[#243330] mt-1">
+                <h2 className="font-serif text-2xl font-normal text-ink mt-1">
                   {COMPANY_INFO.legalEntity}
                 </h2>
               </div>
 
-              <div className="space-y-4 text-xs text-[#5C726E]">
+              <div className="space-y-4 text-xs text-ink-soft">
 
                 {/* Email */}
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white text-[#243330] flex items-center justify-center shrink-0 border border-[#E3E8E6]">
+                  <div className="w-8 h-8 rounded-lg bg-white text-ink flex items-center justify-center shrink-0 border border-line">
                     <EnvelopeIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-semibold text-[#243330] block">{t('officialEmail')}</span>
+                    <span className="font-semibold text-ink block">{t('officialEmail')}</span>
                     <a
                       href={`mailto:${COMPANY_INFO.email}`}
-                      className="text-[#243330] hover:underline font-medium"
+                      className="text-ink hover:underline font-medium"
                     >
                       {COMPANY_INFO.email}
                     </a>
@@ -123,7 +123,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 {/* Marketplace Link - Pure Shopee Logo */}
-                <div className="pt-3 border-t border-[#E3E8E6] flex items-center gap-3">
+                <div className="pt-3 border-t border-line flex items-center gap-3">
                   <a
                     href={COMPANY_INFO.shopeeUrl}
                     target="_blank"
@@ -141,26 +141,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right Column: Inquiry Form */}
-          <div className="lg:col-span-7 bg-[#F6F8F7] p-6 sm:p-8 rounded-xl border border-[#E3E8E6]">
-            <h2 className="font-serif text-2xl font-light text-[#243330] mb-1">
+          <div className="lg:col-span-7 bg-surface p-6 sm:p-8 rounded-xl border border-line">
+            <h2 className="font-serif text-2xl font-light text-ink mb-1">
               Formulir Pesanan (WhatsApp)
             </h2>
-            <p className="text-xs text-[#5C726E] mb-6">
+            <p className="text-xs text-ink-soft mb-6">
               Isi form di bawah ini untuk memesan atau bertanya langsung melalui WhatsApp kami.
             </p>
 
             {isSubmitted ? (
-              <div className="bg-white border border-emerald-200 rounded-lg p-8 text-center space-y-3">
-                <CheckCircleIcon className="w-10 h-10 text-emerald-600 mx-auto" />
-                <h3 className="font-serif font-medium text-[#243330] text-lg">
+              <div className="bg-white border border-brand-200 rounded-lg p-8 text-center space-y-3">
+                <CheckCircleIcon className="w-10 h-10 text-brand-600 mx-auto" />
+                <h3 className="font-serif font-medium text-ink text-lg">
                   Membuka WhatsApp...
                 </h3>
-                <p className="text-xs text-[#5C726E] max-w-md mx-auto">
+                <p className="text-xs text-ink-soft max-w-md mx-auto">
                   Anda akan segera dialihkan ke WhatsApp dengan pesan yang sudah terisi.
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="px-5 py-2 rounded-md bg-[#243330] text-white text-xs font-semibold cursor-pointer"
+                  className="px-5 py-2 rounded-md bg-brand-600 text-white text-xs font-semibold cursor-pointer"
                 >
                   Kirim Pesan Lain
                 </button>
@@ -168,23 +168,23 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Lengkap *</label>
+                  <label className="font-semibold uppercase tracking-wider text-ink text-[11px]">Nama Lengkap *</label>
                   <input
                     type="text"
                     required
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-line text-xs text-ink focus:border-brand-400 outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Jenis Pelanggan *</label>
+                  <label className="font-semibold uppercase tracking-wider text-ink text-[11px]">Jenis Pelanggan *</label>
                   <select
                     required
                     value={formState.buyerType}
                     onChange={(e) => setFormState({ ...formState, buyerType: e.target.value })}
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-line text-xs text-ink focus:border-brand-400 outline-hidden"
                   >
                     <option value="" disabled>Pilih Jenis</option>
                     <option value="Toko">Toko</option>
@@ -198,13 +198,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 {formState.buyerType && formState.buyerType !== 'Pribadi' && (
                   <div className="space-y-1">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Nama Usaha *</label>
+                    <label className="font-semibold uppercase tracking-wider text-ink text-[11px]">Nama Usaha *</label>
                     <input
                       type="text"
                       required={formState.buyerType !== 'Pribadi'}
                       value={formState.institutionName}
                       onChange={(e) => setFormState({ ...formState, institutionName: e.target.value })}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-none"
+                      className="w-full px-4 py-3 bg-white rounded-lg border border-line text-xs text-ink focus:border-brand-400 outline-none"
                       placeholder={`Contoh: ${formState.buyerType === 'Toko' ? 'Toko Kosmetik ABC' : formState.buyerType === 'Hotel' ? 'Hotel Bintang' : formState.buyerType === 'Salon' ? 'Salon Cantik' : 'Nama ' + formState.buyerType}`}
                     />
                   </div>
@@ -212,17 +212,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Produk yang diminati *</label>
+                    <label className="font-semibold uppercase tracking-wider text-ink text-[11px]">Produk yang diminati *</label>
                     {totalCount > 0 ? (
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                          {totalCount} item terpilih
-                        </span>
                         {onNavigate && (
                           <button
                             type="button"
                             onClick={() => onNavigate('products')}
-                            className="text-[10px] text-[#5C726E] hover:text-[#243330] underline cursor-pointer"
+                            className="text-[10px] text-ink-soft hover:text-ink underline cursor-pointer"
                           >
                             Ubah di Produk &rarr;
                           </button>
@@ -245,25 +242,25 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     required
                     value={formState.products}
                     onChange={(e) => setFormState({ ...formState, products: e.target.value })}
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden leading-relaxed"
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-line text-xs text-ink focus:border-brand-400 outline-hidden leading-relaxed"
                     placeholder="Pilih produk dari halaman produk pada website heviny.com"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold uppercase tracking-wider text-[#243330] text-[11px]">Jumlah *</label>
+                  <label className="font-semibold uppercase tracking-wider text-ink text-[11px]">Jumlah *</label>
                   <input
                     type="text"
                     required
                     value={formState.quantity}
                     onChange={(e) => setFormState({ ...formState, quantity: e.target.value })}
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-[#E3E8E6] text-xs text-[#243330] focus:border-[#5C726E] outline-hidden"
+                    className="w-full px-4 py-3 bg-white rounded-lg border border-line text-xs text-ink focus:border-brand-400 outline-hidden"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
+                  className="w-full py-3.5 px-6 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
                 >
                   <PaperAirplaneIcon className="w-3.5 h-3.5" />
                   <span>Kirim ke WhatsApp</span>
@@ -275,12 +272,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* FAQ Accordion Section */}
-        <div className="pt-10 border-t border-[#E3E8E6] space-y-8">
+        <div className="pt-10 border-t border-line space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#5C726E] font-semibold block">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-ink-soft font-semibold block">
               {t('faq')}
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[#243330] font-light">
+            <h2 className="font-serif text-3xl sm:text-4xl text-ink font-light">
               Frequently Asked Questions
             </h2>
           </div>
@@ -292,22 +289,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               return (
                 <div
                   key={faq.id}
-                  className="rounded-lg border border-[#E3E8E6] bg-[#F6F8F7] overflow-hidden transition-colors"
+                  className="rounded-lg border border-line bg-surface overflow-hidden transition-colors"
                 >
                   <button
                     onClick={() => toggleFaq(faq.id)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-serif text-base text-[#243330] hover:text-[#5C726E] cursor-pointer"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-serif text-base text-ink hover:text-ink-soft cursor-pointer"
                   >
                     <span>{localizedFaq.question}</span>
                     {isOpen ? (
-                      <ChevronUpIcon className="w-4 h-4 text-[#5C726E] shrink-0" />
+                      <ChevronUpIcon className="w-4 h-4 text-ink-soft shrink-0" />
                     ) : (
-                      <ChevronDownIcon className="w-4 h-4 text-[#8A9E9A] shrink-0" />
+                      <ChevronDownIcon className="w-4 h-4 text-ink-muted shrink-0" />
                     )}
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 text-xs text-[#5C726E] leading-relaxed border-t border-[#E3E8E6] pt-3 font-sans">
+                    <div className="px-5 pb-5 text-xs text-ink-soft leading-relaxed border-t border-line pt-3 font-sans">
                       {localizedFaq.answer}
                     </div>
                   )}

@@ -78,7 +78,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           
           {/* Visual Showcase */}
           <div className="lg:col-span-6 order-2 lg:order-1">
-            <div className="relative aspect-[7/8] rounded-xl overflow-hidden shadow-xl border border-[#E3E8E6] bg-[#F6F8F7] group">
+            <div className="relative aspect-[7/8] rounded-xl overflow-hidden shadow-xl border border-line bg-surface group">
               <img
                 src="/TentangKami.jpg"
                 alt="Katalog produk dan identitas perusahaan Heviny"
@@ -92,26 +92,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           {/* Narrative Content */}
           <div className="lg:col-span-6 space-y-6 order-1 lg:order-2">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#5C726E] font-semibold block mb-2">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-ink-soft font-semibold block mb-2">
                 {language === 'en' ? 'COMPANY & MANUFACTURING PROFILE' : 'PROFIL PERUSAHAAN & PABRIK MANUFAKTUR'}
               </span>
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#243330] font-light leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-ink font-light leading-tight">
                 {language === 'en' ? <>Hana Cosmetics & <span className="italic font-normal">the Heviny Brand</span></> : <>Hana Cosmetics & <span className="italic font-normal">Merek Heviny</span></>}
               </h1>
             </div>
             
-            <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-ink-soft leading-relaxed font-sans">
               {language === 'en' ? <>Established in Surabaya in 2006, <strong>Hana Cosmetics</strong> is a cosmetics manufacturer and the owner of the <strong>Heviny</strong> brand. We serve beauty salons, spa therapists, barbershops, cosmetics retailers, and consumers with safe, effective hair and skin care at factory-direct prices.</> : <>Didirikan di Surabaya sejak tahun 2006, <strong>Hana Cosmetics (Hana Cosmetic)</strong> adalah pabrik produsen kosmetik terkemuka dan pemilik resmi merek <strong>Heviny</strong>. Kami mendedikasikan diri untuk menjawab kebutuhan para praktisi salon kecantikan, terapis spa, barbershop, toko kosmetik, serta konsumen luas akan produk perawatan rambut dan kulit yang aman, berkhasiat nyata, dan memiliki harga pabrik bersahabat.</>}
             </p>
             
-            <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-ink-soft leading-relaxed font-sans">
               {language === 'en' ? <>At <strong>Hana Cosmetics Surabaya</strong>, we combine Indonesian botanical ingredients—such as candlenut oil, red rose petals, jicama, and fresh aloe vera—with modern formulation expertise that meets Good Cosmetics Manufacturing Practices (CPKB), BPOM RI, and Indonesian Halal standards.</> : <>Di fasilitas manufaktur <strong>Hana Cosmetics Surabaya</strong>, kami memadukan kearifan ekstrak botani nusantara—seperti minyak kemiri murni, kelopak mawar merah, sari bengkoang, dan lidah buaya segar—dengan keahlian formulasi modern yang memenuhi standar Cara Pembuatan Kosmetik yang Baik (CPKB) serta sertifikasi izin edar resmi BPOM RI & Halal Indonesia.</>}
             </p>
 
             <div className="pt-2 flex items-center gap-4">
               <button
                 onClick={() => onNavigate('products')}
-                className="px-6 py-3 rounded-md bg-[#243330] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#1A2624] transition cursor-pointer shadow-xs"
+                className="px-6 py-3 rounded-md bg-brand-600 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 transition cursor-pointer shadow-xs"
               >
                 {t('exploreProducts')}
               </button>
@@ -121,14 +121,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </section>
 
         {/* 2. STATS BAR / MILESTONES */}
-        <section className="bg-[#F6F8F7] rounded-xl border border-[#E3E8E6] p-6 sm:p-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[#E3E8E6]">
+        <section className="bg-surface rounded-xl border border-line p-6 sm:p-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-line">
             {COMPANY_INFO.stats.map((stat, idx) => (
               <div key={idx} className={`space-y-1 text-center ${idx !== 0 ? 'pt-4 sm:pt-0 sm:pl-4' : ''}`}>
-                <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#243330]">
+                <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-ink">
                   {stat.value}
                 </div>
-                <div className="text-[11px] sm:text-xs font-medium text-[#5C726E] uppercase tracking-wider">
+                <div className="text-[11px] sm:text-xs font-medium text-ink-soft uppercase tracking-wider">
                   {language === 'en' ? ['Years of Experience', 'Salon & Spa Partners', 'Natural Product Variants', 'CPKB, BPOM & Halal'][idx] : stat.label}
                 </div>
               </div>
@@ -140,23 +140,23 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <section className="space-y-6 sm:space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#5C726E] font-semibold block">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-ink-soft font-semibold block">
                 {language === 'en' ? 'FOUNDATIONS & STRATEGIC DIRECTION' : 'PONDASI & ARAH STRATEGIS'}
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#243330] font-light">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-ink font-light">
                 {language === 'en' ? <>Vision & <span className="italic font-normal">Commitment</span></> : <>Visi & Dedikasi <span className="italic font-normal">Perusahaan</span></>}
               </h2>
             </div>
 
             {/* Interactive Tab Switcher */}
-            <div className="inline-flex p-1 rounded-lg bg-[#F6F8F7] border border-[#E3E8E6] self-start sm:self-auto">
+            <div className="inline-flex p-1 rounded-lg bg-surface border border-line self-start sm:self-auto">
               <button
                 type="button"
                 onClick={() => setActiveVisionTab('visi')}
                 className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition cursor-pointer ${
                   activeVisionTab === 'visi'
-                    ? 'bg-[#243330] text-white shadow-xs'
-                    : 'text-[#5C726E] hover:text-[#243330]'
+                    ? 'bg-brand-600 text-white shadow-xs'
+                    : 'text-ink-soft hover:text-ink'
                 }`}
               >
                 {language === 'en' ? 'Our Vision' : 'Visi Kami'}
@@ -166,8 +166,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 onClick={() => setActiveVisionTab('misi')}
                 className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition cursor-pointer ${
                   activeVisionTab === 'misi'
-                    ? 'bg-[#243330] text-white shadow-xs'
-                    : 'text-[#5C726E] hover:text-[#243330]'
+                    ? 'bg-brand-600 text-white shadow-xs'
+                    : 'text-ink-soft hover:text-ink'
                 }`}
               >
                 {language === 'en' ? 'Mission & Action' : 'Misi & Aksi Nyata'}
@@ -175,7 +175,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="rounded-xl overflow-hidden border border-[#E3E8E6] transition-all">
+          <div className="rounded-xl overflow-hidden border border-line transition-all">
             <AnimatePresence mode="wait">
               {activeVisionTab === 'visi' ? (
                 <motion.div
@@ -184,7 +184,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25 }}
-                  className="p-7 sm:p-12 bg-[#243330] text-white space-y-6"
+                  className="p-7 sm:p-12 bg-brand-600 text-white space-y-6"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] uppercase tracking-widest text-amber-300 font-semibold block">
@@ -217,28 +217,28 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25 }}
-                  className="p-7 sm:p-12 bg-white text-[#243330] space-y-6"
+                  className="p-7 sm:p-12 bg-white text-ink space-y-6"
                 >
                   <div className="space-y-2">
-                    <span className="text-[10px] uppercase tracking-widest text-[#5C726E] font-semibold block">
+                    <span className="text-[10px] uppercase tracking-widest text-ink-soft font-semibold block">
                       {language === 'en' ? 'PRACTICAL ACTION & FORMULATION COMMITMENT' : 'LANGKAH NYATA & DEDIKASI FORMULASI'}
                     </span>
-                    <p className="font-serif text-lg sm:text-2xl font-normal text-[#243330] leading-relaxed">
+                    <p className="font-serif text-lg sm:text-2xl font-normal text-ink leading-relaxed">
                       {language === 'en' ? 'To create high-quality, safe cosmetics at accessible prices for every consumer.' : COMPANY_INFO.mission}
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-6 border-t border-[#E3E8E6] text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-6 border-t border-line text-xs">
                     <div className="space-y-1.5">
-                      <span className="font-semibold text-emerald-800 block text-sm">{language === 'en' ? '01. Formula Safety' : '01. Keamanan Formulasi'}</span>
-                      <p className="text-[#5C726E] leading-relaxed">{language === 'en' ? 'We ensure transparency around botanical ingredients and compliance with BPOM RI laboratory testing.' : 'Menjamin transparansi bahan botani alami dan kepatuhan uji laboratorium izin edar BPOM RI.'}</p>
+                      <span className="font-semibold text-brand-800 block text-sm">{language === 'en' ? '01. Formula Safety' : '01. Keamanan Formulasi'}</span>
+                      <p className="text-ink-soft leading-relaxed">{language === 'en' ? 'We ensure transparency around botanical ingredients and compliance with BPOM RI laboratory testing.' : 'Menjamin transparansi bahan botani alami dan kepatuhan uji laboratorium izin edar BPOM RI.'}</p>
                     </div>
                     <div className="space-y-1.5">
-                      <span className="font-semibold text-emerald-800 block text-sm">{language === 'en' ? '02. Salon Partnerships' : '02. Pemberdayaan Salon'}</span>
-                      <p className="text-[#5C726E] leading-relaxed">{language === 'en' ? 'We support salons, spas, and distributors with cost-effective refill packaging.' : 'Mendukung pertumbuhan usaha salon, spa, dan distributor lewat efisiensi kemasan isi ulang ekonomis.'}</p>
+                      <span className="font-semibold text-brand-800 block text-sm">{language === 'en' ? '02. Salon Partnerships' : '02. Pemberdayaan Salon'}</span>
+                      <p className="text-ink-soft leading-relaxed">{language === 'en' ? 'We support salons, spas, and distributors with cost-effective refill packaging.' : 'Mendukung pertumbuhan usaha salon, spa, dan distributor lewat efisiensi kemasan isi ulang ekonomis.'}</p>
                     </div>
                     <div className="space-y-1.5">
-                      <span className="font-semibold text-emerald-800 block text-sm">{language === 'en' ? '03. Tropical Innovation' : '03. Inovasi Tropis'}</span>
-                      <p className="text-[#5C726E] leading-relaxed">{language === 'en' ? 'We develop cosmetics suited to tropical climates and local care routines.' : 'Mengembangkan produk kosmetik yang secara spesifik cocok dengan iklim tropis dan kebiasaan masyarakat nusantara.'}</p>
+                      <span className="font-semibold text-brand-800 block text-sm">{language === 'en' ? '03. Tropical Innovation' : '03. Inovasi Tropis'}</span>
+                      <p className="text-ink-soft leading-relaxed">{language === 'en' ? 'We develop cosmetics suited to tropical climates and local care routines.' : 'Mengembangkan produk kosmetik yang secara spesifik cocok dengan iklim tropis dan kebiasaan masyarakat nusantara.'}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -248,22 +248,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </section>
 
         {/* 4. STANDAR MUTU & LEGALITAS RESMI (CONSOLIDATED & MINIMALIST) */}
-        <section className="py-10 sm:py-14 border-y border-[#E3E8E6]">
+        <section className="py-10 sm:py-14 border-y border-line">
           <div className="space-y-8 sm:space-y-10">
             {/* Header: Clear, Authoritative & Concise */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div className="space-y-2 max-w-2xl">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#5C726E] font-semibold block">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-ink-soft font-semibold block">
                   {language === 'en' ? 'QUALITY STANDARDS & OFFICIAL COMPLIANCE' : 'STANDAR MUTU & LEGALITAS RESMI'}
                 </span>
-                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#243330] font-light">
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-ink font-light">
                   {language === 'en' ? <>Quality Assurance & <span className="italic font-normal">Certification</span></> : <>Jaminan Kualitas & <span className="italic font-normal">Sertifikasi</span></>}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed">
+                <p className="text-xs sm:text-sm text-ink-soft leading-relaxed">
                   {language === 'en' ? 'We follow Indonesian regulations, maintain hygienic manufacturing facilities, and uphold formula integrity to protect consumers and salon professionals.' : 'Kepatuhan ketat terhadap regulasi instansi resmi Republik Indonesia, fasilitas manufaktur higienis, dan integritas formula untuk melindungi konsumen serta praktisi salon profesional.'}
                 </p>
               </div>
-              <div className="font-mono text-xs text-[#5C726E] px-3 py-1.5 bg-[#F6F8F7] rounded-md border border-[#E3E8E6] self-start md:self-auto shrink-0">
+              <div className="font-mono text-xs text-ink-soft px-3 py-1.5 bg-surface rounded-md border border-line self-start md:self-auto shrink-0">
                 {language === 'en' ? 'OFFICIAL INDONESIAN STANDARDS' : 'STANDAR RESMI REPUBLIK INDONESIA'}
               </div>
             </div>
@@ -275,26 +275,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 return (
                 <div
                   key={item.code}
-                  className="space-y-3 pt-5 border-t border-[#E3E8E6] flex flex-col justify-between"
+                  className="space-y-3 pt-5 border-t border-line flex flex-col justify-between"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-emerald-800 font-semibold tracking-wider">
+                      <span className="text-xs font-mono text-brand-800 font-semibold tracking-wider">
                         {item.code}
                       </span>
-                      <span className="text-[10px] font-mono text-[#5C726E] uppercase tracking-wider bg-[#F6F8F7] px-2 py-0.5 rounded border border-[#E3E8E6]/80">
+                      <span className="text-[10px] font-mono text-ink-soft uppercase tracking-wider bg-surface px-2 py-0.5 rounded border border-line/80">
                         {certification.badge}
                       </span>
                     </div>
-                    <h3 className="font-serif text-base sm:text-lg text-[#243330] font-medium leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg text-ink font-medium leading-snug">
                       {certification.title}
                     </h3>
-                    <p className="text-xs text-[#5C726E] leading-relaxed">
+                    <p className="text-xs text-ink-soft leading-relaxed">
                       {certification.desc}
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-[#E3E8E6]/60">
-                    <span className="text-[11px] font-medium text-[#243330] block">
+                  <div className="pt-3 border-t border-line/60">
+                    <span className="text-[11px] font-medium text-ink block">
                       {certification.highlight}
                     </span>
                   </div>
@@ -309,19 +309,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <section className="space-y-6 sm:space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
             <div className="space-y-2 max-w-2xl">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#5C726E] font-semibold block">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-ink-soft font-semibold block">
                 {language === 'en' ? 'TROPICAL BOTANICALS' : 'KEKAYAAN ALAM TROPIS'}
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl text-[#243330] font-light">
+              <h2 className="font-serif text-3xl sm:text-4xl text-ink font-light">
                 {language === 'en' ? <>Botanical Active Ingredients from <span className="italic font-normal">Indonesia</span></> : <>Bahan Aktif Botani <span className="italic font-normal">Nusantara</span></>}
               </h2>
-              <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed">
+              <p className="text-xs sm:text-sm text-ink-soft leading-relaxed">
                 {language === 'en' ? 'Explore Heviny’s selected botanical extracts, formulated for beauty and hair care in tropical climates.' : 'Eksplorasi ekstrak botani murni pilihan Heviny dengan khasiat teruji klinis untuk formulasi kecantikan dan perawatan rambut tropis.'}
               </p>
             </div>
             <button
               onClick={() => onNavigate('journal')}
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#243330] hover:text-[#5C726E] cursor-pointer pb-1 border-b border-[#243330] self-start md:self-auto transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink hover:text-ink-soft cursor-pointer pb-1 border-b border-brand-500 self-start md:self-auto transition-colors"
             >
               <span>{language === 'en' ? 'Read Our Care Guides' : 'Baca Panduan Edukasi di Artikel'}</span>
               <ArrowRightIcon className="w-3.5 h-3.5" />
@@ -329,16 +329,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Interactive Editorial Master-Detail Card */}
-          <div className="bg-[#F6F8F7] border border-[#E3E8E6] rounded-xl p-4 sm:p-6 lg:p-8">
+          <div className="bg-surface border border-line rounded-xl p-4 sm:p-6 lg:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
               
               {/* Left Column: Interactive Ingredient Selector */}
               <div className="lg:col-span-5 space-y-3">
                 <div className="flex items-center justify-between px-1">
-                  <span className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#8A9E9A]">
+                  <span className="text-[10px] uppercase tracking-[0.18em] font-semibold text-ink-muted">
                     {language === 'en' ? `SELECT A BOTANICAL (${NATURAL_INGREDIENTS.length})` : `PILIH KANDUNGAN BOTANI (${NATURAL_INGREDIENTS.length})`}
                   </span>
-                  <span className="text-[10px] text-[#8A9E9A] hidden sm:inline">
+                  <span className="text-[10px] text-ink-muted hidden sm:inline">
                     {language === 'en' ? 'Select to view details' : 'Klik untuk melihat detail'}
                   </span>
                 </div>
@@ -353,8 +353,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                         onClick={() => setSelectedIngredient(item)}
                         className={`w-auto sm:min-w-[240px] lg:w-full text-left p-3 sm:p-3.5 rounded-lg border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 shrink-0 group ${
                           isSelected
-                            ? 'bg-[#243330] border-[#243330] text-white shadow-md'
-                            : 'bg-white hover:bg-[#EEF2F0] border-[#E3E8E6] text-[#243330]'
+                            ? 'bg-brand-600 border-brand-500 text-white shadow-md'
+                            : 'bg-white hover:bg-surface-alt border-line text-ink'
                         }`}
                       >
                         <div className="flex items-center gap-3 min-w-0">
@@ -373,14 +373,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                           <div className="min-w-0">
                             <h3
                               className={`font-serif text-sm sm:text-base font-medium truncate ${
-                                isSelected ? 'text-white' : 'text-[#243330] group-hover:text-emerald-900'
+                                isSelected ? 'text-white' : 'text-ink group-hover:text-brand-900'
                               }`}
                             >
                               {language === 'en' ? ENGLISH_INGREDIENTS[item.id].name : item.name}
                             </h3>
                             <p
                               className={`text-[11px] truncate italic font-serif ${
-                                isSelected ? 'text-emerald-300' : 'text-[#5C726E]'
+                                isSelected ? 'text-brand-100' : 'text-ink-soft'
                               }`}
                             >
                               {item.latinName}
@@ -391,8 +391,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                         <ChevronRightIcon
                           className={`w-4 h-4 shrink-0 transition-transform ${
                             isSelected
-                              ? 'text-emerald-300 translate-x-0.5'
-                              : 'text-[#8A9E9A] group-hover:translate-x-0.5'
+                              ? 'text-brand-100 translate-x-0.5'
+                              : 'text-ink-muted group-hover:translate-x-0.5'
                           } hidden sm:block`}
                         />
                       </button>
@@ -403,10 +403,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
               {/* Right Column: Featured Spotlight Detail Card */}
               <div className="lg:col-span-7">
-                <div className="bg-white border border-[#E3E8E6] rounded-xl p-5 sm:p-7 shadow-xs space-y-5">
+                <div className="bg-white border border-line rounded-xl p-5 sm:p-7 shadow-xs space-y-5">
                   
                   {/* Botanical Hero Photo */}
-                  <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-lg overflow-hidden border border-[#E3E8E6] bg-[#1E2B28] group">
+                  <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-lg overflow-hidden border border-line bg-brand-900 group">
                     <img
                       src={selectedIngredient.image}
                       alt={selectedIngredientCopy.name}
@@ -428,34 +428,34 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                       </span>
                     </div>
 
-                    <div className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 text-white text-xs bg-[#243330]/80 backdrop-blur-md px-2.5 py-1 rounded-sm border border-white/15">
-                      <MapPinIcon className="w-3.5 h-3.5 text-emerald-300" />
+                    <div className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 text-white text-xs bg-brand-600/80 backdrop-blur-md px-2.5 py-1 rounded-sm border border-white/15">
+                      <MapPinIcon className="w-3.5 h-3.5 text-brand-100" />
                       <span className="font-medium text-[11px]">{language === 'en' ? 'Source:' : 'Sumber Asli:'} {selectedIngredientCopy.origin}</span>
                     </div>
                   </div>
 
                   {/* Botanical Title & Narrative */}
                   <div className="space-y-2">
-                    <h3 className="font-serif text-2xl sm:text-3xl font-light text-[#243330]">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-light text-ink">
                       {selectedIngredientCopy.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#5C726E] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-ink-soft leading-relaxed">
                       {selectedIngredientCopy.description}
                     </p>
                   </div>
 
                   {/* Key Dermatological Benefits Grid */}
                   <div className="space-y-2.5 pt-1">
-                    <span className="text-[10px] uppercase font-semibold text-[#8A9E9A] tracking-wider block">
+                    <span className="text-[10px] uppercase font-semibold text-ink-muted tracking-wider block">
                       {language === 'en' ? 'Research-Informed Benefits:' : 'Khasiat & Manfaat Teruji:'}
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {selectedIngredientCopy.benefits.map((benefit, bIdx) => (
                         <div
                           key={bIdx}
-                          className="flex items-start gap-2 p-2.5 rounded-md bg-[#F6F8F7] border border-[#E3E8E6] text-xs text-[#243330]"
+                          className="flex items-start gap-2 p-2.5 rounded-md bg-surface border border-line text-xs text-ink"
                         >
-                          <CheckIcon className="w-3.5 h-3.5 text-emerald-700 shrink-0 mt-0.5" />
+                          <CheckIcon className="w-3.5 h-3.5 text-brand-700 shrink-0 mt-0.5" />
                           <span className="leading-snug">{benefit}</span>
                         </div>
                       ))}
@@ -463,16 +463,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   </div>
 
                   {/* Formulated Products & Action Link */}
-                  <div className="pt-4 border-t border-[#E3E8E6] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="pt-4 border-t border-line flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1.5 min-w-0">
-                      <span className="text-[10px] uppercase font-semibold text-[#8A9E9A] tracking-wider block">
+                      <span className="text-[10px] uppercase font-semibold text-ink-muted tracking-wider block">
                         {language === 'en' ? 'Featured in These Products:' : 'Diformulasikan Pada Produk:'}
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {selectedIngredient.associatedProducts.map((prod, pIdx) => (
                           <span
                             key={pIdx}
-                            className="text-[11px] px-2.5 py-1 rounded-sm bg-[#F6F8F7] text-[#243330] font-medium border border-[#E3E8E6]"
+                            className="text-[11px] px-2.5 py-1 rounded-sm bg-surface text-ink font-medium border border-line"
                           >
                             {prod}
                           </span>
@@ -482,7 +482,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
                     <button
                       onClick={() => onNavigate('products')}
-                      className="px-4 py-2.5 rounded-md bg-[#243330] hover:bg-[#1A2624] text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5 shrink-0 self-start sm:self-auto shadow-xs"
+                      className="px-4 py-2.5 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5 shrink-0 self-start sm:self-auto shadow-xs"
                     >
                       <span>{language === 'en' ? 'View Related Products' : 'Lihat Produk Terkait'}</span>
                       <ArrowRightIcon className="w-3.5 h-3.5" />
@@ -497,17 +497,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </section>
 
         {/* 6.5. PABRIK LANGSUNG & EFISIENSI DISTRIBUSI (EDITORIAL IN-DEPTH SECTION) */}
-        <section className="p-6 sm:p-10 rounded-xl bg-[#F6F8F7] border border-[#E3E8E6] space-y-6">
+        <section className="p-6 sm:p-10 rounded-xl bg-surface border border-line space-y-6">
           <div className="max-w-3xl space-y-2">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#5C726E] font-semibold block">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-ink-soft font-semibold block">
               {language === 'en' ? 'MANUFACTURING EFFICIENCY & DIRECT PRICING' : 'EFISIENSI MANUFAKTUR & HARGA PABRIK'}
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#243330] font-light">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-ink font-light">
               {language === 'en' ? <>High-Quality Cosmetics at <span className="italic font-normal">Factory-Direct Prices</span></> : <>Kosmetik Berkualitas Tinggi dengan <span className="italic font-normal">Harga Pabrik Terjangkau</span></>}
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-xs sm:text-sm text-[#5C726E] leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-xs sm:text-sm text-ink-soft leading-relaxed">
             <div className="space-y-4">
               <p>
                 {language === 'en' ? <>As a direct manufacturer in Surabaya since 2006, <strong>Hana Cosmetics</strong> manages an integrated supply chain, from botanical sourcing and laboratory formulation to modern packaging that meets <strong>Good Cosmetics Manufacturing Practices (CPKB)</strong>.</> : <>Sebagai produsen langsung sejak 2006 di Surabaya, <strong>Hana Cosmetics</strong> menerapkan sistem rantai pasok terintegrasi dari pengadaan bahan baku botani, formulasi laboratorium, hingga lini pengemasan modern berstandar <strong>Cara Pembuatan Kosmetik yang Baik (CPKB)</strong>.</>}
@@ -526,24 +526,24 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#E3E8E6] flex flex-wrap items-center justify-between gap-4 text-xs text-[#243330]">
+          <div className="pt-4 border-t border-line flex flex-wrap items-center justify-between gap-4 text-xs text-ink">
             <div className="flex items-center gap-2">
-              <CheckIcon className="w-4 h-4 text-emerald-700 shrink-0" />
+              <CheckIcon className="w-4 h-4 text-brand-700 shrink-0" />
               <span>{language === 'en' ? 'Factory-Direct Wholesale for Salons & Resellers' : 'Harga Grosir Pabrik Langsung untuk Salon & Reseller'}</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckIcon className="w-4 h-4 text-emerald-700 shrink-0" />
+              <CheckIcon className="w-4 h-4 text-brand-700 shrink-0" />
               <span>{language === 'en' ? 'BPOM RI Registered & Halal-Certified' : '100% Notifikasi Resmi BPOM RI & Bersertifikat Halal'}</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckIcon className="w-4 h-4 text-emerald-700 shrink-0" />
+              <CheckIcon className="w-4 h-4 text-brand-700 shrink-0" />
               <span>{language === 'en' ? 'Retail Packaging to 20-Liter Jerrycans' : 'Kemasan Lengkap Retail hingga Jerigen 20 Liter'}</span>
             </div>
           </div>
         </section>
 
         {/* 7. CTA BANNER */}
-        <section className="p-8 sm:p-12 rounded-xl bg-[#243330] text-white text-center space-y-6">
+        <section className="p-8 sm:p-12 rounded-xl bg-brand-600 text-white text-center space-y-6">
           <div className="max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-4xl font-light">
               {language === 'en' ? 'Want to Learn More About Our Products?' : 'Ingin Mengetahui Lebih Lengkap Mengenai Produk Kami?'}
@@ -553,13 +553,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <button
               onClick={() => onNavigate('products')}
-              className="px-6 py-3.5 rounded-md bg-white text-[#243330] hover:bg-[#EAEFEF] text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-xs"
+              className="px-6 py-3.5 rounded-md bg-white text-ink hover:bg-surface-alt text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-xs"
             >
               {language === 'en' ? 'View Product Catalog' : 'Lihat Daftar Produk'}
             </button>
             <button
               onClick={() => onNavigate('contact')}
-              className="px-6 py-3.5 rounded-md bg-emerald-600 text-white text-xs font-semibold uppercase tracking-wider hover:bg-emerald-500 transition cursor-pointer"
+              className="px-6 py-3.5 rounded-md bg-white text-brand-700 text-xs font-semibold uppercase tracking-wider hover:bg-brand-50 transition cursor-pointer"
             >
               {t('contactCompany')}
             </button>
