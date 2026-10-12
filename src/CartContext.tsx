@@ -38,31 +38,20 @@ export const EMPTY_CART_PRODUCTS_TEXT = 'Pilih produk dari halaman produk pada w
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'heviny_selected_products_v1';
+// Selections used to be persisted here; they now reset on every page load.
+const LEGACY_STORAGE_KEY = 'heviny_selected_products_v1';
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>(() => {
-    if (typeof window === 'undefined') return [];
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) return parsed;
-      }
-    } catch {
-      // ignore parsing error
-    }
-    return [];
-  });
+  const [items, setItems] = useState<CartItem[]>([]);
 
+  // Drop selections saved by the previous persisted version of the cart.
   useEffect(() => {
-    if (typeof window === 'undefined') return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
     } catch {
       // ignore storage error
     }
-  }, [items]);
+  }, []);
 
   const makeId = (productId: string, size?: string) => {
     const cleanSize = (size || 'default').trim().toLowerCase();
