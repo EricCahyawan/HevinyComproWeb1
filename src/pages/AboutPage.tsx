@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   CheckIcon,
   ArrowRightIcon,
-  ChevronRightIcon,
-  MapPinIcon
+  ChevronRightIcon
 } from '@heroicons/react/24/outline';
 import { COMPANY_INFO, NATURAL_INGREDIENTS } from '../data/companyInfo';
 import { ActivePage, IngredientHighlight } from '../types';
@@ -361,7 +360,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                           <img
                             src={item.image}
                             alt={language === 'en' ? ENGLISH_INGREDIENTS[item.id].name : item.name}
-                            className="w-11 h-11 sm:w-12 sm:h-12 rounded-md object-cover shrink-0 border border-black/10"
+                            className="w-11 h-11 sm:w-12 sm:h-12 rounded-md object-contain bg-white shrink-0 border border-black/10"
                             referrerPolicy="no-referrer"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -409,6 +408,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-lg overflow-hidden border border-line bg-brand-900 group">
                     <img
                       src={selectedIngredient.image}
+                      alt=""
+                      aria-hidden="true"
+                      referrerPolicy="no-referrer"
+                      className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-60"
+                    />
+                    <img
+                      src={selectedIngredient.image}
                       alt={selectedIngredientCopy.name}
                       referrerPolicy="no-referrer"
                       onError={(e) => {
@@ -417,20 +423,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                           target.src = 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80';
                         }
                       }}
-                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
+                      className="relative w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
                     
                     {/* Floating Badges */}
                     <div className="absolute top-3 left-3 z-10">
                       <span className="px-2.5 py-1 rounded-sm bg-black/60 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-wider border border-white/20">
                         {selectedIngredient.latinName}
                       </span>
-                    </div>
-
-                    <div className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 text-white text-xs bg-brand-600/80 backdrop-blur-md px-2.5 py-1 rounded-sm border border-white/15">
-                      <MapPinIcon className="w-3.5 h-3.5 text-brand-100" />
-                      <span className="font-medium text-[11px]">{language === 'en' ? 'Source:' : 'Sumber Asli:'} {selectedIngredientCopy.origin}</span>
                     </div>
                   </div>
 

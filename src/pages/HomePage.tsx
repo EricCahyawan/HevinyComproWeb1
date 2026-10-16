@@ -53,15 +53,15 @@ export const HomePage: React.FC<HomePageProps> = ({
           className="absolute inset-0 -top-24 -bottom-24 z-0 will-change-transform"
         >
           <img
-            src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1400&q=75"
-            alt="Kemurnian Ekstrak Botani Heviny"
-            className="w-full h-full object-cover opacity-35 brightness-110"
+            src="/hero-gerai-heviny.webp"
+            alt="Gerai Heviny Cosmetics"
+            className="w-full h-full object-cover object-[35%_75%] opacity-75"
             referrerPolicy="no-referrer"
             decoding="async"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-700/85 via-brand-700/55 to-brand-700" />
-          <div className="absolute inset-0 bg-radial from-transparent via-brand-700/40 to-brand-700" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-700/75 via-brand-700/45 to-brand-700/90" />
+          <div className="absolute inset-0 bg-radial from-transparent via-brand-700/20 to-brand-700/80" />
         </motion.div>
 
         {/* Hero Main Content with Subtle Parallax Elevation */}
@@ -174,7 +174,16 @@ export const HomePage: React.FC<HomePageProps> = ({
                 className="bg-white rounded-xl p-4 sm:p-6 border border-line shadow-xs space-y-3 sm:space-y-4 flex flex-col justify-between hover:shadow-xl transition-all duration-300"
               >
                 <div className="space-y-2 sm:space-y-3">
-                  <div className="aspect-[16/10] rounded-lg overflow-hidden bg-surface relative group">
+                  <div className="aspect-[16/10] rounded-lg overflow-hidden bg-surface relative">
+                    <img
+                      src={item.image}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-60"
+                      referrerPolicy="no-referrer"
+                    />
                     <img
                       src={item.image}
                       alt={ingredient.name}
@@ -186,7 +195,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                           target.src = 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80';
                         }
                       }}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="relative w-full h-full object-contain"
                       referrerPolicy="no-referrer"
                     />
                   </div>
