@@ -5,7 +5,8 @@ import {
   XMarkIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-  ArrowDownTrayIcon
+  ArrowDownTrayIcon,
+  ArrowUpRightIcon
 } from '@heroicons/react/24/outline';
 import { ActivePage, ProductCategory } from '../types';
 import { HevinyLogo } from './HevinyLogo';
@@ -575,9 +576,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={() => handleNavClick('contact')}
-                className="flex-1 py-2.5 px-3 rounded-md bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer transition shadow-xs"
+                className="btn-pill flex-1 justify-between"
               >
                 <span>{t('contactCompany')}</span>
+                <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
               </button>
             </div>
           </motion.div>

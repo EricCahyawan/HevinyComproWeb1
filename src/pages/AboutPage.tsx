@@ -5,7 +5,7 @@ import {
   ArrowRightIcon,
   ChevronRightIcon,
   MapPinIcon,
-  ArrowTopRightOnSquareIcon
+  ArrowUpRightIcon
 } from '@heroicons/react/24/outline';
 import { COMPANY_INFO, NATURAL_INGREDIENTS } from '../data/companyInfo';
 import { ActivePage, IngredientHighlight } from '../types';
@@ -112,9 +112,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <div className="pt-2 flex items-center gap-4">
               <button
                 onClick={() => onNavigate('products')}
-                className="px-6 py-3 rounded-md bg-brand-600 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 transition cursor-pointer shadow-xs"
+                className="btn-pill"
               >
-                {t('exploreProducts')}
+                <span>{t('exploreProducts')}</span>
+                <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
               </button>
             </div>
           </div>
@@ -180,10 +181,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               href="https://www.google.com/maps/search/?api=1&query=Toko+Kosmetik+Heviny+Royal+Plaza+Surabaya"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider rounded-md transition"
+              className="btn-pill"
             >
               <span>{language === 'en' ? 'Open in Google Maps' : 'Buka di Google Maps'}</span>
-              <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+              <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
             </a>
           </div>
         </section>
@@ -205,7 +206,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => setActiveVisionTab('visi')}
-                className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition cursor-pointer ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition cursor-pointer ${
                   activeVisionTab === 'visi'
                     ? 'bg-brand-600 text-white shadow-xs'
                     : 'text-ink-soft hover:text-ink'
@@ -216,7 +217,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => setActiveVisionTab('misi')}
-                className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition cursor-pointer ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition cursor-pointer ${
                   activeVisionTab === 'misi'
                     ? 'bg-brand-600 text-white shadow-xs'
                     : 'text-ink-soft hover:text-ink'
@@ -535,10 +536,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
                     <button
                       onClick={() => onNavigate('products')}
-                      className="px-4 py-2.5 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5 shrink-0 self-start sm:self-auto shadow-xs"
+                      className="btn-pill shrink-0 self-start sm:self-auto"
                     >
                       <span>{language === 'en' ? 'View Related Products' : 'Lihat Produk Terkait'}</span>
-                      <ArrowRightIcon className="w-3.5 h-3.5" />
+                      <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
                     </button>
                   </div>
 
@@ -606,13 +607,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <button
               onClick={() => onNavigate('products')}
-              className="px-6 py-3.5 rounded-md bg-white text-ink hover:bg-surface-alt text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-xs"
+              className="btn-pill btn-pill-light"
             >
-              {language === 'en' ? 'View Product Catalog' : 'Lihat Daftar Produk'}
+              <span>{language === 'en' ? 'View Product Catalog' : 'Lihat Daftar Produk'}</span>
+              <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
             </button>
             <button
               onClick={() => onNavigate('contact')}
-              className="px-6 py-3.5 rounded-md bg-white text-brand-700 text-xs font-semibold uppercase tracking-wider hover:bg-brand-50 transition cursor-pointer"
+              className="btn-pill-glass"
             >
               {t('contactCompany')}
             </button>

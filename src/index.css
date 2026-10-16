@@ -86,3 +86,29 @@ body {
 .animate-marquee-scroll:hover {
   animation-play-state: paused;
 }
+
+/* Buttons: rounded pill with a circular arrow badge */
+@layer components {
+  .btn-pill {
+    @apply inline-flex items-center justify-center gap-3 rounded-full bg-brand-600 text-white text-sm font-medium tracking-normal transition-colors duration-200 cursor-pointer shadow-sm hover:bg-brand-700;
+    padding: 0.375rem 0.375rem 0.375rem 1.5rem;
+  }
+  .btn-pill-plain {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 text-white text-sm font-medium tracking-normal px-6 py-3 transition-colors duration-200 cursor-pointer shadow-sm hover:bg-brand-700;
+  }
+  .btn-pill-light {
+    @apply bg-white text-ink hover:bg-surface;
+  }
+  .btn-pill-glass {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white/10 text-white text-sm font-medium px-6 py-3 border border-white/25 backdrop-blur-md transition-colors duration-200 cursor-pointer hover:bg-white/20;
+  }
+  .btn-pill-arrow {
+    @apply w-9 h-9 shrink-0 rounded-full bg-white text-brand-700 flex items-center justify-center transition-transform duration-300;
+  }
+  .btn-pill-light .btn-pill-arrow {
+    @apply bg-brand-600 text-white;
+  }
+  .btn-pill:hover .btn-pill-arrow {
+    transform: rotate(45deg);
+  }
+}

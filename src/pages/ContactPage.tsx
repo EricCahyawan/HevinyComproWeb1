@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   EnvelopeIcon,
-  PaperAirplaneIcon,
+  ArrowUpRightIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   CheckCircleIcon
@@ -160,7 +160,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="px-5 py-2 rounded-md bg-brand-600 text-white text-xs font-semibold cursor-pointer"
+                  className="btn-pill-plain"
                 >
                   Kirim Pesan Lain
                 </button>
@@ -260,10 +260,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
+                  className="btn-pill w-full justify-between"
                 >
-                  <PaperAirplaneIcon className="w-3.5 h-3.5" />
                   <span>Kirim ke WhatsApp</span>
+                  <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
                 </button>
               </form>
             )}

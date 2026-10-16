@@ -81,18 +81,18 @@ export const ProductCard: React.FC<ProductCardProps> = memo(({
                 image: product.image
               })
             }
-            className="w-full h-9 sm:h-10 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs active:scale-[0.98]"
+            className="w-full h-9 sm:h-10 rounded-full bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs active:scale-[0.98]"
             title="Tambah ke keranjang"
           >
             <PlusIcon className="w-4 h-4 stroke-[2.5]" />
             <span>Tambah</span>
           </button>
         ) : (
-          <div className="w-full h-9 sm:h-10 rounded-lg bg-surface-alt border border-line flex items-center justify-between px-2.5 py-1">
+          <div className="w-full h-9 sm:h-10 rounded-full bg-surface-alt border border-line flex items-center justify-between px-1.5 py-1">
             <button
               type="button"
               onClick={() => decreaseItem(product.id, defaultSize)}
-              className="w-7 h-7 flex items-center justify-center rounded-md text-ink hover:bg-black/5 transition cursor-pointer text-base font-bold active:scale-90"
+              className="w-7 h-7 flex items-center justify-center rounded-full text-ink hover:bg-black/5 transition cursor-pointer text-base font-bold active:scale-90"
               aria-label="Kurangi jumlah"
               title="Kurangi 1"
             >
@@ -113,7 +113,7 @@ export const ProductCard: React.FC<ProductCardProps> = memo(({
                   image: product.image
                 })
               }
-              className="w-7 h-7 flex items-center justify-center rounded-md bg-brand-600 hover:bg-brand-700 text-white transition cursor-pointer text-sm font-bold active:scale-90 shadow-xs"
+              className="w-7 h-7 flex items-center justify-center rounded-full bg-brand-600 hover:bg-brand-700 text-white transition cursor-pointer text-sm font-bold active:scale-90 shadow-xs"
               aria-label="Tambah jumlah"
               title="Tambah 1"
             >

@@ -3,7 +3,8 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import {
   ArrowRightIcon,
   ShieldCheckIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+  ArrowUpRightIcon
 } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { NATURAL_INGREDIENTS, TESTIMONIALS, COMPANY_INFO } from '../data/companyInfo';
@@ -229,10 +230,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="text-center mt-8 sm:mt-12">
             <button
               onClick={() => onNavigate('journal')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider transition cursor-pointer shadow-md"
+              className="btn-pill"
             >
               <span>{t('learnArticles')}</span>
-              <ArrowRightIcon className="w-4 h-4" />
+              <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
             </button>
           </div>
 

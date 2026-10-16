@@ -242,7 +242,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 key={cat}
                 id={`btn-category-${cat.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition cursor-pointer whitespace-nowrap ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition cursor-pointer whitespace-nowrap ${
                   selectedCategory === cat
                     ? 'bg-brand-600 text-white shadow-xs'
                     : 'bg-white text-ink-soft hover:bg-surface-alt border border-line'
@@ -282,7 +282,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 setSelectedCategory('Semua');
                 setSearchQuery('');
               }}
-              className="px-6 py-2.5 rounded-md bg-brand-600 text-white text-xs font-semibold uppercase tracking-wider hover:bg-brand-700 transition cursor-pointer"
+              className="btn-pill-plain"
             >
               {t('showAllArticles')}
             </button>
@@ -454,7 +454,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                         key={idx}
                         id={`btn-recommended-prod-${idx}`}
                         onClick={() => handleProductClick(prodName)}
-                        className="px-4 py-2 rounded-md bg-white hover:bg-brand-600 text-ink hover:text-white border border-line text-xs font-medium transition cursor-pointer shadow-2xs flex items-center gap-1.5"
+                        className="px-4 py-2 rounded-full bg-white hover:bg-brand-600 text-ink hover:text-white border border-line text-xs font-medium transition cursor-pointer shadow-2xs flex items-center gap-1.5"
                       >
                         <span>{prodName}</span>
                         <ArrowRight className="w-3 h-3" />
@@ -479,7 +479,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
                 <button
                   id="btn-close-article-bottom"
                   onClick={closeArticle}
-                  className="px-6 py-2.5 rounded-md bg-brand-600 text-white text-xs font-semibold hover:bg-brand-700 transition cursor-pointer"
+                  className="btn-pill-plain"
                 >
                   {t('closeArticle')}
                 </button>

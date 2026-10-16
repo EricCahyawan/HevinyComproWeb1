@@ -1,6 +1,6 @@
 import React, { useRef, memo } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import { useLanguage } from '../LanguageContext';
 
 interface ParallaxBannerProps {
@@ -70,17 +70,17 @@ export const ParallaxBanner: React.FC<ParallaxBannerProps> = memo(({
             {onNavigateProducts && (
               <button
                 onClick={onNavigateProducts}
-                className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-md bg-white text-ink hover:bg-surface text-xs font-semibold uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl hover:scale-102 cursor-pointer"
+                className="btn-pill btn-pill-light shadow-xl"
               >
                 <span>{language === 'en' ? 'Explore Our Products' : 'Jelajahi Produk Kami'}</span>
-                <ArrowRightIcon className="w-3.5 h-3.5" />
+                <span className="btn-pill-arrow"><ArrowUpRightIcon className="w-4 h-4" /></span>
               </button>
             )}
 
             {onNavigateContact && (
               <button
                 onClick={onNavigateContact}
-                className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-md bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer hover:scale-102"
+                className="btn-pill-glass"
               >
                 <span>{t('contactCompany')}</span>
               </button>
