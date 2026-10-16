@@ -45,7 +45,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* 1. HERO SECTION WITH PROMINENT PARALLAX BACKGROUND */}
       <section
         ref={heroRef}
-        className="relative min-h-[90vh] flex flex-col justify-between pt-32 pb-16 bg-brand-700 text-white overflow-hidden"
+        className="relative min-h-[calc(100svh-69px)] flex flex-col justify-between pt-8 pb-6 sm:pt-12 sm:pb-10 bg-brand-700 text-white overflow-hidden"
       >
         {/* Parallax Background Imagery */}
         <motion.div
@@ -67,10 +67,10 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Hero Main Content with Subtle Parallax Elevation */}
         <motion.div
           style={{ y: heroContentY, opacity: heroContentOpacity }}
-          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 sm:space-y-8 my-auto will-change-transform"
+          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-[clamp(0.75rem,3svh,2rem)] my-auto py-4 will-change-transform"
         >
           {/* Heading */}
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white leading-[1.1] drop-shadow-sm">
+          <h1 className="font-serif text-[clamp(1.85rem,min(8vw,8svh),4.5rem)] font-light tracking-tight text-white leading-[1.1] drop-shadow-sm">
             <span className="block overflow-hidden pb-1">
               <span className="inline-block">
                 {t('heroTitle')}
@@ -84,13 +84,13 @@ export const HomePage: React.FC<HomePageProps> = ({
           </h1>
 
           {/* Subtitle */}
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/90 font-sans leading-relaxed drop-shadow-xs">
+          <p className="max-w-2xl mx-auto text-[clamp(0.8rem,2.2svh,1rem)] text-white/90 font-sans leading-relaxed drop-shadow-xs">
             {t('heroDescription')}
           </p>
         </motion.div>
 
         {/* Bottom Legal Certification Pillars */}
-        <div className="relative z-10 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/20 flex items-center justify-center gap-6 sm:gap-14 text-left backdrop-blur-xs">
+        <div className="relative z-10 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(0.75rem,2.5svh,1.5rem)] border-t border-white/20 flex items-center justify-center gap-6 sm:gap-14 text-left backdrop-blur-xs">
           <div className="flex items-center gap-2.5 sm:gap-3 text-xs text-white/95">
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shrink-0 shadow-sm">
               <ShieldCheckIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-brand-100" />

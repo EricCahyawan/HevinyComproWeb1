@@ -3,7 +3,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   CheckIcon,
   ArrowRightIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  MapPinIcon,
+  ArrowTopRightOnSquareIcon
 } from '@heroicons/react/24/outline';
 import { COMPANY_INFO, NATURAL_INGREDIENTS } from '../data/companyInfo';
 import { ActivePage, IngredientHighlight } from '../types';
@@ -132,6 +134,57 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* 2b. OFFLINE STORE — ROYAL PLAZA SURABAYA */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-6">
+            <div className="rounded-xl overflow-hidden border border-line shadow-xl bg-surface">
+              <img
+                src="/hero-gerai-heviny.webp"
+                alt={language === 'en' ? 'Heviny store at Royal Plaza Surabaya' : 'Toko Heviny di Royal Plaza Surabaya'}
+                className="w-full h-auto object-contain"
+                loading="lazy"
+                decoding="async"
+                width={680}
+                height={510}
+              />
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 space-y-5">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.25em] text-ink-soft font-semibold block mb-2">
+                {language === 'en' ? 'VISIT OUR STORE' : 'KUNJUNGI TOKO KAMI'}
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-light text-ink leading-tight">
+                {language === 'en' ? <>Heviny at <span className="italic font-normal">Royal Plaza</span></> : <>Toko Heviny di <span className="italic font-normal">Royal Plaza</span></>}
+              </h2>
+            </div>
+            <p className="text-sm sm:text-base text-ink-soft leading-relaxed">
+              {language === 'en'
+                ? 'Besides ordering online, you can see and buy Heviny products in person at our store in Royal Plaza Surabaya.'
+                : 'Selain memesan secara online, Anda bisa melihat dan membeli produk Heviny secara langsung di toko kami di Royal Plaza Surabaya.'}
+            </p>
+            <div className="flex items-start gap-3 rounded-lg border border-line bg-white p-4">
+              <div className="w-9 h-9 rounded-md bg-brand-50 border border-line flex items-center justify-center shrink-0">
+                <MapPinIcon className="w-4.5 h-4.5 text-brand-700" />
+              </div>
+              <div className="text-sm">
+                <span className="block font-semibold text-ink">Royal Plaza Surabaya</span>
+                <span className="block text-ink-soft">{language === 'en' ? 'Ground Floor (Lantai G)' : 'Lantai G'}</span>
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Toko+Kosmetik+Heviny+Royal+Plaza+Surabaya"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold uppercase tracking-wider rounded-md transition"
+            >
+              <span>{language === 'en' ? 'Open in Google Maps' : 'Buka di Google Maps'}</span>
+              <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+            </a>
           </div>
         </section>
 
