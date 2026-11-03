@@ -39,9 +39,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     },
     {
       code: '03',
-      badge: 'Fasilitas Steril',
+      badge: 'Fasilitas Higienis',
       title: 'Standar Manufaktur CPKB',
-      desc: 'Diproduksi di fasilitas higienis berpedoman ketat Cara Pembuatan Kosmetik yang Baik (CPKB) dari BPOM RI dengan uji mikrobiologi dan kontrol stabilitas di setiap batch.',
+      desc: 'Diproduksi di fasilitas higienis berpedoman ketat Cara Pembuatan Kosmetik yang Baik (CPKB) dari BPOM RI dengan uji mikrobiologi dan kontrol stabilitas.',
       highlight: 'Standar CPKB / GMP Terakreditasi'
     },
     {
@@ -55,7 +55,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   const englishCertifications = [
     { badge: 'Official Notification', title: 'Official BPOM RI Registration', desc: 'All formulas are tested and registered with BPOM RI, and are made without prohibited ingredients such as mercury or hydroquinone.', highlight: 'Registered & Tested' },
     { badge: 'BPJPH & MUI', title: 'Indonesian Halal Certificate', desc: 'Officially certified under registration ID35110019295530624, ensuring hygienic production and compliance with Halal requirements.', highlight: 'ID35110019295530624' },
-    { badge: 'Sterile Facility', title: 'Good Cosmetics Manufacturing Practices', desc: 'Made in a hygienic facility following BPOM RI guidelines for Good Cosmetics Manufacturing Practices, with microbiological and batch-stability controls.', highlight: 'CPKB / GMP Standards' },
+    { badge: 'Hygienic Facility', title: 'Good Cosmetics Manufacturing Practices', desc: 'Made in a hygienic facility following BPOM RI guidelines for Good Cosmetics Manufacturing Practices, with microbiological testing and stability controls.', highlight: 'CPKB / GMP Standards' },
     { badge: 'Professional Solutions', title: 'Salon & Bulk Supply Partnerships', desc: 'Trusted by more than 1,200 salons in Indonesia, with retail jars and bottles, 1-liter refills, and value-size 5- and 20-liter jerrycans.', highlight: 'From Retail to 20L' }
   ];
 
