@@ -1,7 +1,27 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/produk",
+      "destination": "/__pages/produk.html"
+    },
+    {
+      "source": "/tentang-kami",
+      "destination": "/__pages/tentang-kami.html"
+    },
+    {
+      "source": "/kontak",
+      "destination": "/__pages/kontak.html"
+    },
+    {
+      "source": "/artikel",
+      "destination": "/__pages/artikel.html"
+    },
+    {
+      "source": "/artikel/:slug",
+      "destination": "/__pages/artikel/:slug.html"
+    },
+    {
+      "source": "/:catalog(katalog|katalog-pdf|unduh-katalog)",
       "destination": "/index.html"
     }
   ],

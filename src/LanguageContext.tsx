@@ -82,6 +82,8 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(() => {
+    const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+    if (requestedLanguage === 'en' || requestedLanguage === 'id') return requestedLanguage;
     try {
       return localStorage.getItem('heviny-language') === 'en' ? 'en' : 'id';
     } catch {

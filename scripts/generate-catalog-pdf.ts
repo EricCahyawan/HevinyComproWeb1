@@ -67,7 +67,7 @@ async function generateCatalogPDF() {
   // Footer Contacts
   doc.setFontSize(9);
   doc.setTextColor(200, 210, 205);
-  doc.text(`WhatsApp Resmi: ${COMPANY_INFO.phone} | Website: https://hevinycosmetics.com`, 105, 260, { align: 'center' });
+  doc.text(`WhatsApp Resmi: ${COMPANY_INFO.phone} | Website: https://heviny.com`, 105, 260, { align: 'center' });
   doc.text('Jl. Rungkut Industri III No. 45, Surabaya, Jawa Timur', 105, 266, { align: 'center' });
 
   // PAGE 2: TABLE OF PRODUCTS

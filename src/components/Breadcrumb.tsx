@@ -30,7 +30,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
       'position': idx + 1,
       'name': item.name,
       ...(item.url
-        ? { 'item': item.url.startsWith('http') ? item.url : `https://hevinycosmetics.com${item.url}` }
+        ? { 'item': item.url.startsWith('http') ? item.url : `https://heviny.com${item.url}` }
         : {})
     }))
   };

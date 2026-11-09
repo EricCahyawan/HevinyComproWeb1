@@ -5,6 +5,7 @@ import { ArticleItem, ActivePage } from '../types';
 import { Breadcrumb, BreadcrumbItem } from '../components/Breadcrumb';
 import { BotanicalArticleVisual } from '../components/BotanicalArticleVisual';
 import { useLanguage } from '../LanguageContext';
+import { SITE_ORIGIN } from '../seo';
 
 const JOURNAL_SEO = {
   title: 'Edukasi Hana Cosmetics & Heviny | Panduan Kosmetik Murah & Suplai Salon BPOM',
@@ -43,14 +44,14 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
 
   useEffect(() => {
     const articlePath = selectedArticle ? `${ARTICLE_PATH}/${selectedArticle.id}` : ARTICLE_PATH;
-    const canonicalUrl = `${window.location.origin}${articlePath}`;
+    const canonicalUrl = `${SITE_ORIGIN}${articlePath}`;
     const title = selectedArticle
       ? `${selectedArticle.title} | Hana Cosmetics (Heviny)`
       : JOURNAL_SEO.title;
     const description = selectedArticle?.metaDescription || JOURNAL_SEO.description;
     const image = selectedArticle
       ? new URL(selectedArticle.image, window.location.origin).href
-      : 'https://hevinycosmetics.com/logo.webp';
+      : 'https://heviny.com/logo.webp';
     const keywords = selectedArticle
       ? [...(selectedArticle.tags || []), selectedArticle.category, 'Hana Cosmetics', 'Heviny'].join(', ')
       : JOURNAL_SEO.keywords;
@@ -101,12 +102,12 @@ export const JournalPage: React.FC<JournalPageProps> = ({ onSelectProductByName,
     publisher: {
       '@type': 'Organization',
       name: 'Hana Cosmetics',
-      url: 'https://hevinycosmetics.com/'
+      url: 'https://heviny.com/'
     },
     articleSection: selectedArticle.category,
     keywords: selectedArticle.tags?.join(', '),
     inLanguage: language === 'id' ? 'id-ID' : 'en-US',
-    mainEntityOfPage: `${window.location.origin}${ARTICLE_PATH}/${selectedArticle.id}`
+    mainEntityOfPage: `${SITE_ORIGIN}${ARTICLE_PATH}/${selectedArticle.id}`
   } : null;
 
   const categories = [

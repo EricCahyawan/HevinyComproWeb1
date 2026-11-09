@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
+import { writeSeoPages } from './scripts/seo-html';
 
 const productPhotoDirectory = path.resolve(__dirname, 'public/product-images');
 const productPhotoFiles = fs.readdirSync(productPhotoDirectory)
@@ -27,7 +28,7 @@ const copyPublicAssetsWithoutOriginalPhotos = {
         fs.copyFileSync(sourcePath, outputPath);
       }
     }
-
+    writeSeoPages(outputDirectory);
   },
 };
 

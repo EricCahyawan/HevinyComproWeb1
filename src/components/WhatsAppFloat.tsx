@@ -26,7 +26,7 @@ export const WhatsAppFloat: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://hevinycosmetics.com';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://heviny.com';
     const pdfUrl = `${origin}/?download_catalog=true`;
 
     const productFormatted = form.product.includes('\n')

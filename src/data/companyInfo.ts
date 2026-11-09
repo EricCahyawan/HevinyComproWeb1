@@ -14,7 +14,7 @@ export const COMPANY_INFO = {
   phone: '+62 813-3407-0067',
   whatsapp: '+62 813-3407-0067',
   email: 'hevinycs@gmail.com',
-  website: 'hevinycosmetics.com',
+  website: 'heviny.com',
   vision: 'Best Quality Best Price.',
   mission: 'Memproduksi kosmetik yang berkualitas baik, aman dalam pemakaian, dengan harga yang terjangkau untuk semua konsumen (To produce quality and safe cosmetics at affordable prices for all consumers).',
   workingHours: {

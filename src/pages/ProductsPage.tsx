@@ -32,7 +32,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const { language, t } = useLanguage();
   const { addItem, decreaseItem, getItemQuantity, totalCount, clearCart } = useCart();
   const [activeCategory, setActiveCategory] = useState<ProductCategory>(selectedCategory);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => new URLSearchParams(window.location.search).get('q') || '');
 
   const [showBackToTop, setShowBackToTop] = useState(false);
 

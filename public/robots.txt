@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hevinycosmetics.com/sitemap.xml
+Sitemap: https://heviny.com/sitemap.xml

@@ -43,7 +43,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     e.preventDefault();
     if (!formState.name.trim() || !formState.buyerType || !formState.products.trim() || !formState.quantity.trim()) return;
 
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://hevinycosmetics.com';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://heviny.com';
     const catalogUrl = `${origin}/?download_catalog=true`;
 
     const productFormatted = formState.products.includes('\n')
